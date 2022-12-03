@@ -1,3 +1,24 @@
+# Mac
+*.DS_Store
+setingan_rahasia2.py
+setingan_rahasia.py
+ac_control/settings.py
+config_dev.json
+documantations/deployment_corymes.md
+
+# Static & Media file
+static/
+media/logo/*
+!media/logo/logo.png
+!media/logo/logo_big.png
+!/media/logo/welcome.jpg
+!/media/logo/logo_transparent.png
+!/media/logo/logo.ico
+
+
+media/profile/*
+!media/profile/default.png
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
