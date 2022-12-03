@@ -1,0 +1,805 @@
+{% load index %}
+{% load get_qureyset_obj %}
+{% load get_initial %}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="shortcut icon" href="/media/logo/logo.ico" />
+{% if title %}
+  <title>OlahragaGo! - {{ title }}</title>
+{% else %}
+  <title>OlahragaGo!</title>
+{% endif %}
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jura:wght@300&display=swap" rel="stylesheet">
+<!-- bootsrap -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Fa icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+  
+
+
+<style>
+	/*placeholder input*/
+	input::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #BBBBBB;
+	}
+	input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+	    color:    #BBBBBB;
+	}
+	input::-moz-placeholder { /* Mozilla Firefox 19+ */
+	    color:    #BBBBBB;
+	}
+	input:-ms-input-placeholder { /* Internet Explorer 10+ */
+	    color:    #BBBBBB;
+	}
+</style>
+<!-- button tantang animation -->
+<style type="text/css">
+	@keyframes flickerAnimation {
+  0%   { opacity:1; }
+  50%  { opacity:0.7; }
+  100% { opacity:1; }
+}
+@-o-keyframes flickerAnimation{
+  0%   { opacity:1; }
+  50%  { opacity:0.7; }
+  100% { opacity:1; }
+}
+@-moz-keyframes flickerAnimation{
+  0%   { opacity:1; }
+  50%  { opacity:0.7; }
+  100% { opacity:1; }
+}
+@-webkit-keyframes flickerAnimation{
+  0%   { opacity:1; }
+  50%  { opacity:0.7; }
+  100% { opacity:1; }
+}
+.animate-flicker {
+   -webkit-animation: flickerAnimation 3s infinite;
+   -moz-animation: flickerAnimation 3s infinite;
+   -o-animation: flickerAnimation 3s infinite;
+    animation: flickerAnimation 3s infinite;
+}
+/*spining*/
+@-webkit-keyframes rotating /* Safari and Chrome */ {
+  from {
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotating {
+  from {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+.rotating {
+  -webkit-animation: rotating 11s linear infinite;
+  -moz-animation: rotating 11s linear infinite;
+  -ms-animation: rotating 11s linear infinite;
+  -o-animation: rotating 11s linear infinite;
+  animation: rotating 11s linear infinite;
+}
+</style>
+
+</head>
+<body style="font-family: 'Jura', sans-serif;">
+
+	<!-- Top Navigation -->
+	{% if not request.user.is_authenticated %}
+		<div style="position: fixed; top: 0; left: 0; width: 100%; list-style-type: none; margin: 0; padding: 0; background: white; z-index: 10; padding-left: 11px; padding-right: 11px; border-bottom: 1px solid; border-color:#F7F7F7">
+			<div style="text-align: center; margin: 0 auto; max-width: 600px;">
+				<div style="width: 30%; background-color: transparent; float: left !important; color: #555555; font-weight: bold; margin-top: 13px; margin-bottom: 8px; font-size: 13px;">
+					<a href="">
+						<div style="width:100%; color: #777777;">
+							<div class="rotating" style="width:30%; float: left;">
+								<img src="/media/logo/logo.png" width="100%" height="100%" style="border-radius:50%;">
+							</div>
+
+
+							<div style="width: 70%; float: left;">
+								<div style="text-align: left; line-height:23px; font-size:11px;">OlahragaGo!</div>
+								<div style="text-align: left; line-height:1px; font-size:12px;">Sepak Bola</div>
+							</div>
+							
+						</div>
+					</a>
+
+				</div>
+				<div style="width: 66%; background-color: transparent; float: left; font-size: 12px; margin-top: 16px; margin-bottom: 11px; justify-content: space-between; color: #777777;">
+					<div style="width: 17%; background-color: transparent; float: right;">
+						<a href="{% url 'register' %}">
+							<button style="border-radius: 4px; border-color: #FFEE66; background-color: transparent; border: solid 1px #FFEE66; font-size: 12px; color: #555555; font-family: 'Jura', sans-serif; margin: -5px;">
+							Daftar
+							</button>
+						</a>
+					</div>
+					<a href="{% url 'login' %}" style="color:#999999;">
+						<div style="width: 20%; background-color: transparent; float: right;">Login</div>
+					</a>
+					<a href="" style="color:#999999;">
+						<div style="width: 20%; background-color: transparent; float: right;">Tutorial</div>
+					</a>
+
+					<a href="" style="color: #999999;">
+						<div style="width: 17%; background-color: transparent; float: right; font-size: 18px;"><i class="fa fa-calendar" aria-hidden="true"></i></div>
+					</a>
+					<a href="" style="color: #999999;">
+						<div style="width: 17%; background-color: transparent; float: right; font-size: 18px;"><i class="fa fa-trophy" aria-hidden="true"></i></div>
+					</a>
+					<!-- <a href="sponsorship.html" style="color: #777777;">
+						<div style="width: 37%; background-color: transparent; float: left;">Sponsorship</div>
+					</a> -->
+					
+					
+				</div>
+			</div>
+		</div>
+	{% else %}
+		<div style="position: fixed; top: 0; left: 0; width: 100%; list-style-type: none; margin: 0; padding: 0; background: white; z-index: 10; padding-left: 11px; padding-right: 11px; border-bottom: 1px solid; border-color:#F7F7F7">
+			<div style="text-align: right; margin: 0 auto; max-width: 600px;">
+				<div style="width: 30%; background-color: transparent; float: left !important; color: #555555; font-weight: bold; margin-top: 13px; margin-bottom: 8px; font-size: 13px;">
+					<a href="">
+						<div style="width:100%; color: #777777;">
+							<div class="rotating" style="width:30%; float: left;">
+								<img src="/media/logo/logo.png" width="100%" height="100%" style="border-radius:50%;">
+							</div>
+							<!-- <div style="width: 70%; float: left;">
+								<div style="text-align: left;">Liga</div>
+								<div style="text-align: left;">Persahabatan</div>
+							</div> -->
+							<!-- <div style="width: 70%; float: left;">
+								<div style="text-align: left; line-height:33px; font-size:17px;">OlahragaGo!</div>
+							</div> -->
+							<div style="width: 70%; float: left;">
+								<div style="text-align: left; line-height:23px; font-size:11px;">OlahragaGo!</div>
+								<div style="text-align: left; line-height:1px; font-size:12px;">Sepak Bola</div>
+							</div>
+						</div>
+					</a>
+
+				</div>
+				<div style="width: 66%; background-color: transparent; float: left; font-size: 12px; margin-top: 16px; margin-bottom: 11px; justify-content: space-between; color: #777777;">
+					<div style="width: 15%; background-color: transparent; float: right;">
+						<div onclick="open_profile_menu()">
+							<!-- <img src="{{ request.user.profile.image.url }}" width="25px" height="25px" style="border-radius:50%;"> -->
+							{% if request.user.profile.image != 'profile/default.png' %}
+								<img src="{{ request.user.profile.image.url }}" width="25px" height="25px" style="border-radius:50%;">
+							{% else %}
+								<div style="width:25px; height:25px; line-height:22px; text-align: center; border: 1px solid gold; border-radius:50%; float: right;">
+									{{request.user.profile.full_name|get_initial}}
+								</div>
+							{% endif %}
+						</div>
+					</div>
+					<div style="width:  15%; background-color: transparent; float: right; font-size: 21px; margin-top:-4px;">
+						<a href="" style="color:#999999;">
+							<i class="fa fa-bell" aria-hidden="true">
+								{% if total_notif %}
+									<span style="font-size:9px; color: red; margin-left: -50%; margin-top: -50%; background-color: white; border-radius:50%;">
+											{{total_notif}}
+									</span>
+								{% endif %}
+							</i>
+						</a>
+					</div>
+					<div style="width: 15%; background-color: transparent; float: right; font-size: 21px; margin-top:-4px;">
+						<a href="" style="color:#999999;">
+							<i class="fa fa-envelope" aria-hidden="true">
+								{% if count_unread_message %}
+									<span style="font-size:9px; color: red; margin-left: -50%; margin-top: -50%; background-color: white; border-radius:50%;">{{count_unread_message}}
+									</span>
+								{% endif %}
+							</i>			
+						</a>
+					</div>
+					<a href="" style="color:#999999;">
+						<div style="width: 15%; background-color: transparent; float: right; font-size: 16px; "><i class="fa fa-search" aria-hidden="true"></i></div>
+					</a>
+					<a href="" style="color: #999999;">
+						<div style="width: 17%; background-color: transparent; float: right; font-size: 18px;"><i class="fa fa-calendar" aria-hidden="true"></i></div>
+					</a>
+					<a href="" style="color: #999999;">
+						<div style="width: 15%; background-color: transparent; float: right; font-size: 18px;"><i class="fa fa-trophy" aria-hidden="true"></i></div>
+					</a>
+					<!-- <a href="sponsorship.html" style="color: #777777;">
+						<div style="width: 37%; background-color: transparent; float: left;">Sponsorship</div>
+					</a> -->
+
+					
+					
+					
+				</div>
+			</div>
+		</div>
+	{% endif %}
+
+	<!-- Body -->
+	<div style="height: 7px;"></div>
+	<div style="max-width: 600px; justify-content: center; margin: auto; padding-left: 11px; padding-right: 11px;">
+		<div style="margin-top: 47px;">
+
+		 <div style="max-width: 600px; justify-content: center; margin: auto; padding-left: 11px; padding-right: 11px;">
+			<div style="margin-top: 47px;">
+
+			<div style="height: 47px;"></div>
+			{% if paling_seru or paling_seru_aktif %}
+				<div id="paling_seru" class="carousel slide" data-ride="carousel" data-interval="2300">
+					<!-- Indicators -->
+					<ul class="carousel-indicators" style="bottom:-11px">
+						<li data-target="#paling_seru" data-slide-to="0" class="active"></li>
+						{% for pertandingan in paling_seru %}
+							<li data-target="#paling_seru" data-slide-to="{{ forloop.counter1 }}"></li>
+						{% endfor %}
+					</ul>
+					<!-- The slideshow -->
+					<div class="carousel-inner">
+						<div class="carousel-item active">
+							{% if paling_seru_aktif %}
+								<a href="" style="text-decoration: none;">
+							{% else %}
+								<a href="" style="text-decoration: none;">
+							{% endif %}
+								<div style="height: 190px; background-color: #FFEA00; border-radius: 15px; text-align: center; line-height: 9px; padding-right: 11px; padding-left:11px;">
+									<div style="width: 100%; font-size:12px; color:#777777;padding-top:9px;">
+										<small>PALING SERU</small>
+									</div>
+									<div style="width: 100%; font-size:12px; color:#000000;">
+										<small>{{paling_seru_aktif.total_suporter}} supporter</small>
+									</div>
+
+									<div style="width:100%; margin-top: -10px;">
+										<div style="width:45%; background-color: transparent; float: left; display: inline-block;">
+											
+											<!-- Image -->
+											{% if paling_seru_aktif.penantang.image == 'club_bola/default.png' %}
+											<div style="width: 100%; justify-content: center; display: flex;">
+												<div style="width:60px; height:60px; line-height:60px; border: 1px solid gold; border-radius:50%; font-size:31px; line-height:60px;">
+
+														{{paling_seru_aktif.penantang.name|get_initial}}
+												</div>
+											</div>
+											{% else %}
+												<div>
+													<img src="{{paling_seru_aktif.penantang.image.url}}" width="60px" height="60px" style="border-radius:50%;">
+												</div>
+											{% endif %}
+
+
+
+											<div style="font-size:16px; font-weight:bold; color:#000000; margin-top: 11px; line-height: 13px;">
+												{{paling_seru_aktif.penantang.name}}
+											</div>
+											<div style="color: white; font-size:11px; margin-top:5px;">
+												<span>
+													{% if sportifitas_aktif %}
+														{% for i in sportifitas_aktif|index:0 %}
+															{% if i == 1 %}
+																<i class="fa fa-star" aria-hidden="true" style="color: white;"></i>
+															{% else %}
+																<i class="fa fa-star" aria-hidden="true" style="color: #FFF28F;"></i>
+															{% endif %}
+														{% endfor %}
+													{% endif %}
+												</span>
+												<span>({{paling_seru_aktif.penantang.sportifitas}})
+												</span>									
+											</div>
+											<div style="color: white; font-size:10px; margin-top:7px; color: #777777; ">
+												{{paling_seru_aktif.penantang.kategori}} - {{paling_seru_aktif.penantang.gender}}
+											</div>
+											<div style="color: white; font-size:10px; margin-top:0px; color: #777777; ">
+												{{paling_seru_aktif.penantang.total_suporter}} suporters
+											</div>
+										</div>
+										<div style="width:10%; background-color: transparent; float: left; text-align: center; margin-top:50px;">
+											<div style="font-size:24px; color:#000000;">VS</div>
+										</div>
+										<div style="width:45%; background-color: transparent; float: left;">
+
+											<!-- Image klub -->
+											{% if paling_seru_aktif.ditantang.image == 'club_bola/default.png' %}
+											<div style="width: 100%; justify-content: center; display: flex;">
+												<div style="width:60px; height:60px; line-height:60px; border: 1px solid gold; border-radius:50%; font-size:31px; line-height:60px;">
+
+														{{paling_seru_aktif.ditantang.name|get_initial}}
+												</div>
+											</div>
+											{% else %}
+												<div>
+													<img src="{{paling_seru_aktif.ditantang.image.url}}" width="60px" height="60px" style="border-radius:50%;">
+											</div>
+											{% endif %}
+
+
+
+											<div style="font-size:16px; font-weight:bold; color:#000000; margin-top: 11px; line-height: 13px;">
+												{{paling_seru_aktif.ditantang.name}}
+											</div>
+											<div style="color: white; font-size:11px; margin-top:5px;">
+												<span>
+													{% if sportifitas_aktif %}
+														{% for i in sportifitas_aktif|index:1 %}
+															{% if i == 1 %}
+																<i class="fa fa-star" aria-hidden="true" style="color: white;"></i>
+															{% else %}
+																<i class="fa fa-star" aria-hidden="true" style="color: #FFF28F;"></i>
+															{% endif %}
+														{% endfor %}
+													{% endif %}
+												</span>
+												<span>({{paling_seru_aktif.ditantang.sportifitas}})
+												</span>			
+											</div>
+											<div style="color: white; font-size:10px; margin-top:7px; color: #777777; ">
+												{{paling_seru_aktif.ditantang.kategori}} - {{paling_seru_aktif.ditantang.gender}}
+											</div>
+											<div style="color: white; font-size:10px; margin-top:0px; color: #777777; ">
+												{{paling_seru_aktif.ditantang.total_suporter}} suporter
+											</div>
+										</div>
+									</div>
+									<div style="font-size: 10px; display: inline-block; margin-top: 1px; color: #333333; width: 100%;">
+										{{paling_seru_aktif.date_match|date:"d M Y"}} Pukul {{paling_seru_aktif.waktu_match}} {{paling_seru_aktif.zona_waktu}}
+									</div>
+									<div style="font-size: 10px; display: block;margin-top: 1px; color: #1199EE; text-decoration: underline;">
+										{{paling_seru_aktif.alamat_tanding}}
+									</div>
+								</div>
+							</a>
+						</div>
+						
+						
+						{% for pertandingan in paling_seru %}
+							<div class="carousel-item">
+								<a href="">
+									<div style="height: 190px; background-color: #FFEA00; border-radius: 15px; text-align: center; line-height: 9px; padding-right: 11px; padding-left:11px;">
+										<div style="width: 100%; font-size:12px; color:#777777;padding-top:9px;">
+											<small>PALING SERU</small>
+										</div>
+										<div style="width: 100%; font-size:12px; color:#000000;">
+											<small>{{pertandingan.total_suporter}} suporter</small>
+										</div>
+
+										<div style="width:100%; margin-top: -10px;">
+											<div style="width:45%; background-color: transparent; float: left; display: inline-block;">
+												<!-- <div>
+													<img src="{{pertandingan.penantang.image.url}}" width="60px" height="60px" style="border-radius:50%;">
+												</div> -->
+												<!-- Image -->
+												{% if pertandingan.penantang.image == 'club_bola/default.png' %}
+													<div style="width: 100%; justify-content: center; display: flex;">
+														<div style="width:60px; height:60px; line-height:60px; border: 1px solid gold; border-radius:50%; font-size:31px; line-height:60px;">
+
+																{{pertandingan.penantang.name|get_initial}}
+														</div>
+													</div>
+													{% else %}
+														<div>
+															<img src="{{pertandingan.penantang.image.url}}" width="60px" height="60px" style="border-radius:50%;">
+													</div>
+													{% endif %}
+
+
+												<div style="font-size:16px; font-weight:bold; color:#000000; margin-top: 11px; line-height: 13px;">
+													{{pertandingan.penantang.name}}
+												</div>
+												<div style="color: white; font-size:11px; margin-top:5px;">
+													<span>
+														{% with forloop.counter0 as outer_counter %}
+															{% for i in sportifitas_seru|index:outer_counter|index:0 %}
+																{% if i == 1 %}
+																	<i class="fa fa-star" aria-hidden="true" style="color: white;"></i>
+																{% else %}
+																	<i class="fa fa-star" aria-hidden="true" style="color: #FFF28F;"></i>
+																{% endif %}
+															{% endfor %}
+														{% endwith %}
+													</span>
+													<span>({{pertandingan.penantang.sportifitas}})
+													</span>							
+												</div>
+												<div style="color: white; font-size:10px; margin-top:7px; color: #777777; ">
+													{{pertandingan.penantang.kategori}} - {{pertandingan.penantang.gender}}
+												</div>
+												<div style="color: white; font-size:10px; margin-top:0px; color: #777777; ">
+													{{pertandingan.penantang.total_suporter}} suporter
+												</div>
+											</div>
+											<div style="width:10%; background-color: transparent; float: left; text-align: center; margin-top:50px;">
+												<div style="font-size:24px; color:#000000;">VS</div>
+											</div>
+											<div style="width:45%; background-color: transparent; float: left;">
+												<!-- 
+												<div>
+													<img src="{{pertandingan.ditantang.image.url}}" width="60px" height="60px" style="border-radius:50%;">
+												</div> -->
+												<!-- Image klub -->
+												{% if pertandingan.ditantang.image == 'club_bola/default.png' %}
+												<div style="width: 100%; justify-content: center; display: flex;">
+													<div style="width:60px; height:60px; line-height:60px; border: 1px solid gold; border-radius:50%; font-size:31px; line-height:60px;">
+
+															{{pertandingan.ditantang.name|get_initial}}
+													</div>
+												</div>
+												{% else %}
+													<div>
+														<img src="{{pertandingan.ditantang.image.url}}" width="60px" height="60px" style="border-radius:50%;">
+												</div>
+												{% endif %}
+
+
+
+												<div style="font-size:16px; font-weight:bold; color:#000000; margin-top: 11px; line-height: 13px;">
+												{{pertandingan.ditantang.name}}
+												</div>
+												<div style="color: white; font-size:11px; margin-top:5px;">
+													<span>
+														{% with forloop.counter0 as outer_counter %}
+															{% for i in sportifitas_seru|index:outer_counter|index:1 %}
+																{% if i == 1 %}
+																	<i class="fa fa-star" aria-hidden="true" style="color: white;"></i>
+																{% else %}
+																	<i class="fa fa-star" aria-hidden="true" style="color: #FFF28F;"></i>
+																{% endif %}
+															{% endfor %}
+														{% endwith %}
+													</span>
+													<span>({{pertandingan.ditantang.sportifitas}})
+													</span>							
+												</div>
+												<div style="color: white; font-size:10px; margin-top:7px; color: #777777; ">
+													{{pertandingan.ditantang.kategori}} - {{pertandingan.ditantang.gender}}
+												</div>
+												<div style="color: white; font-size:10px; margin-top:0px; color: #777777; ">
+													{{pertandingan.ditantang.total_suporter}} suporters
+												</div>
+											</div>
+										</div>
+										<div style="font-size: 10px; display: inline-block; margin-top: 1px; color: #333333; width: 100%;">
+											{{pertandingan.date_match|date:"d M Y"}} Pukul {{pertandingan.waktu_match}} {{pertandingan.zona_waktu}}
+										</div>
+										<div style="font-size: 10px; display: block;margin-top: 1px; color: #1199EE; text-decoration: underline;">
+											{{pertandingan.alamat_tanding}}
+										</div>
+									</div>
+								</a>
+							</div>
+						{% endfor %}
+						<!-- SEE MORE PERTANDINGAN -->
+						<div class="carousel-item">
+							<a href="">
+								<div style="height: 190px; background-color: #FFEA00; border-radius: 15px; text-align: center; line-height: 9px; padding-right: 11px; padding-left:11px;">
+										<div style="width: 100%; font-size:12px; color:#777777;padding-top:9px;">
+											<small></small>
+										</div>
+										<div style="width:100%; background-color: transparent; float: left; text-align: center; margin-top:80px; border-radius: 15px; ">
+											<div style="font-size:16px; color:#000000;">Lihat jadwal pertandingan lainnya
+											</div>
+										</div>
+									</div>
+							</a>
+						</div>
+						
+
+					</div>
+					<!-- Left and right controls -->
+					<a class="carousel-control-prev" href="#paling_seru" data-slide="prev">
+						<span class="carousel-control-prev-icon"></span>
+					</a>
+					<a class="carousel-control-next" href="#paling_seru" data-slide="next">
+						<span class="carousel-control-next-icon"></span>
+					</a>
+				</div>
+			{% endif %}
+				
+
+			<!-- List klub terbaik -->
+			<div style="height: 13px;"></div>
+			<div style="width:100%;">
+				<div style="width: 10%; float: right;"></div>
+
+				<div style="width: 90%; float: right;">
+					<!-- Klub-klub terbaik -->
+					<div style="width:100%; float: left; font-size: 11px; color:#777777; height: 30px; line-height: 30px; background-color: transparent;">KLUB BOLA TERBAIK SAAT INI
+					</div>
+					
+					<!-- Paginator previous -->
+					{% if clubs.has_previous %}
+						<div style="height: 17px;"></div>
+						<div style="max-width: 600px; justify-content: center; margin: auto; padding-left: 11px; padding-right: 11px; background-color: white;">
+							<div style="width:100%; float: left; font-size: 11px; color:#777777; height: 30px; line-height: 30px; background-color: transparent;">
+								<a href="?page={{ clubs.previous_page_number }}" style="text-decoration: underline;">
+										Load klub-klub dengan ranking terbaik sebelumnya
+								</a>
+
+							</div>
+						</div>
+					{% endif %}
+
+					
+
+					{% for klub in clubs %}
+						<!-- list -->
+						<div style="width:100%; display: block; background-color: transparent;  border-bottom: solid 1px #DDDDDD; padding-bottom: 11px; padding-top: 11px;">
+							
+								<div style="width: 100%; display: flex; background-color: transparent;">
+									<div style="width:20%; background-color: transparent;">
+										<!-- image -->
+										<a href="" style="color:#333333;">
+											{% if klub.image == 'club_bola/default.png' %}
+												<div style="width:71px; height:71px; line-height:71px; text-align: center; border: 1px solid gold; border-radius:50%; font-size:41px;">
+													{{klub.name|get_initial}}
+												</div>
+											{% else %}
+												<div style="width: 100%; background-color:transparent; text-align:center; vertical-align: middle;">
+													<img src="{{ klub.image.url }}" width="100%" height="auto" style="border-radius:50%;">
+												</div>
+											{% endif %}
+										</a>
+
+									</div>
+									<div style="width:45%; display: block;">
+										<!-- club identitas -->
+										<div style="width: 100%; padding-left: 7px;">
+											<a href="" style="color:#333333;">
+												<!-- nama -->
+												<div style="font-size:12px; font-weight:bold; color:#000000; margin-top: 5px; max-width: 100px; line-height: 11px;">{{ klub.name }}
+												</div>
+												<!-- bintang -->
+												<div style="color: white; font-size:11px; margin-top:5px; background-color: transparent;">
+													<span>
+														{% for i in sportifitas|index:forloop.counter0 %}
+															{% if i == 1 %}
+																<i class="fa fa-star" aria-hidden="true" style="color: #FFEE66;"></i>
+															{% else %}
+																<i class="fa fa-star" aria-hidden="true" style="color: #DDDDDD;"></i>
+															{% endif %}
+														{% endfor %}
+													</span>								
+												</div>
+												<!-- supporter -->
+												<div style="color: white; font-size:11px; margin-top:0px; color: #777777; ">
+													{{ klub.total_suporter }} Suporter
+												</div>
+											</a>
+
+											{% if klub.kategori == 'SMA/SMK/MA SEDERAJAT' %}
+												<a href="">
+											{% else %}
+												<a href="">
+											{% endif %}
+												<div style="font-size:11px; margin-top:0px;">
+													{{klub.kategori}} - {{klub.gender}}
+												</div>
+											</a>
+											
+											
+											<a href="">
+												<div style="font-size:11px; margin-top:0px; ">
+													{{ klub.asal_daerah|title }}
+												</div>
+											</a>											
+
+											<!-- TODO! Sponsors -->
+											{% if sponsors|index:forloo.counter0 %}
+												<div style="width:80%; background-color: transparent; display: block; margin: 0 auto; justify-content: left; float: left;">
+													<div style="font-size:7px;">Sponsor</div>
+													<div>
+														<img src="img/c1.png" width="30px" height="30px" style="border-radius:50%; margin-right: 7px;">
+														<img src="img/c1.png" width="30px" height="30px" style="border-radius:50%; margin-right: 7px;">
+													</div>
+												</div>
+											{% endif %}
+										</div>
+									</div>
+									<div style="width:35%; background-color: transparent;">
+										<div style="width:100%; font-size: 9px;">
+											<a href="" style="color:#333333;">
+												<div style="width: 100%; display: block; text-align: right;">
+													<div style="width:100%; text-align: right; padding-right:11px;">Ranking Nasional</div>
+													<div style="width:100%; display:block;">
+														<div style="width:50%; font-size:23px; float:right; text-align: center;">{{ klub.true_ranking_nasional }}</div>
+													</div>
+												</div>
+												<div style="width: 100%; display: flex; background-color: transparent;">
+													<div style="width:80%; text-align: right; padding-right: 7px;">Ranking Daerah</div>
+													<div style="width:20%; text-align:left;">{{ klub.true_ranking_daerah }}</div>
+												</div>
+												<div style="width: 100%; display: flex; background-color: transparent;">
+													<div style="width:80%; text-align: right; padding-right: 7px;">Peluang Menang</div>
+													<div style="width:20%; text-align:left;">{{ klub.peluang_kemenangan }}</div>
+												</div>
+												<div style="width: 100%; display: flex; background-color: transparent;">
+													<div style="width:80%; text-align: right; padding-right: 7px;">Unik Sparing</div>
+													<div style="width:20%; text-align:left;">{{ klub.total_unik_sparing }}</div>
+												</div>
+												<div style="width: 100%; display: flex; background-color: transparent;">
+													<div style="width:80%; text-align: right; padding-right: 7px;">Bertanding</div>
+													<div style="width:20%; text-align:left;">{{ klub.total_pertandingan }}</div>
+												</div>
+												<div style="width: 100%; display: flex; background-color: transparent;">
+													<div style="width:80%; text-align: right; padding-right: 7px;">Menang</div>
+													<div style="width:20%; text-align:left;">{{ klub.total_kemenangan }}</div>
+												</div>
+												<div style="width: 100%; display: flex; background-color: transparent;">
+													<div style="width:80%; text-align: right; padding-right: 7px;">Draw</div>
+													<div style="width:20%; text-align:left;">{{ klub.total_draw }}</div>
+												</div>
+											</a>
+										</div>
+									</div>
+								</div>
+							<!-- </a> -->
+							<!-- Tombol tantang -->
+							{% if not is_anggota_klub|index:forloop.counter0 %}
+								<div style="width:100%; display: flex; padding-top: 7px; background-color: transparent;">
+									<div style="width:20%; float: left;"></div>
+									<div style="width:80%; background-color: transparent; display: flex; margin: 0 auto; justify-content: center; float: left; padding-left: 7px;">
+											<a href="" style="width:100%;">
+												<button style="width:100%; height:40px; border-radius:7px; font-size:12px; color: #000000; background-color: #F5FEFF; border: 1px solid #F5FEFF;">TANTANG KLUB INI!</button>
+											</a>
+									</div>
+								</div>
+							{% else %}
+								<div style="width:100%; display: flex; padding-top: 7px; background-color: transparent;">
+									<div style="width:20%; float: left;"></div>
+									<div style="width:80%; background-color: transparent; display: flex; margin: 0 auto; justify-content: center; float: left; padding-left: 7px;">
+											<!-- TODO! channel masih salah -->
+											<a href="" style="width:100%;">
+												<button style="width:100%; height:40px; border-radius:7px; font-size:12px; color: #000000; background-color: white; border: 1px solid #FFEE66;">MASUK MARKAS KLUB</button>
+											</a>
+									</div>
+								</div>
+							{% endif %}
+						</div>
+					{% endfor %}
+					<!--  -->
+
+
+					<!-- Paginator next -->
+					{% if clubs.has_next %}
+						<div style="height: 17px;"></div>
+						<div style="max-width: 600px; justify-content: center; margin: auto; padding-left: 11px; padding-right: 11px; background-color: white;">
+							<div style="width:100%; float: left; font-size: 11px; color:#777777; height: 30px; line-height: 30px; background-color: transparent; padding-left:11px;">
+								<a href="?page={{ clubs.next_page_number }}" style="text-decoration: underline;">
+										Load klub-klub dengan rangking teratas lain
+								</a>
+
+							</div>
+						</div>
+					{% endif %}
+
+				
+
+
+
+					<br><br><br><br><br><br><br><br><br>
+				</div>
+			</div>
+
+
+			<br><br><br><br><br><br><br><br><br><br>
+			<div style="height: 1067px;"></div>
+		</div>
+	</div>
+
+
+	<!-- Bottom Navigation -->
+	<div style="position: fixed; bottom: 0px; left: 0; width: 100%; list-style-type: none; margin: 0; background: transparent; z-index: 10; padding-left: 11px; padding-right: 11px; padding-top: 11px; border-bottom: 1px solid; border-color:#F7F7F7; height: 100px;">
+		<div style="text-align: center; margin: 0 auto; max-width: 600px;">
+			<div style="width: 10%; float: right;"></div>
+			<div style="width: 90%; background-color: transparent; float: right; font-size: 12px; margin-bottom: 0px; display: flex; justify-content: space-around; font-size: 27px; color: #DDDDDD;">
+				<div style="line-height: 7px;">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Profile Menu -->
+	{% if request.user.is_authenticated %}
+		<div id='profile_menu' onclick="close_profile_menu()" style="position: fixed; top: 61px; width: 100%; height: 100%; text-align: right; z-index: 15; background:rgba(1,1,1,0.5); margin: 0 auto; display: none; width: 100%;">
+			<div style="max-width:600px; display: flex; margin: 0 auto; background: transparent;">
+				<div style="float: left; width: 20%; background-color: transparent;"></div>
+				<div style="width: 80%; background-color: #DDDDDD; margin: 0px 11px 11px 11px; padding: 17px 17px 17px 17px; border-radius:0px; line-height:1.2em; float: left;">
+					<a href="{% url 'profile' user.profile.slug %}">
+						<button style="width:100%; height:40px; border-radius:1px; font-size:16px; color: #000000; background-color: #FFEE66; border: 1px solid #FFEE66; margin-bottom: 3px; text-align: left; padding-right:11px;">PROFILE</button>
+					</a>
+					{% if own_clubs %}
+						<button style="width:100%; height:40px; border-radius:1px; font-size:16px; color: #000000; background-color: #FFEE66; border: 1px solid #FFEE66; margin-bottom: 3px; text-align: left; padding-right:11px;">KLUB KAMU</button>
+						
+						{% for club in own_clubs %}
+							<a href="">
+								<button style="width:100%; height:40px; border-radius:1px; font-size:16px; color: #000000; background-color: transparent; border: 1px solid transparent; margin-bottom: 3px; text-align: left; padding-right:11px; padding-left: 30px;">{{club.name}}</button>
+							</a>
+						{% endfor %}
+					{% endif %}
+					<a href="">
+						<button style="width:100%; height:40px; border-radius:1px; font-size:16px; color: #000000; background-color: #FFEE66; border: 1px solid #FFEE66; margin-bottom: 3px; text-align: left; padding-right:11px;">KLUB KESAYANGANMU</button>
+					</a>
+					<a href="">
+						<button style="width:100%; height:40px; border-radius:1px; font-size:16px; color: #000000; background-color: #FFEE66; border: 1px solid #FFEE66; margin-bottom: 3px; text-align: left; padding-right:11px;">JADWAL PERTANDINGAN</button>
+					</a>
+					<a href="">
+						<button style="width:100%; height:40px; border-radius:1px; font-size:16px; color: #000000; background-color: #FFEE66; border: 1px solid #FFEE66; margin-bottom: 3px; text-align: left; padding-right:11px;">
+							{% if request.user.profile.sport_mode == 'futsal'%}
+								DAFTARKAN KLUB FUTSALMU
+							{% else %}
+								DAFTARKAN KLUB SEPAK BOLAMU
+							{% endif %}
+
+						</button>
+					</a>
+					<a href="">
+						<button style="width:100%; height:40px; border-radius:1px; font-size:16px; color: #000000; background-color: #FFEE66; border: 1px solid #FFEE66; margin-bottom: 3px; text-align: left; padding-right:11px;">TUTORIAL</button>
+					</a>
+					<a href="{% url 'logout' %}">
+						<button style="width:100%; height:40px; border-radius:1px; font-size:16px; color: #000000; background-color: #FFEE66; border: 1px solid #FFEE66; margin-bottom: 3px; text-align: left;padding-right:11px;">LOGOUT</button>
+					</a>
+				</div>
+			</div>
+		</div>
+	{% endif %}
+	
+
+</body>
+
+<script type="text/javascript">
+	function close_sambutan() {
+		document.getElementById( 'sambutan' ).style.display = 'none';
+	}
+	function close_profile_menu() {
+		document.getElementById( 'profile_menu' ).style.display = 'none';
+	}
+	function open_profile_menu() {
+		document.getElementById( 'profile_menu' ).style.display = 'block';
+	}
+</script>
+<script>
+  function to_search_page() {
+      var search_daerah = document.getElementById('search_daerah').value;
+      var search_query = document.getElementById('search_query').value;
+
+      if (! search_daerah) {
+      	search_daerah = 'NASIONAL';
+      };
+      if (! search_query) {
+      	search_query = 'NONE';
+      };
+      
+      window.location.href = window.location.origin.toString() + '/sepakbola/ranking/' + search_daerah +'/' + search_query +'/';
+      
+  };
+</script>
+</html>
+
+

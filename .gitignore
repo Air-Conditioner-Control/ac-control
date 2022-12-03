@@ -15,9 +15,18 @@ media/logo/*
 !/media/logo/logo_transparent.png
 !/media/logo/logo.ico
 
-
 media/profile/*
 !media/profile/default.png
+
+
+
+# Migration file
+users/migrations/*
+!users/migrations/__init__.py
+home/migrations/*
+!home/migrations/__init__.py
+
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <link rel="shortcut icon" href="/media/logo/logo.ico" />
+  {% if title %}
+    <title>OlahragaGo! - {{ title }}</title>
+  {% else %}
+    <title>OlahragaGo!</title>
+  {% endif %}
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+
+    <style>
+    body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+
+    body, html {
+      height: 100%;
+      line-height: 1.8;
+      background-color: white;
+      font-family: 'Comfortaa', cursive;
+    }
+
+    .w3-bar .w3-button {
+      padding: 16px;
+    }
+
+    {% block style %}
+    {% endblock style %}
+
+    </style>
+</head>
+<body>
+
+<main>
+	<div style="width: 100%; top: 0; background-color: white; position: fixed; box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset; min-height: 100vh; padding: 25px 15px 15px 15px;">
+
+		<div style="max-width: 700px; text-align: center; background-color: transparent; margin: auto;" class="row">
+	        <div class="column" style="float: left; width: 60%; background-color: transparent; text-align: left; padding-left: 10px; padding-right: auto; line-height: 1.5em; width:100%;">
+	              <a href="{% url 'sugestion_survey' %}" style="color: #68acac; font-weight: bold; text-decoration: none; font-size: 1.3em; font-weight: bold;">
+	                <span><img style="border-radius:50%; width: 27px; height: 27px;" src="/media/assets/logo.ico"></span><span style="text-shadow: 2px 2px 5px #F8F8F8;"><span style="color: #00ff00;">pini</span>Stream</span>
+		            </a>
+		            <div>
+		               <small style="font-size: 0.9em; color: #68acac; padding-left: 27px; text-shadow: 2px 2px 5px #F8F8F8;">Demokratisasi Data Personal</small>
+	              </div>
+	        </div>
+	    </div>
+
+			<div style="width: 100%; min-height: 100vh; text-align: center; margin: auto; max-width: 700px; overflow: scroll; font-size:0.9em;">
+			    <div style="height: 0; padding-top: 7px; background-size: contain; background-repeat: no-repeat;, contain; position:  relative; margin: 17px; border-radius: 3px; text-align: left;">
+			    	<div>
+			    		<small class="text-muted">
+			    		Platform untuk memudahkan setiap orang membuat survey dan mendapatkan data persona masyarakat umum serta memonetisasinya.</small>
+			    	</div>
+			    	<div style="padding-top: 0.5em;">
+			    		<small class="text-muted">Pada platform ini anda bisa mendapatkan:</small>
+			    		<ul>
+			    			<small class="text-muted">
+			    				<li>Informasi mendalam mengenai prefrensi masyarakat secara umum.</li>
+			    				<li>Mendapatkan penghasilan tambahan tanpa membuka privasi kepartisipasian anda terhadap suatu survey (cooming soon).</li>
+			    			</small>
+			    		</ul>
+			    	</div>
+			    	<div style="padding-top: 0.5em;">
+			    		<small class="text-muted">Untuk dapat melihat data suatu survey, anda harus berpartisipasi dengan cara:</small>
+			    		<div>
+				    		<ul>
+				    			<small class="text-muted">
+				    				<li>Membuat, atau</li>
+				    				<li>Berpartisipasi terhadap survey tersebut.</li>
+				    			</small>
+				    		</ul>
+                <small class="text-muted">Dengan OpiniStream anda dapat membuat, ataupun mengikuti survey public, serta dapat memantau data hasil surveynya setiap saat.</small>
+			    		</div>
+			    	</div>
+			    </div>
+			</div>  
+	</div> 
+</main>
+
+
+</body>
+
+<script>
+  {% block script %}
+  {% endblock script%}
+
+
+function menu_open() {
+    var menu_bar_open = document.getElementById("menu_bar_open");
+    if (menu_bar_open.style.display == 'block') {
+        menu_bar_open.style.display = 'none';
+    } else {
+        menu_bar_open.style.display = 'block';
+    }
+}
+
+function menuBarClose() {
+    var menu_bar_open = document.getElementById("menu_bar_open");
+    if (menu_bar_open.style.display == 'block') {
+        menu_bar_open.style.display = 'none';
+    } else {
+        menu_bar_open.style.display = 'block';
+    }
+}
+
+</script>
+{% block script2 %}
+{% endblock script2%}
+
+<!-- SEARCH -->
+<script type="text/javascript">
+  function search_window_open() {
+    // Focus on search_input NOT WORK
+    document.getElementById("search_input").focus(); 
+  
+    var search_window_open = document.getElementById("search_window");
+    if (search_window_open.style.display == 'flex') {
+        search_window_open.style.display = 'none';
+    } else {
+        search_window_open.style.display = 'flex';
+    }
+  };
+
+  function window_search_close() {
+      var search_window_open = document.getElementById("search_window");
+      if (search_window_open.style.display == 'flex') {
+          search_window_open.style.display = 'none';
+      } else {
+          search_window_open.style.display = 'flex';
+      }
+  };
+
+  function to_search_page() {
+      var search_input = document.getElementById('search_input').value;
+      console.log("search_input", search_input);
+      if (search_input) {
+        window.location.href = window.location.origin.toString() + '/survey_search/' + search_input +'/';
+      } else {
+        window.location.href = window.location.origin.toString() + '/sugestion_survey/';
+      };
+  };
+
+</script>
+</html>
+
