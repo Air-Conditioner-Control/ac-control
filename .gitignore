@@ -17,6 +17,7 @@ media/logo/*
 
 media/profile/*
 !media/profile/default.png
+media/assets/*
 
 
 
