@@ -18,6 +18,12 @@ media/logo/*
 media/profile/*
 !media/profile/default.png
 media/assets/*
+media/ac/*
+!media/ac/default.png
+media/customer/*
+!media/customer/default.png
+media/riwayat_penanganan/*
+!media/riwayat_penanganan/default.png
 
 
 
