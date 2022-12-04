@@ -14,6 +14,5 @@ urlpatterns = [
     path('about/', user_view.about, name='about-page'),
     path('profile/<slug:slug>/', user_view.profile, name='profile'), 
     path('change_password/', user_view.change_password, name='change_password'),
-    # path('change_password/', user_view.change_password, name='change_password'),
 
 ]

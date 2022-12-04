@@ -120,52 +120,22 @@
 		color: red;
 
 	}
-	#id_old_password {
-		width: 100%; 
-		background-color: white; 
-		height: 40px; 
-		border-radius:7px; 
-		border: solid 1px #FFEE66; 
-		color: #BBBBBB; 
-		padding-left: 16px;
-	}
-	#id_new_password1 {
-		width: 100%; 
-		background-color: white; 
-		height: 40px; 
-		border-radius:7px; 
-		border: solid 1px #FFEE66; 
-		color: #BBBBBB; 
-		padding-left: 16px;
-	}
-	
-	#id_new_password2 {
-		width: 100%; 
-		background-color: white; 
-		height: 40px; 
-		border-radius:7px; 
-		border: solid 1px #FFEE66; 
-		color: #BBBBBB; 
-		padding-left: 16px;
-	}
-	
-
 </style>
 </head>
 <body style="font-family: 'Jura', sans-serif;">
 
 	<!-- Top Navigation -->
-	<div style="position: fixed; top: 0; left: 0; width: 100%; list-style-type: none; margin: 0; padding: 0; background: background: rgb(255, 255, 255, 0.4); z-index: 10; padding-left: 11px; padding-right: 11px; border-bottom: 1px solid; border-color:#F7F7F7">
+	<div style="position: fixed; top: 0; left: 0; width: 100%; list-style-type: none; margin: 0; padding: 0; background: rgb(255, 255, 255, 0.4); z-index: 10; padding-left: 11px; padding-right: 11px; border-bottom: 1px solid; border-color:#F7F7F7">
 		<div style="text-align: center; margin: 0 auto; max-width: 600px;">
-			<div style="width: 100%; background-color: background: rgb(255, 255, 255, 0.4); float: left !important; color: #555555; font-weight: bold; margin-top: 13px; margin-bottom: 8px; font-size: 13px; left: 0px;">
+			<div style="width: 100%; background-color: transparent; float: left !important; color: #555555; font-weight: bold; margin-top: 13px; margin-bottom: 8px; font-size: 13px; left: 0px;">
 				<div style="width:100%">
-					<a href="{% url 'profile' user.profile.slug %}">
+					<a href="{% url 'home' %}">
 						<div style="width:7%; float: left; text-align: left; padding-left:3px; color:#777777;">
 							<i class="fa fa-arrow-left" aria-hidden="true"></i>
 						</div>
 					</a>
 					<div style="width: 93%; float: left; color:#777777; display: flex;">
-						<div style="text-align: left;">Ganti password</div>
+						<div style="text-align: left;">Daftarkan Teknisi</div>
 					</div>
 				</div>
 			</div>
@@ -173,63 +143,65 @@
 	</div>
 
 
-	<!-- Logo -->
-		<div style="width: 100%; height: 100px; text-align: center;">
-			<a href="{% url 'profile' user.profile.slug %}" style="width:100%;">
-				<div style="padding-top: 70px;">
-					<button style="width:368px; height:110px; border-radius:7px; font-size:16px; color: #000000; background-color: transparent; border: 1px solid transparent;">
-						<div style="width:30%; float: left; height:90px; width:90px;">
-							<img src="/media/logo/logo.png" width="100%" height="100%">
-						</div>
-						<div style="width: 70%; float: left; line-height: 90px;">
-							<div style="text-align: left; font-size:40px; color: #777777;">AC Control!</div>
-							<div style="margin-top:-50px; margin-left:-1px; font-size:12px;">Merawat AC anda dengan sebaiknya.</div>
-						</div>
-					</button>
-				</div>
-			</a>
-		</div>
-	</div>
 
 
 	<!-- Body -->
 	<div style="max-width: 600px; justify-content: center; margin: auto; padding-left: 11px; padding-right: 11px;">
 
-		<div style="left: 0; width: 100%; list-style-type: none; margin: 0; padding: 0; background: white; z-index: 10; padding-left: 11px; padding-right: 11px; margin-top:80px;">
+		<div style="left: 0; width: 100%; list-style-type: none; margin: 0; padding: 0; background: white; z-index: 10; padding-left: 11px; padding-right: 11px; margin-top:50px;">
 			<div style="text-align: center; margin: 0 auto; max-width: 400px;">
 				<div style="width: 100%; background-color: white; float: left; font-size: 12px; margin-top: 16px; justify-content: space-between; color: #777777;">
 
 					<!-- Form -->
-					<form method="POST">
+					<form method="POST" enctype="multipart/form-data">
 						{% csrf_token %}
-					    <div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 20px;">
-							<div style="margin-bottom: 5px;">PASSWORD LAMA</div>
-							{{form.old_password}}
-						</div>
+					   	<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 20px;">
+								<div style="margin-bottom: 5px;">NAMA LENGKAP</div>
+								{{form.nama_lengkap}}
+								{% for error in form.nama_lengkap.errors %}
+			            <div class="alert alert-danger">
+			              <strong>{{ error|escape }}</strong>
+			            </div>
+			          {% endfor %}
+							</div>
 
-						<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 20px;">
-							<div style="margin-bottom: 5px;">PASSWORD BARU</div>
-							{{form.new_password1}}
-						    <div style="font-size: 11px;">
-						    	<ul>
-						    		<li>Password jangan sama dengan informasi personal anda</li>
-						    		<li>Setidaknya 8 karakter</li>
-						    		<li>Jangan gunakan password yang umum digunakan</li>
-						    		<li>Password tidak boleh semuanya angka</li>
-						    	</ul>
-						    </div>
-						</div>
+							
 
-						<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 20px;">
-							<div style="margin-bottom: 5px;">TULIS KEMBALI PASSWORD BARU</div>
-							{{form.new_password2}}
-						    <div style="font-size: 11px;">Tulis kembali password baru di atas untuk konfirmasi</div>
-						</div>
+							<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 20px;">
+								<div style="margin-bottom: 5px;">ALAMAT</div>
+								{{form.alamat}}
+								{% for error in form.alamat.errors %}
+			            <div class="alert alert-danger">
+			              <strong>{{ error|escape }}</strong>
+			            </div>
+			          {% endfor %}
+							</div>
 
-						<!-- Tombol ganti password -->
+							<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 20px;">
+								<div style="margin-bottom: 5px;">NOMOR WHATSAPP/HP</div>
+								{{form.wa_number}}
+								{% for error in form.wa_number.errors %}
+			            <div class="alert alert-danger">
+			              <strong>{{ error|escape }}</strong>
+			            </div>
+			          {% endfor %}
+							</div>
+
+							<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 20px;">
+								<div style="margin-bottom: 5px;">FOTO</div>
+								{{form.image}}
+								{% for error in form.image.errors %}
+			            <div class="alert alert-danger">
+			              <strong>{{ error|escape }}</strong>
+			            </div>
+			          {% endfor %}
+							</div>
+
+						
+						<!-- Tombol create -->
 						<div style="width: 100%; height: 100px; text-align: center;">
 							<div style="padding-top: 30px;">
-								<button style="width:268px; height:40px; border-radius:7px; font-size:16px; color: #000000; background-color: background: rgb(255, 255, 255, 0.4); border: 1px solid #FFEE66;">GANTI PASSWORD</button>
+								<button style="width:268px; height:40px; border-radius:7px; font-size:16px; color: #000000; background-color: rgb(100, 100, 100, 0.2); border: 1px solid #FFEE66;">UPDATE DATA</button>
 							</div>
 						</div>
 					</form>

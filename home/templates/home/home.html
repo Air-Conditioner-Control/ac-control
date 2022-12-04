@@ -341,14 +341,17 @@
 
 	<!-- Top Navigation -->
 	{% if not request.user.is_authenticated %}
-		<div style="position: fixed; top: 0; left: 0; width: 100%; list-style-type: none; margin: 0; padding: 0; background: rgb(255, 255, 255, 0.4); z-index: 10; padding-left: 11px; padding-right: 11px; border-bottom: 1px solid; border-color:#F7F7F7">
+		<div style="position: fixed; top: 0; left: 0; width: 100%; list-style-type: none; margin: 0; padding: 0; background: rgb(255, 255, 255, 0.8); z-index: 10; padding-left: 11px; padding-right: 11px; border-bottom: 1px solid; border-color:#F7F7F7">
 			<div style="text-align: center; margin: 0 auto; max-width: 600px; background-color: transparent;">
-				<div style="width: 30%; background-color: transparent; float: left !important; color: #555555; font-weight: bold; margin-top: 13px; margin-bottom: 8px; font-size: 13px;">
+				<div style="width: 50%; background-color: transparent; float: left !important; color: #555555; font-weight: bold; margin-top: 13px; margin-bottom: 8px; font-size: 13px;">
 					
 					<a href="">
 						<div style="width:100%; color: #777777;">
+							<div style="width:30%; float: left;">
+								<img src="/media/logo/logo.png" width="100%" height="100%">
+							</div>
 
-							<div style="width: 100%; float: left;">
+							<div style="width: 70%; float: left;">
 								<div style="text-align: left; line-height:23px; font-size:18px; color: black; padding-left:11px;">AC Control</div>
 
 							</div>
@@ -356,11 +359,11 @@
 					</a>
 
 				</div>
-				<div style="width: 66%; background-color: transparent; float: left; font-size: 12px; margin-top: 16px; margin-bottom: 11px; justify-content: space-between; color: #777777;">
-					<div style="width: 37%; background-color: transparent; float: right;">
+				<div style="width: 50%; background-color: transparent; float: right; font-size: 12px; margin-top: 16px; margin-bottom: 11px; color: #777777; position: relative;">
+					<div style="width: 50%; background-color: transparent; float: right;">
 						{% if user.profile.user_type != 'UMUM' %}
 							<a href="{% url 'login' %}">
-								<button style="border-radius: 4px; border-color: #FFEE66; background-color: transparent; border: solid 1px black; font-size: 12px; color: black; font-family: 'Jura', sans-serif; margin: -5px; font-weight: bold;">
+								<button style="border-radius: 4px; border-color: #FFEE66; background-color: transparent; border: solid 1px black; font-size: 12px; color: black; font-family: 'Jura', sans-serif; font-weight: bold;">
 								Admin Login
 								</button>
 							</a>
@@ -374,13 +377,16 @@
 			</div>
 		</div>
 	{% else %}
-		<div style="position: fixed; top: 0; left: 0; width: 100%; list-style-type: none; margin: 0; padding: 0; background: rgb(255, 255, 255, 0.4); z-index: 10; padding-left: 11px; padding-right: 11px; border-bottom: 1px solid; border-color:#F7F7F7">
+		<div style="position: fixed; top: 0; left: 0; width: 100%; list-style-type: none; margin: 0; padding: 0; background: rgb(255, 255, 255, 0.8); z-index: 10; padding-left: 11px; padding-right: 11px; border-bottom: 1px solid; border-color:#F7F7F7">
 			<div style="text-align: right; margin: 0 auto; max-width: 600px;">
-				<div style="width: 30%; background-color: transparent; float: left !important; color: #555555; font-weight: bold; margin-top: 13px; margin-bottom: 8px; font-size: 13px;">
+				<div style="width: 50%; background-color: transparent; float: left !important; color: #555555; font-weight: bold; margin-top: 13px; margin-bottom: 8px; font-size: 13px;">
 					<a href="">
 						<div style="width:100%; color: #777777;">
+							<div style="width:30%; float: left;">
+								<img src="/media/logo/logo.png" width="100%" height="100%">
+							</div>
 
-							<div style="width: 100%; float: left;">
+							<div style="width: 70%; float: left;">
 								<div style="text-align: left; line-height:23px; font-size:18px; color: black; padding-left:11px;">AC Control</div>
 
 							</div>
@@ -388,8 +394,8 @@
 					</a>
 
 				</div>
-				<div style="width: 66%; background-color: transparent; float: left; font-size: 12px; margin-top: 16px; margin-bottom: 11px; justify-content: space-between; color: #777777;">
-					<div style="width: 15%; background-color: transparent; float: right;">
+				<div style="width: 50%; background-color: transparent; float: left; font-size: 12px; margin-top: 16px; margin-bottom: 11px; justify-content: space-between; color: #777777;">
+					<div style="width: 30%; background-color: transparent; float: right; padding-right: 10px;">
 						<div onclick="open_profile_menu()">
 							{% if request.user.profile.image != 'profile/default.png' %}
 								<img src="{{ request.user.profile.image.url }}" width="25px" height="25px" style="border-radius:50%;">
@@ -401,7 +407,7 @@
 						</div>
 					</div>
 					
-					<div style="width: 27%; background-color: transparent; float: right;">
+					<div style="width: 70%; background-color: transparent; float: right;">
 						{% if user.profile.user_type != 'UMUM' %}
 							<a href="">
 								<button style="border-radius: 4px; border-color: #FFEE66; background-color: transparent; border: solid 1px transparent; font-size: 12px; color: black; font-family: 'Jura', sans-serif; margin: -5px; font-weight: bold; line-height: 30px;">
@@ -530,8 +536,8 @@
                       <div class="text-center">
                         <img src="https://i.imgur.com/gazoShk.jpg" class="img-fluid profile-pic">
                       </div>
-                      <h6 class="mb-0 mt-2">Hanung Manggara</h6>
-                      <small style="width: 80px;">Manager Operasional Gajdah Maju</small>
+                      <h6 class="mb-0 mt-2" style="font-weight: bold;">Hanung Manggara</h6>
+                      <small style="width: 80px; text-align: center;">Manager Operasional Gajdah Maju</small>
                     </div>
                     <img class="img-fluid open-quotes" src="https://i.imgur.com/Hp91vdT.png" width="20" height="20">
                     <p class="content mb-0" style="padding-left: 70px; min-height: 200px;">Servisnya bagus, harga transparan, respon cepat, pengerjaan juga cepat, profesional pokoknya.</p>
@@ -587,20 +593,38 @@
 				<div style="float: left; width: 20%; background-color: transparent;"></div>
 				<div style="width: 80%; background-color: black; margin: 0px 11px 11px 11px; padding: 17px 17px 17px 17px; border-radius:0px; line-height:1.2em; float: left;">
 					<a href="{% url 'profile' user.profile.slug %}">
-						<button style="width:100%; height:40px; border-radius:1px; font-size:16px; color: white; background-color: transparent; border: 1px solid white; margin-bottom: 3px; text-align: left; padding-right:11px;">PROFILE</button>
+						<button style="width:100%; height:33px; border-radius:1px; font-size:16px; color: white; background-color: transparent; border: 1px solid transparent; margin-bottom: 3px; text-align: left; padding-right:11px;">PROFILE</button>
 					</a>
 					{% if user.profile.user_type == 'ADMIN' %}
+						<hr>
+					{% endif %}
+					{% if user.profile.user_type == 'ADMIN' %}
 						<a href="{% url 'create_teknisi' %}">
-							<button style="width:100%; height:40px; border-radius:1px; font-size:16px; color: white; background-color: transparent; border: 1px solid white; margin-bottom: 3px; text-align: left; padding-right:11px;">BUAT TEKNISI</button>
+							<button style="width:100%; height:33px; border-radius:1px; font-size:16px; color: white; background-color: transparent; border: 1px solid transparent; margin-bottom: 3px; text-align: left; padding-right:11px;">DAFTARKAN TEKNISI</button>
 						</a>
 						<a href="{% url 'daftar_teknisi' %}">
-							<button style="width:100%; height:40px; border-radius:1px; font-size:16px; color: white; background-color: transparent; border: 1px solid white; margin-bottom: 3px; text-align: left; padding-right:11px;">DATA TEKNISI</button>
+							<button style="width:100%; height:33px; border-radius:1px; font-size:16px; color: white; background-color: transparent; border: 1px solid transparent; margin-bottom: 3px; text-align: left; padding-right:11px;">DATA TEKNISI</button>
 						</a>
+					{% endif %}
+					{% if user.profile.user_type != 'UMUM' %}
+						
+						<a href="{% url 'daftarkan_customer' %}">
+							<hr>
+							<button style="width:100%; height:33px; border-radius:1px; font-size:16px; color: white; background-color: transparent; border: 1px solid transparent; margin-bottom: 3px; text-align: left; padding-right:11px;">DAFTARKAN KUSTOMER</button>
+						</a>
+						<a href="{% url 'daftar_customer' %}">
+							<button style="width:100%; height:33px; border-radius:1px; font-size:16px; color: white; background-color: transparent; border: 1px solid transparent; margin-bottom: 3px; text-align: left; padding-right:11px;">DATA KUSTOMER</button>
+						</a>
+						<a href="{% url 'daftar_teknisi' %}">
+							<button style="width:100%; height:33px; border-radius:1px; font-size:16px; color: white; background-color: transparent; border: 1px solid transparent; margin-bottom: 3px; text-align: left; padding-right:11px;">DATA AC</button>
+						</a>
+
 					{% endif %}
 					
 					
 					<a href="{% url 'logout' %}">
-						<button style="width:100%; height:40px; border-radius:1px; font-size:16px; color: white; background-color: transparent; border: 1px solid white; margin-bottom: 3px; text-align: left;padding-right:11px;">LOGOUT</button>
+						<hr>
+						<button style="width:100%; height:33px; border-radius:1px; font-size:16px; color: white; background-color: transparent; border: 1px solid transparent; margin-bottom: 3px; text-align: left;padding-right:11px;">LOGOUT</button>
 					</a>
 				</div>
 			</div>
@@ -614,7 +638,7 @@
 		<div style="text-align: right; margin: 0 auto; max-width: 600px;">
 			<a href="">
 				<div style="margin-bottom:30px; color: lightgreen; font-weight: bold;">
-					<div style="font-size:18px;"><span style="text-shadow: 1px 1px 1px #000000;">Chat Kami</span>
+					<div style="font-size:18px;"><span style="text-shadow: 1px 1px 1px #000000;">Customer Service</span>
 						<i class="fab fa-whatsapp" style="font-size:33px"></i></div>
 				</div>
 			</a>

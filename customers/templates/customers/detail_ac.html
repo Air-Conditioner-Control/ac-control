@@ -1,3 +1,5 @@
+{% load get_initial %}
+{% load index %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -98,29 +100,14 @@
   }
 }
 .rotating {
-  -webkit-animation: rotating 11s linear infinite;
-  -moz-animation: rotating 11s linear infinite;
-  -ms-animation: rotating 11s linear infinite;
-  -o-animation: rotating 11s linear infinite;
-  animation: rotating 11s linear infinite;
+  -webkit-animation: rotating 2s linear infinite;
+  -moz-animation: rotating 2s linear infinite;
+  -ms-animation: rotating 2s linear infinite;
+  -o-animation: rotating 2s linear infinite;
+  animation: rotating 2s linear infinite;
 }
 </style>
-<style type="text/css">
-	.input_form_style {
-		width: 100%; 
-		background-color: white; 
-		height: 40px; 
-		border-radius:7px; 
-		border: solid 1px #FFEE66; 
-		color: #BBBBBB; 
-		padding-left: 16px;
-	}
-	.label_form_style {
-		margin-bottom: 5px;
-		color: red;
 
-	}
-</style>
 </head>
 <body style="font-family: 'Jura', sans-serif;">
 
@@ -129,56 +116,107 @@
 		<div style="text-align: center; margin: 0 auto; max-width: 600px;">
 			<div style="width: 100%; background-color: transparent; float: left !important; color: #555555; font-weight: bold; margin-top: 13px; margin-bottom: 8px; font-size: 13px; left: 0px;">
 				<div style="width:100%">
-					<a href="{% url 'home' %}">
+					<a href="">
 						<div style="width:7%; float: left; text-align: left; padding-left:3px; color:#777777;">
 							<i class="fa fa-arrow-left" aria-hidden="true"></i>
 						</div>
 					</a>
-					<div style="width: 93%; float: left; color:#777777; display: flex;">
-						<div style="text-align: left;">LOGOUT</div>
+					<div style="width: 93%; float: left; color:#777777;">
+						<div style="text-align: left;">Detail AC</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-
-	<!-- Logo -->
-		<div style="width: 100%; height: 100px; text-align: center;">
-			<a href="{% url 'home' %}" style="width:100%;">
-				<div style="padding-top: 70px;">
-					<button style="width:368px; height:110px; border-radius:7px; font-size:16px; color: #000000; background-color: transparent; border: 1px solid transparent;">
-						<div style="width:30%; float: left; height:90px; width:90px;">
-							<img src="/media/logo/logo.png" width="100%" height="100%">
-						</div>
-						<div style="width: 70%; float: left; line-height: 90px;">
-							<div style="text-align: left; font-size:40px; color: #777777;">AC Control!</div>
-							<div style="margin-top:-50px; margin-left:-1px; font-size:12px;">Merawat AC anda dengan sebaiknya.</div>
-						</div>
-					</button>
-				</div>
-			</a>
-		</div>
-	</div>
+	
 
 
-
-	<!-- Body -->
+	<!-- Biodata -->
 	<div style="max-width: 600px; justify-content: center; margin: auto; padding-left: 11px; padding-right: 11px;">
 
-		<div style="left: 0; width: 100%; list-style-type: none; margin: 0; padding: 0; background: white; z-index: 10; padding-left: 11px; padding-right: 11px; margin-top:80px;">
-			<div style="text-align: center; margin: 0 auto; max-width: 400px;">
-				<div style="width: 100%; background-color: white; float: left; font-size: 12px; margin-top: 16px; justify-content: space-between; color: #777777;">
-
-					<div style="font-size: 14px;">Anda telah berhasil keluar (logout)</div>
-					<div style="font-size: 14px;">Login kembali? <a href="{% url 'login' %}"> Login</a></div>
+		<div style="left: 0; width: 100%; list-style-type: none; margin: 0; padding: 0; background: white; z-index: 10; padding-left: 11px; padding-right: 11px; margin-top:50px; font-size: 12px;">
+					
+			<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 20px;">
+				<div style="margin-bottom: 0px; font-size: 16px; width: 100%;">
+					<img src="{{ ac.image.url }}" width="100%" height="auto" style="border-radius:3%;">
 				</div>
 			</div>
+
+			<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 0px; display: block;">
+				<div style="margin-bottom: 0px;">{{ ac.ac_id }}</div>
+			</div>
+
+			<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 0px; display: block;">
+				<div style="margin-bottom: 0px;">{{ ac.merk }}</div>
+			</div>
+
+			<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 0px;">
+				<div style="margin-bottom: 0px;">{{ ac.kapasitas }}</div>
+			</div>
+			<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 0px;">
+				<div style="margin-bottom: 0px;">{{ ac.ruangan }}</div>
+			</div>
+			{% if user.profile.user_type == 'ADMIN' %}
+				<div style="width: 100%; height: 50px; text-align: left; font-size:12px;">
+					<a href="{% url 'edit_data_ac' ac.slug %}" style="width:50%;">
+						<i class="fa fa-edit"></i>&nbsp;&nbsp;Edit Data AC
+					</a>
+				</div>
+			{% endif %}
 		</div>
+		
+
+		{% if user.profile.user_type != 'UMUM' %}
+				<div style="width: 100%; height: 30px; text-align: left; font-size:12px;">
+					<a href="{% url 'tambah_riwayat_penanganan' ac.slug %}" style="width:50%;">
+						<i class="fa fa-plus"></i>&nbsp;&nbsp;Tambah Riwayat Penanganan
+					</a>
+				</div>
+			{% endif %}
+		<table class="table table-striped w-auto" style="font-size:12px;">
+			  <thead>
+			    <tr>
+			      <th>No</th>
+			      <th>Deskripsi</th>
+			      <th>Trouble Shooting</th>
+			      <th>Solusi</th>
+			      <th>Tanggal</th>
+			      <th>Teknisi</th>
+			      <th>Gambar</th>
+			    </tr>
+			  </thead>
+			  
+			  <tbody>
+			  	{% for pen in riwayat_penanganan %}
+				    <tr>
+				      <th scope="row">{{ forloop.counter }}</th>
+				      <td>{{pen.description}}</td>
+				      <td>{{pen.trouble_shooting}}</td>
+				      <td>{{pen.solusi}}</td>
+				      <td>{{pen.date_created|date:"d M Y"}}</td>
+				      {% if pen.teknisi %}
+					      <td><a href="{% url 'profile' pen.teknisi.slug %}">{{pen.teknisi}}</a></td>
+					    {% else %}
+				      	<td>{{pen.teknisi}}</td>
+					    {% endif %}
+
+				      <td><img src="{{ pen.image.url }}" width="200px" height="auto" style="border-radius:1%;"></td>
+				    </tr>
+				  {% endfor %}
+
+			  </tbody>
+			</table>
+
+			
+
+
+	
+
+		
+	
+
 	</div>
-
-
-
 
 
 </body>
