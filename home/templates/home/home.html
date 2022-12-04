@@ -8,9 +8,9 @@
 
 <link rel="shortcut icon" href="/media/logo/logo.ico" />
 {% if title %}
-  <title>OlahragaGo! - {{ title }}</title>
+  <title>AC Control! - {{ title }}</title>
 {% else %}
-  <title>OlahragaGo!</title>
+  <title>AC Control!</title>
 {% endif %}
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -357,39 +357,30 @@
 
 				</div>
 				<div style="width: 66%; background-color: transparent; float: left; font-size: 12px; margin-top: 16px; margin-bottom: 11px; justify-content: space-between; color: #777777;">
-					<div style="width: 17%; background-color: transparent; float: right;">
-						<a href="{% url 'register' %}">
+					<div style="width: 37%; background-color: transparent; float: right;">
+						<a href="{% url 'login' %}">
 							<button style="border-radius: 4px; border-color: #FFEE66; background-color: transparent; border: solid 1px black; font-size: 12px; color: black; font-family: 'Jura', sans-serif; margin: -5px; font-weight: bold;">
-							Daftar
+							Admin Login
 							</button>
 						</a>
 					</div>
-					<a href="{% url 'login' %}" style="color:#999999; font-weight: bold;">
+					<!-- <a href="{% url 'login' %}" style="color:#999999; font-weight: bold;">
 						<div style="width: 20%; background-color: transparent; float: right; color: black;">Login</div>
-					</a>
+					</a> -->
 					
 				</div>
 			</div>
 		</div>
 	{% else %}
-		<div style="position: fixed; top: 0; left: 0; width: 100%; list-style-type: none; margin: 0; padding: 0; background: white; z-index: 10; padding-left: 11px; padding-right: 11px; border-bottom: 1px solid; border-color:#F7F7F7">
+		<div style="position: fixed; top: 0; left: 0; width: 100%; list-style-type: none; margin: 0; padding: 0; background: rgb(255, 255, 255, 0.4); z-index: 10; padding-left: 11px; padding-right: 11px; border-bottom: 1px solid; border-color:#F7F7F7">
 			<div style="text-align: right; margin: 0 auto; max-width: 600px;">
 				<div style="width: 30%; background-color: transparent; float: left !important; color: #555555; font-weight: bold; margin-top: 13px; margin-bottom: 8px; font-size: 13px;">
 					<a href="">
 						<div style="width:100%; color: #777777;">
-							<div class="rotating" style="width:30%; float: left;">
-								<img src="/media/logo/logo.png" width="100%" height="100%" style="border-radius:50%;">
-							</div>
-							<!-- <div style="width: 70%; float: left;">
-								<div style="text-align: left;">Liga</div>
-								<div style="text-align: left;">Persahabatan</div>
-							</div> -->
-							<!-- <div style="width: 70%; float: left;">
-								<div style="text-align: left; line-height:33px; font-size:17px;">OlahragaGo!</div>
-							</div> -->
-							<div style="width: 70%; float: left;">
-								<div style="text-align: left; line-height:23px; font-size:11px;">OlahragaGo!</div>
-								<div style="text-align: left; line-height:1px; font-size:12px;">Sepak Bola</div>
+
+							<div style="width: 100%; float: left;">
+								<div style="text-align: left; line-height:23px; font-size:18px; color: black; padding-left:11px;">AC Control</div>
+
 							</div>
 						</div>
 					</a>
@@ -398,7 +389,6 @@
 				<div style="width: 66%; background-color: transparent; float: left; font-size: 12px; margin-top: 16px; margin-bottom: 11px; justify-content: space-between; color: #777777;">
 					<div style="width: 15%; background-color: transparent; float: right;">
 						<div onclick="open_profile_menu()">
-							<!-- <img src="{{ request.user.profile.image.url }}" width="25px" height="25px" style="border-radius:50%;"> -->
 							{% if request.user.profile.image != 'profile/default.png' %}
 								<img src="{{ request.user.profile.image.url }}" width="25px" height="25px" style="border-radius:50%;">
 							{% else %}
@@ -408,37 +398,14 @@
 							{% endif %}
 						</div>
 					</div>
-					<div style="width:  15%; background-color: transparent; float: right; font-size: 21px; margin-top:-4px;">
-						<a href="" style="color:#999999;">
-							<i class="fa fa-bell" aria-hidden="true">
-								{% if total_notif %}
-									<span style="font-size:9px; color: red; margin-left: -50%; margin-top: -50%; background-color: white; border-radius:50%;">
-											{{total_notif}}
-									</span>
-								{% endif %}
-							</i>
-						</a>
-					</div>
-					<div style="width: 15%; background-color: transparent; float: right; font-size: 21px; margin-top:-4px;">
-						<a href="" style="color:#999999;">
-							<i class="fa fa-envelope" aria-hidden="true">
-								{% if count_unread_message %}
-									<span style="font-size:9px; color: red; margin-left: -50%; margin-top: -50%; background-color: white; border-radius:50%;">{{count_unread_message}}
-									</span>
-								{% endif %}
-							</i>			
-						</a>
-					</div>
-					<a href="" style="color:#999999;">
-						<div style="width: 15%; background-color: transparent; float: right; font-size: 16px; "><i class="fa fa-search" aria-hidden="true"></i></div>
-					</a>
-					<a href="" style="color: #999999;">
-						<div style="width: 17%; background-color: transparent; float: right; font-size: 18px;"><i class="fa fa-calendar" aria-hidden="true"></i></div>
-					</a>
-					<a href="" style="color: #999999;">
-						<div style="width: 15%; background-color: transparent; float: right; font-size: 18px;"><i class="fa fa-trophy" aria-hidden="true"></i></div>
-					</a>
 					
+					<div style="width: 27%; background-color: transparent; float: right;">
+						<a href="{% url 'login' %}">
+							<button style="border-radius: 4px; border-color: #FFEE66; background-color: transparent; border: solid 1px transparent; font-size: 12px; color: black; font-family: 'Jura', sans-serif; margin: -5px; font-weight: bold; line-height: 30px;">
+							Data AC
+							</button>
+						</a>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -449,7 +416,7 @@
 		<div style="background: url('/media/assets/home.jpg'); background-size: cover;">
 			<div style="width:100%; float: left; height: 250px; ">
 				<div style="margin-left: 11px; margin-right: 11px; background-color: rgb(0,100,0,0.5); width:50%; position: relative; top:80%;-webkit-transform: translateY(-80%); -ms-transform: translateY(-80%); transform: translateY(-80%); color: white; padding: 5px;">
-					<div>Profesional, Berpengalaman, dan Dicintai Customer
+					<div>Profesional, Berpengalaman, dan Dicintai Pelanggan
 					</div>
 				</div>
 			</div>
@@ -462,7 +429,7 @@
 		<!-- Client list -->
 		<div class="container" style="max-width:600px; padding:0px; margin:0px; margin-bottom: 30px;">
 			<div style="color: #555555; margin-top: 30px; margin-bottom: 10px; text-align: center;">
-				<div>KOSTOMER KAMI</div>
+				<div>PELANGGAN KAMI</div>
 			</div>
 		  <section class="customer-logos slider">
 		    <div class="slide"><img src="/media/assets/c1.png"></div>
@@ -560,10 +527,10 @@
                         <img src="https://i.imgur.com/gazoShk.jpg" class="img-fluid profile-pic">
                       </div>
                       <h6 class="mb-0 mt-2">Hanung Manggara</h6>
-                      <small>Manager Operasional Gajdah Maju</small>
+                      <small style="width: 80px;">Manager Operasional Gajdah Maju</small>
                     </div>
                     <img class="img-fluid open-quotes" src="https://i.imgur.com/Hp91vdT.png" width="20" height="20">
-                    <p class="content mb-0">Servisnya bagus, harga transparan, respon cepat, pengerjaan juga cepat, profesional pokoknya.</p>
+                    <p class="content mb-0" style="padding-left: 70px; min-height: 200px;">Servisnya bagus, harga transparan, respon cepat, pengerjaan juga cepat, profesional pokoknya.</p>
                     <img class="img-fluid close-quotes ml-auto" src="https://i.imgur.com/iPcHyJK.png" width="20" height="20">
                   </div>
                 </div>
@@ -574,10 +541,10 @@
                         <img src="https://i.imgur.com/oW8Wpwi.jpg" class="img-fluid profile-pic">
                       </div>
                       <h6 class="mb-0 mt-2">Istikhomah</h6>
-                      <small>UI/UX Designer</small>
+                      <small style="width: 80px;">VP Production PT Adi Daya</small>
                     </div>
                     <img class="img-fluid open-quotes" src="https://i.imgur.com/Hp91vdT.png" width="20" height="20">
-                    <p class="content mb-0">Servisnya bagus, harga transparan, respon cepat, pengerjaan juga cepat, profesional pokoknya.</p>
+                    <p class="content mb-0" style="padding-left: 70px; min-height: 200px;">Servisnya bagus, harga transparan, respon cepat, pengerjaan juga cepat, profesional pokoknya.</p>
                     <img class="img-fluid close-quotes ml-auto" src="https://i.imgur.com/iPcHyJK.png" width="20" height="20">
                   </div>
                 </div>
@@ -588,10 +555,10 @@
                         <img src="https://i.imgur.com/ndQx2Rg.jpg" class="img-fluid profile-pic">
                       </div>
                       <h6 class="mb-0 mt-2">Subaiyo</h6>
-                      <small>Direktur PT Maju Jaya</small>
+                      <small style="width: 80px;">Direktur PT Maju Jaya</small>
                     </div>
                     <img class="img-fluid open-quotes" src="https://i.imgur.com/Hp91vdT.png" width="20" height="20">
-                    <p class="content mb-0">Servisnya bagus, harga transparan, respon cepat, pengerjaan juga cepat, profesional pokoknya.</p>
+                    <p class="content mb-0" style="padding-left: 70px; min-height: 200px;">Servisnya bagus, harga transparan, respon cepat, pengerjaan juga cepat, profesional pokoknya.</p>
                     <img class="img-fluid close-quotes ml-auto" src="https://i.imgur.com/iPcHyJK.png" width="20" height="20">
                   </div>
                 </div>
@@ -611,43 +578,17 @@
 
 	<!-- Profile Menu -->
 	{% if request.user.is_authenticated %}
-		<div id='profile_menu' onclick="close_profile_menu()" style="position: fixed; top: 61px; width: 100%; height: 100%; text-align: right; z-index: 15; background:rgba(1,1,1,0.5); margin: 0 auto; display: none; width: 100%;">
+		<div id='profile_menu' onclick="close_profile_menu()" style="position: fixed; top: 0px; width: 100%; height: 100%; text-align: right; z-index: 15; background:rgba(1,1,1,0.5); margin: 0 auto; display: none; width: 100%; padding-top: 61px;">
 			<div style="max-width:600px; display: flex; margin: 0 auto; background: transparent;">
 				<div style="float: left; width: 20%; background-color: transparent;"></div>
-				<div style="width: 80%; background-color: #DDDDDD; margin: 0px 11px 11px 11px; padding: 17px 17px 17px 17px; border-radius:0px; line-height:1.2em; float: left;">
+				<div style="width: 80%; background-color: black; margin: 0px 11px 11px 11px; padding: 17px 17px 17px 17px; border-radius:0px; line-height:1.2em; float: left;">
 					<a href="{% url 'profile' user.profile.slug %}">
-						<button style="width:100%; height:40px; border-radius:1px; font-size:16px; color: #000000; background-color: #FFEE66; border: 1px solid #FFEE66; margin-bottom: 3px; text-align: left; padding-right:11px;">PROFILE</button>
+						<button style="width:100%; height:40px; border-radius:1px; font-size:16px; color: white; background-color: transparent; border: 1px solid white; margin-bottom: 3px; text-align: left; padding-right:11px;">PROFILE</button>
 					</a>
-					{% if own_clubs %}
-						<button style="width:100%; height:40px; border-radius:1px; font-size:16px; color: #000000; background-color: #FFEE66; border: 1px solid #FFEE66; margin-bottom: 3px; text-align: left; padding-right:11px;">KLUB KAMU</button>
-						
-						{% for club in own_clubs %}
-							<a href="">
-								<button style="width:100%; height:40px; border-radius:1px; font-size:16px; color: #000000; background-color: transparent; border: 1px solid transparent; margin-bottom: 3px; text-align: left; padding-right:11px; padding-left: 30px;">{{club.name}}</button>
-							</a>
-						{% endfor %}
-					{% endif %}
-					<a href="">
-						<button style="width:100%; height:40px; border-radius:1px; font-size:16px; color: #000000; background-color: #FFEE66; border: 1px solid #FFEE66; margin-bottom: 3px; text-align: left; padding-right:11px;">KLUB KESAYANGANMU</button>
-					</a>
-					<a href="">
-						<button style="width:100%; height:40px; border-radius:1px; font-size:16px; color: #000000; background-color: #FFEE66; border: 1px solid #FFEE66; margin-bottom: 3px; text-align: left; padding-right:11px;">JADWAL PERTANDINGAN</button>
-					</a>
-					<a href="">
-						<button style="width:100%; height:40px; border-radius:1px; font-size:16px; color: #000000; background-color: #FFEE66; border: 1px solid #FFEE66; margin-bottom: 3px; text-align: left; padding-right:11px;">
-							{% if request.user.profile.sport_mode == 'futsal'%}
-								DAFTARKAN KLUB FUTSALMU
-							{% else %}
-								DAFTARKAN KLUB SEPAK BOLAMU
-							{% endif %}
-
-						</button>
-					</a>
-					<a href="">
-						<button style="width:100%; height:40px; border-radius:1px; font-size:16px; color: #000000; background-color: #FFEE66; border: 1px solid #FFEE66; margin-bottom: 3px; text-align: left; padding-right:11px;">TUTORIAL</button>
-					</a>
+					
+					
 					<a href="{% url 'logout' %}">
-						<button style="width:100%; height:40px; border-radius:1px; font-size:16px; color: #000000; background-color: #FFEE66; border: 1px solid #FFEE66; margin-bottom: 3px; text-align: left;padding-right:11px;">LOGOUT</button>
+						<button style="width:100%; height:40px; border-radius:1px; font-size:16px; color: white; background-color: transparent; border: 1px solid white; margin-bottom: 3px; text-align: left;padding-right:11px;">LOGOUT</button>
 					</a>
 				</div>
 			</div>
@@ -672,24 +613,26 @@
 
 
 <!-- Footer -->
-<!--footer starts from here-->
 <footer class="footer" style="background: white; color: black;">
-<div class="container bottom_border">
-<div class="row">
-<div class=" col-sm-4 col-md col-sm-4  col-12 col">
-<h5 class="headin5_amrc col_white_amrc pt2" style="font-weight: bold;">KONTAK KAMI</h5>
-<p class="mb10">Jl. Pramuka Raya, No. 43B, Kap. 123A, Jakarta Selatan, Indonesia</p>
-<p><i class="fa fa-location-arrow"></i> 9878/25 sec 9 rohini 35 </p>
-<p><i class="fa fa-phone"></i>  +91-9999878398  </p>
-<p><i class="fa fa fa-envelope"></i> info@example.com</p>
-</div>
-
-
-<div style="height: 30px; color: transparent;">.</div>
-
-
+	<div class="container bottom_border">
+		<div class="row">
+			<div class=" col-sm-4 col-md col-sm-4  col-12 col">
+				<h5 class="headin5_amrc col_white_amrc pt2" style="font-weight: bold;">KONTAK KAMI
+				</h5>
+				<hr>
+				<p class="mb10">Jl. Pramuka Raya, No. 43B, Kap. 123A, Jakarta Selatan, Indonesia</p>
+				<p>
+					<i class="fa fa-phone"></i>  +6285602186771
+				</p>
+				<p>
+					<i class="fa fa fa-envelope">
+					</i>thomasmujirin@gmail.com
+				</p>
+			</div>
+		</div>
+	</div>
 </footer>
-
+<div style="height: 100px; color: transparent;">.</div>
 
 
 <script type="text/javascript">
