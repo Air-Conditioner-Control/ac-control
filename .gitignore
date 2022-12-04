@@ -26,6 +26,12 @@ users/migrations/*
 !users/migrations/__init__.py
 home/migrations/*
 !home/migrations/__init__.py
+teknisi/migrations/*
+!teknisi/migrations/__init__.py
+
+
+# Note
+documentations/notes.md
 
 
 

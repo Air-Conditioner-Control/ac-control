@@ -18,8 +18,9 @@ class Profile(models.Model):
 	admin_type_choices = (
 		('ADMIN', 'ADMIN'),
 		('TEKNISI', 'TEKNISI'),
+		('UMUM', 'UMUM'),
 		)
-	user_type = models.CharField(max_length=200, choices=admin_type_choices, default='TEKNISI')
+	user_type = models.CharField(max_length=200, choices=admin_type_choices, default='UMUM')
 	wa_number = models.CharField(max_length=12)
 	
 

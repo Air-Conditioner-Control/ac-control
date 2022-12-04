@@ -358,11 +358,13 @@
 				</div>
 				<div style="width: 66%; background-color: transparent; float: left; font-size: 12px; margin-top: 16px; margin-bottom: 11px; justify-content: space-between; color: #777777;">
 					<div style="width: 37%; background-color: transparent; float: right;">
-						<a href="{% url 'login' %}">
-							<button style="border-radius: 4px; border-color: #FFEE66; background-color: transparent; border: solid 1px black; font-size: 12px; color: black; font-family: 'Jura', sans-serif; margin: -5px; font-weight: bold;">
-							Admin Login
-							</button>
-						</a>
+						{% if user.profile.user_type != 'UMUM' %}
+							<a href="{% url 'login' %}">
+								<button style="border-radius: 4px; border-color: #FFEE66; background-color: transparent; border: solid 1px black; font-size: 12px; color: black; font-family: 'Jura', sans-serif; margin: -5px; font-weight: bold;">
+								Admin Login
+								</button>
+							</a>
+						{% endif %}
 					</div>
 					<!-- <a href="{% url 'login' %}" style="color:#999999; font-weight: bold;">
 						<div style="width: 20%; background-color: transparent; float: right; color: black;">Login</div>
@@ -400,11 +402,13 @@
 					</div>
 					
 					<div style="width: 27%; background-color: transparent; float: right;">
-						<a href="{% url 'login' %}">
-							<button style="border-radius: 4px; border-color: #FFEE66; background-color: transparent; border: solid 1px transparent; font-size: 12px; color: black; font-family: 'Jura', sans-serif; margin: -5px; font-weight: bold; line-height: 30px;">
-							Data AC
-							</button>
-						</a>
+						{% if user.profile.user_type != 'UMUM' %}
+							<a href="">
+								<button style="border-radius: 4px; border-color: #FFEE66; background-color: transparent; border: solid 1px transparent; font-size: 12px; color: black; font-family: 'Jura', sans-serif; margin: -5px; font-weight: bold; line-height: 30px;">
+								Data AC
+								</button>
+							</a>
+						{% endif %}
 					</div>
 				</div>
 			</div>
@@ -585,6 +589,14 @@
 					<a href="{% url 'profile' user.profile.slug %}">
 						<button style="width:100%; height:40px; border-radius:1px; font-size:16px; color: white; background-color: transparent; border: 1px solid white; margin-bottom: 3px; text-align: left; padding-right:11px;">PROFILE</button>
 					</a>
+					{% if user.profile.user_type == 'ADMIN' %}
+						<a href="{% url 'create_teknisi' %}">
+							<button style="width:100%; height:40px; border-radius:1px; font-size:16px; color: white; background-color: transparent; border: 1px solid white; margin-bottom: 3px; text-align: left; padding-right:11px;">BUAT TEKNISI</button>
+						</a>
+						<a href="{% url 'daftar_teknisi' %}">
+							<button style="width:100%; height:40px; border-radius:1px; font-size:16px; color: white; background-color: transparent; border: 1px solid white; margin-bottom: 3px; text-align: left; padding-right:11px;">DATA TEKNISI</button>
+						</a>
+					{% endif %}
 					
 					
 					<a href="{% url 'logout' %}">
