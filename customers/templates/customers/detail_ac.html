@@ -191,12 +191,12 @@
 			  <thead>
 			    <tr>
 			      <th>No</th>
+			      <th>Tanggal</th>
 			      <th>Deskripsi</th>
 			      <th>Trouble Shooting</th>
 			      <th>Solusi</th>
-			      <th>Tanggal</th>
 			      <th>Teknisi</th>
-			      <th>Gambar</th>
+			      <th>Foto AC</th>
 			    </tr>
 			  </thead>
 			  
@@ -204,10 +204,10 @@
 			  	{% for pen in riwayat_penanganan %}
 				    <tr>
 				      <th scope="row">{{ forloop.counter }}</th>
+				      <td>{{pen.date_created|date:"d M Y"}}</td>
 				      <td><div style='width: 230px; white-space: pre-wrap;'>{{pen.description}}</div></td>
 				      <td><div style='width: 230px; white-space: pre-wrap;'>{{pen.trouble_shooting}}</div</td>
-				      <td><div style='width: 230px; white-space: pre-wrap;'>{{pen.solusi}}</div</td>
-				      <td>{{pen.date_created|date:"d M Y"}}</td>
+				      <td><div style='width: 230px; white-space: pre-wrap;'>{{pen.solusi}}</div></td>
 				      {% if pen.teknisi %}
 					      <td><a href="{% url 'profile' pen.teknisi.slug %}">{{pen.teknisi}}</a></td>
 					    {% else %}

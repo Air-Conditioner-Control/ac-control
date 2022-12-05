@@ -12,6 +12,7 @@ urlpatterns = [
     path('detail_ac/<slug:slug>/', customer_view.detail_ac, name='detail_ac'),
     path('edit_data_ac/<slug:slug>/', customer_view.edit_data_ac, name='edit_data_ac'),
     path('tambah_riwayat_penanganan/<slug:slug>/', customer_view.tambah_riwayat_penanganan, name='tambah_riwayat_penanganan'),
+    path('data_ac/', customer_view.data_ac, name='data_ac'),
 ]
 
 

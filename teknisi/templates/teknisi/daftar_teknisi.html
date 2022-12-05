@@ -133,6 +133,15 @@
 
 	<div style="text-align: left; margin: 0 auto; max-width: 600px;">
 		<div style="width: 100%; background-color: transparent; float: left; !important; color: #555555; font-weight: bold; margin-top: 73px; margin-left: 11px; margin-right: 11px; margin-bottom: 8px; font-size: 13px; left: 0px;">
+
+			{% if user.profile.user_type == 'ADMIN' %}
+				<div style="width: 100%; text-align: left; font-size:12px; height:24px;">
+					<a href="{% url 'create_teknisi' %}" style="width:50%;">
+						<i class="fa fa-plus"></i>&nbsp;&nbsp;Tambah Teknisi
+					</a>
+				</div>
+			{% endif %}
+
 			<!--Table-->
 			<table class="table table-striped w-auto">
 
@@ -152,7 +161,7 @@
 			  	{% for tek in teknisi %}
 				    <tr>
 				      <th scope="row">{{ forloop.counter }}</th>
-				      <td>{{tek.username}}</td>
+				      <td><a href="{% url 'profile' tek.user.profile.slug %}">{{tek.username}}</a></td>
 				      <td>{{tek.password}}</td>
 				      <td>{{tek.date_created|date:"d M Y"}}</td>
 				      <td>{{tek.user.email}}</td>

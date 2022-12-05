@@ -162,3 +162,13 @@ def tambah_riwayat_penanganan(request, slug):
 
 
 
+def data_ac(request):
+	
+	all_ac = list(reversed(DataAC.objects.all().order_by('date_created')))
+	context = {
+		'all_ac': all_ac,
+		'query': 'NONE'
+	}
+	return render(request, 'customers/data_ac.html', context)
+
+

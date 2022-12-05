@@ -8,6 +8,7 @@ from django.contrib.auth import update_session_auth_hash
 from django.shortcuts import get_object_or_404
 from .models import *
 import json
+from customers.models import RiwayatPenanganan
 
 
 
@@ -74,8 +75,7 @@ def edit_profile(request, profile_slug):
 @login_required
 def profile(request, slug):
 	profile = get_object_or_404(Profile, slug=slug)
-
-	
+	riwayat_penanganan = reversed(RiwayatPenanganan.objects.filter(teknisi=profile))
 
 	if profile.user == request.user:
 		is_owner = True
@@ -84,7 +84,8 @@ def profile(request, slug):
 
 	context = {
 		'page_name': 'Profile',
-		'profile': profile
+		'profile': profile,
+		'riwayat_penanganan': riwayat_penanganan
 	}
 
 	return render(request, 'users/profile.html', context)

@@ -159,38 +159,40 @@
 							</div>
 						</a>
 					</div>
-					{% if state != 'RESULT' %}
-						<div>Contoh AC ID: AC-120</div>
-					{% else %}
-						{% if all_ac %}
-							<div>Hasil pencarian ({{all_ac|length}})</div>
-							{% for ac in all_ac %}
-								<a href="{% url 'detail_ac' ac.slug %}" style="color: inherit;">
-									<!--  -->
-									<div style="width: 100%; padding:11px; margin: 0px; background-color: transparent; height: 250px;margin-top: 7px; border-radius:1px; -moz-box-shadow: 0 0 1px #ccc; -webkit-box-shadow: 0 0 3px #ccc; box-shadow: 0 0 3px #ccc;">
-										<div style="color: white;">
-											<div style="width:80%; height: 210px; float: left;">
-												<img src="{{ ac.image.url }}" width="100%" height="100%" style="border-radius: 5px; -moz-box-shadow: 0 0 3px #ccc; -webkit-box-shadow: 0 0 0px #ccc; box-shadow: 0 0 3px #ccc;">
-											</div>
-											<div style="width:50%; height: 100%; float: left; padding: 0px 11px 0px 11px; color: black; margin-left: -30%; background-color: rgb(255, 255, 255, 0.9); margin-top:40px; border-radius:7px; border: solid 1px transparent; text-align: left;">
-												<div style="font-size: 16px; font-weight: bold;">{{ ac.merk }} {{ ac.kapasitas }}
-												</div>
-												<div style="margin-bottom: 0px; font-size: 14px;">(Ruang {{ ac.ruangan }})
-												</div>
-												<br>
-												<div style="margin-bottom: 0px;">{{ ac.customer }}
-												</div>
-												<div style="margin-bottom: 0px;">{{ ac.customer.alamat }}
-												</div>
-											</div>
-										</div>
-									</div>
-								</a>
-							{% endfor %}
-						{% else %}
-							<div>Tidak ditemukan AC dengan ID: <strong>{{query}}</strong></div>
-						{% endif %}
-					{% endif %}
+					<!-- Daftar AC -->
+					<div>Daftar Semua AC</div>
+					<div style="width:100%; overflow:scroll; white-space:nowrap; display:inline-block;">
+						<table class="table table-striped w-auto" style="font-size:12px;">
+						  <thead>
+						    <tr>
+						      <th>No</th>
+						      <th>ID</th>
+						      <th>Merk</th>
+						      <th>Kapasitas</th>
+						      <th>Ruangan</th>
+						      <th>Customer</th>
+						      <th>Alamat</th>
+						      <th>Whatsapp/HP</th>
+						    </tr>
+						  </thead>
+						  
+						  <tbody>
+						  	{% for ac in all_ac %}
+							    <tr>
+							      <th scope="row">{{ forloop.counter }}</th>
+							      <td><a href="{% url 'detail_ac' ac.slug %}">{{ac.ac_id}}</a></td>
+							      <td><div style='width: 100px; white-space: pre-wrap;'>{{ac.merk}}</div></td>
+							      <td>{{ac.kapasitas}}</td>
+							      <td>{{ac.ruangan}}</td>
+							      <td>{{ac.customer}}</td>
+							      <td><div style='width: 200px; white-space: pre-wrap;'>{{ac.customer.alamat}}</div></td>
+							      <td>{{ac.customer.wa_number}}</td>
+							    </tr>
+							  {% endfor %}
+
+						  </tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
