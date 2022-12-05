@@ -36,6 +36,8 @@ teknisi/migrations/*
 !teknisi/migrations/__init__.py
 customers/migrations/*
 !customers/migrations/__init__.py
+search/migrations/*
+!search/migrations/__init__.py
 
 # Note
 documentations/notes.md

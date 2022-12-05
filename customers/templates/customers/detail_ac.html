@@ -106,6 +106,15 @@
   -o-animation: rotating 2s linear infinite;
   animation: rotating 2s linear infinite;
 }
+
+/**/
+.wordwrap { 
+   white-space: pre-wrap;      /* CSS3 */   
+   white-space: -moz-pre-wrap; /* Firefox */    
+   white-space: -pre-wrap;     /* Opera <7 */   
+   white-space: -o-pre-wrap;   /* Opera 7 */    
+   word-wrap: break-word;      /* IE */
+}
 </style>
 
 </head>
@@ -116,7 +125,7 @@
 		<div style="text-align: center; margin: 0 auto; max-width: 600px;">
 			<div style="width: 100%; background-color: transparent; float: left !important; color: #555555; font-weight: bold; margin-top: 13px; margin-bottom: 8px; font-size: 13px; left: 0px;">
 				<div style="width:100%">
-					<a href="">
+					<a href="{% url 'detail_customer' ac.customer.slug %}">
 						<div style="width:7%; float: left; text-align: left; padding-left:3px; color:#777777;">
 							<i class="fa fa-arrow-left" aria-hidden="true"></i>
 						</div>
@@ -174,7 +183,11 @@
 					</a>
 				</div>
 			{% endif %}
-		<table class="table table-striped w-auto" style="font-size:12px;">
+			<div style="width:100%; overflow:scroll; white-space:nowrap; display:inline-block;">
+
+
+				
+			<table class="table table-striped w-auto" style="font-size:12px;">
 			  <thead>
 			    <tr>
 			      <th>No</th>
@@ -191,9 +204,9 @@
 			  	{% for pen in riwayat_penanganan %}
 				    <tr>
 				      <th scope="row">{{ forloop.counter }}</th>
-				      <td>{{pen.description}}</td>
-				      <td>{{pen.trouble_shooting}}</td>
-				      <td>{{pen.solusi}}</td>
+				      <td><div style='width: 230px; white-space: pre-wrap;'>{{pen.description}}</div></td>
+				      <td><div style='width: 230px; white-space: pre-wrap;'>{{pen.trouble_shooting}}</div</td>
+				      <td><div style='width: 230px; white-space: pre-wrap;'>{{pen.solusi}}</div</td>
 				      <td>{{pen.date_created|date:"d M Y"}}</td>
 				      {% if pen.teknisi %}
 					      <td><a href="{% url 'profile' pen.teknisi.slug %}">{{pen.teknisi}}</a></td>
@@ -207,6 +220,11 @@
 
 			  </tbody>
 			</table>
+
+
+
+
+			</div>
 
 			
 

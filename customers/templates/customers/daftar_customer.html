@@ -138,28 +138,30 @@
 					</a>
 				</div>
 			{% endif %}
-			<table class="table table-striped w-auto" style="font-size:12px;">
-			  <thead>
-			    <tr>
-			      <th>No</th>
-			      <th>Nama</th>
-			      <th>Alamat</th>
-			      <th>Whatsapp/HP</th>
-			    </tr>
-			  </thead>
-			  
-			  <tbody>
-			  	{% for cus in customers %}
+			<div style="width:100%; overflow:scroll; white-space:nowrap; display:inline-block;">
+				<table class="table table-striped w-auto" style="font-size:12px;">
+				  <thead>
 				    <tr>
-				      <th scope="row">{{ forloop.counter }}</th>
-				      <td><a href="{% url 'detail_customer' cus.slug %}">{{cus.nama_lengkap}}</a></td>
-				      <td>{{cus.alamat}}</td>
-				      <td>{{cus.wa_number}}</td>
+				      <th>No</th>
+				      <th>Nama</th>
+				      <th>Alamat</th>
+				      <th>Whatsapp/HP</th>
 				    </tr>
-				  {% endfor %}
+				  </thead>
+				  
+				  <tbody>
+				  	{% for cus in customers %}
+					    <tr>
+					      <th scope="row">{{ forloop.counter }}</th>
+					      <td><a href="{% url 'detail_customer' cus.slug %}">{{cus.nama_lengkap}}</a></td>
+					      <td><div style='width: 230px; white-space: pre-wrap;'>{{cus.alamat}}</td>
+					      <td>{{cus.wa_number}}</td>
+					    </tr>
+					  {% endfor %}
 
-			  </tbody>
-			</table>
+				  </tbody>
+				</table>
+			</div>
 
 			
 		</div>

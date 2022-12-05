@@ -1,5 +1,3 @@
-{% load get_initial %}
-{% load index %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -100,14 +98,29 @@
   }
 }
 .rotating {
-  -webkit-animation: rotating 2s linear infinite;
-  -moz-animation: rotating 2s linear infinite;
-  -ms-animation: rotating 2s linear infinite;
-  -o-animation: rotating 2s linear infinite;
-  animation: rotating 2s linear infinite;
+  -webkit-animation: rotating 11s linear infinite;
+  -moz-animation: rotating 11s linear infinite;
+  -ms-animation: rotating 11s linear infinite;
+  -o-animation: rotating 11s linear infinite;
+  animation: rotating 11s linear infinite;
 }
 </style>
+<style type="text/css">
+	.input_form_style {
+		width: 100%; 
+		background-color: white; 
+		height: 40px; 
+		border-radius:7px; 
+		border: solid 1px #FFEE66; 
+		color: #BBBBBB; 
+		padding-left: 16px;
+	}
+	.label_form_style {
+		margin-bottom: 5px;
+		color: red;
 
+	}
+</style>
 </head>
 <body style="font-family: 'Jura', sans-serif;">
 
@@ -116,104 +129,75 @@
 		<div style="text-align: center; margin: 0 auto; max-width: 600px;">
 			<div style="width: 100%; background-color: transparent; float: left !important; color: #555555; font-weight: bold; margin-top: 13px; margin-bottom: 8px; font-size: 13px; left: 0px;">
 				<div style="width:100%">
-					<a href="{% url 'daftar_customer' %}">
+					<a href="{% url 'home' %}">
 						<div style="width:7%; float: left; text-align: left; padding-left:3px; color:#777777;">
 							<i class="fa fa-arrow-left" aria-hidden="true"></i>
 						</div>
 					</a>
-					<div style="width: 93%; float: left; color:#777777;">
-						<div style="text-align: left;">Detail Kustomer</div>
+					<div style="width: 93%; float: left; color:#777777; display: flex;">
+						<div style="text-align: left;">Cari AC (dengan ID)</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	
 
 
-	<!-- Biodata -->
+	<!-- Body -->
 	<div style="max-width: 600px; justify-content: center; margin: auto; padding-left: 11px; padding-right: 11px;">
 
-		<div style="left: 0; width: 100%; list-style-type: none; margin: 0; padding: 0; background: white; z-index: 10; padding-left: 11px; padding-right: 11px; margin-top:50px; font-size: 12px;">
-					
-			<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 20px;">
-				<div style="margin-bottom: 5px; font-size: 16px; width: 100%;">
-					<div style="float: left;">
-						<img src="{{ customer.image.url }}" width="30px" height="30px" style="border-radius:50%;">
+		<div style="left: 0; width: 100%; list-style-type: none; margin: 0; padding: 0; background: white; z-index: 10; padding-left: 11px; padding-right: 11px; margin-top:50px;">
+			<div style="text-align: center; margin: 0 auto; max-width: 400px;">
+				<div style="width: 100%; background-color: white; float: left; font-size: 12px; margin-top: 16px; justify-content: space-between; color: #777777;">
+
+					<!-- Search -->
+					<div style="width: 100%; background-color: white; float: left; font-size: 12px; margin-bottom: 11px;">
+						<input id="search_query" type="text" name="" placeholder="Masukan ID AC" style="width: 85%; background-color: white; float: left; height: 30px; border-radius:7px; border: solid 1px #FFEE66; color: #BBBBBB; padding-left: 11px;">
+						<a onclick="to_search_page()">
+							<div style="width: 15%; background-color: #FFEE66; float: right; border-radius: 4px; height: 30px; border: solid 1px #FFEE66; height: 30px;line-height: 30px; text-align: center;">CARI
+							</div>
+						</a>
 					</div>
-					<div style="float: left;">
-						&nbsp;&nbsp;{{ customer.nama_lengkap }}
-					</div>
+					{% if state != 'RESULT' %}
+						<div>Contoh AC ID: AC-120</div>
+					{% else %}
+						{% if all_ac %}
+							<div>Hasil pencarian</div>
+							{% for ac in all_ac %}
+								<a href="{% url 'detail_ac' ac.slug %}" style="color: inherit;">
+									<!--  -->
+									<div style="width: 100%; padding:11px; margin: 0px; background-color: transparent; height: 250px;margin-top: 7px; border-radius:1px; -moz-box-shadow: 0 0 1px #ccc; -webkit-box-shadow: 0 0 3px #ccc; box-shadow: 0 0 3px #ccc;">
+										<div style="color: white;">
+											<div style="width:80%; height: 210px; float: left;">
+												<img src="{{ ac.image.url }}" width="100%" height="100%" style="border-radius: 5px; -moz-box-shadow: 0 0 3px #ccc; -webkit-box-shadow: 0 0 0px #ccc; box-shadow: 0 0 3px #ccc;">
+											</div>
+											<div style="width:50%; height: 100%; float: left; padding: 0px 11px 0px 11px; color: black; margin-left: -30%; background-color: rgb(255, 255, 255, 0.9); margin-top:40px; border-radius:7px; border: solid 1px transparent; text-align: left;">
+												<div style="font-size: 16px; font-weight: bold;">{{ ac.merk }} {{ ac.kapasitas }}
+												</div>
+												<div style="margin-bottom: 0px; font-size: 14px;">(Ruang {{ ac.ruangan }})
+												</div>
+												<br>
+												<div style="margin-bottom: 0px;">{{ ac.customer }}
+												</div>
+												<div style="margin-bottom: 0px;">{{ ac.customer.alamat }}
+												</div>
+											</div>
+										</div>
+									</div>
+								</a>
+							{% endfor %}
+						{% else %}
+							<div>Tidak ditemukan AC dengan ID: <strong>{{query}}</strong></div>
+						{% endif %}
+					{% endif %}
 				</div>
-				
 			</div>
-			<br><br><br>
-
-			<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 0px; display: block;">
-				<div style="margin-bottom: 0px;">{{ customer.alamat }}</div>
-			</div>
-
-
-			<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 0px;">
-				<div style="margin-bottom: 0px;">{{ customer.wa_number }}</div>
-			</div>
-			<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 0px;">
-				<div style="margin-bottom: 0px;">{{ customer.status }}</div>
-			</div>
-			{% if user.profile.user_type == 'ADMIN' %}
-				<div style="width: 100%; height: 50px; text-align: left; font-size:12px;">
-					<a href="{% url 'edit_data_customer' customer.slug %}" style="width:50%;">
-						<i class="fa fa-edit"></i>&nbsp;&nbsp;Edit Data Kustomer
-					</a>
-				</div>
-			{% endif %}
 		</div>
-		
-
-		{% if user.profile.user_type != 'UMUM' %}
-				<div style="width: 100%; height: 30px; text-align: left; font-size:12px;">
-					<a href="{% url 'tambah_ac' customer.slug %}" style="width:50%;">
-						<i class="fa fa-plus"></i>&nbsp;&nbsp;Tambah AC
-					</a>
-				</div>
-			{% endif %}
-			<div style="width:100%; overflow:scroll; white-space:nowrap; display:inline-block;">
-				<table class="table table-striped w-auto" style="font-size:12px;">
-				  <thead>
-				    <tr>
-				      <th>No</th>
-				      <th>ID</th>
-				      <th>Merk</th>
-				      <th>Kapasitas</th>
-				      <th>Ruangan</th>
-				    </tr>
-				  </thead>
-				  
-				  <tbody>
-				  	{% for ac in data_ac %}
-					    <tr>
-					      <th scope="row">{{ forloop.counter }}</th>
-					      <td><a href="{% url 'detail_ac' ac.slug %}">{{ac.ac_id}}</a></td>
-					      <td><div style='width: 100px; white-space: pre-wrap;'>{{ac.merk}}</div></td>
-					      <td>{{ac.kapasitas}}</td>
-					      <td>{{ac.ruangan}}</td>
-					    </tr>
-					  {% endfor %}
-
-				  </tbody>
-				</table>
-			</div>
-
-			
-
-
-	
-
-		
-	
-
 	</div>
+
+
+
 
 
 </body>
@@ -222,6 +206,14 @@
 	function close_sambutan() {
 		document.getElementById( 'sambutan' ).style.display = 'none';
 	}
+</script>
+<script>
+  function to_search_page() {
+      var search_query = document.getElementById('search_query').value;
+      
+      window.location.href = window.location.origin.toString() + '/search/ac_search/' +  search_query +'/';
+      
+  };
 </script>
 </html>
 
