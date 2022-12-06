@@ -154,6 +154,7 @@
 			      <th>Date Created</th>
 			      <th>Email</th>
 			      <th>Role</th>
+			      <th>Delet</th>
 
 			    </tr>
 			  </thead>
@@ -167,6 +168,7 @@
 				      <td>{{tek.date_created|date:"d M Y"}}</td>
 				      <td>{{tek.user.email}}</td>
 				      <td><a href="{% url 'jadikan_admin' tek.slug %}">{{tek.user.profile.user_type}}</a></td>
+				      <td><a href="{% url 'delet_teknisi' tek.slug %}" style="color: red;">Delet</a></td>
 				    </tr>
 				  {% endfor %}
 

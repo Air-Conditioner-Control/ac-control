@@ -201,54 +201,56 @@
 	</div>
 	{% endif %}
 
-	<!-- Daftar AC yang ditangani -->
-	<div style="max-width: 600px; justify-content: center; margin: auto; padding-left: 11px; padding-right: 11px;">
+	{% if request.user.profile.user_type != 'UMUM' %}
+		<!-- Daftar AC yang ditangani -->
+		<div style="max-width: 600px; justify-content: center; margin: auto; padding-left: 11px; padding-right: 11px;">
 
-		<div style="width:100%; overflow:scroll; white-space:nowrap; display:inline-block; margin-top: 30px;">
-			<div style="font-size:12px;">Riwayat AC yang ditangani teknisi</div>
-			<table class="table table-striped w-auto" style="font-size:12px;">
-			  <thead>
-			    <tr>
-			      <th>No</th>
-			      <th>Tanggal</th>
-			      <th>Deskripsi</th>
-			      <th>Trouble Shooting</th>
-			      <th>Solusi</th>
-			      <th>Teknisi</th>
-			      <th>Foto AC</th>
-			    </tr>
-			  </thead>
-			  
-			  <tbody>
-			  	{% for pen in riwayat_penanganan %}
+			<div style="width:100%; overflow:scroll; white-space:nowrap; display:inline-block; margin-top: 30px;">
+				<div style="font-size:12px;">Riwayat AC yang ditangani teknisi</div>
+				<table class="table table-striped w-auto" style="font-size:12px;">
+				  <thead>
 				    <tr>
-				      <th scope="row">{{ forloop.counter }}</th>
-				      <td>{{pen.date_created|date:"d M Y"}}</td>
-				      <td>
-				      	<div style='width: 230px; white-space: pre-wrap;'>{{pen.description}}</div>
-				      </td>
-				      <td>
-				      	<div style='width: 230px; white-space: pre-wrap;'>{{pen.trouble_shooting}}</div>
-				      </td>
-				      <td><div style='width: 230px; white-space: pre-wrap;'>{{pen.solusi}}</div></td>
-				      {% if pen.teknisi %}
-					      <td>
-					      	<a href="{% url 'profile' pen.teknisi.slug %}">{{pen.teknisi}}</a>
-					      </td>
-					    {% else %}
-				      	<td>{{pen.teknisi}}</td>
-					    {% endif %}
-
-				      <td>
-				      	<img src="{{ pen.image.url }}" width="200px" height="auto" style="border-radius:1%;">
-				      </td>
+				      <th>No</th>
+				      <th>Tanggal</th>
+				      <th>Deskripsi</th>
+				      <th>Trouble Shooting</th>
+				      <th>Solusi</th>
+				      <th>Teknisi</th>
+				      <th>Foto AC</th>
 				    </tr>
-				  {% endfor %}
+				  </thead>
+				  
+				  <tbody>
+				  	{% for pen in riwayat_penanganan %}
+					    <tr>
+					      <th scope="row">{{ forloop.counter }}</th>
+					      <td>{{pen.date_created|date:"d M Y"}}</td>
+					      <td>
+					      	<div style='width: 230px; white-space: pre-wrap;'>{{pen.description}}</div>
+					      </td>
+					      <td>
+					      	<div style='width: 230px; white-space: pre-wrap;'>{{pen.trouble_shooting}}</div>
+					      </td>
+					      <td><div style='width: 230px; white-space: pre-wrap;'>{{pen.solusi}}</div></td>
+					      {% if pen.teknisi %}
+						      <td>
+						      	<a href="{% url 'profile' pen.teknisi.slug %}">{{pen.teknisi}}</a>
+						      </td>
+						    {% else %}
+					      	<td>{{pen.teknisi}}</td>
+						    {% endif %}
 
-			  </tbody>
-			</table>
+					      <td>
+					      	<img src="{{ pen.image.url }}" width="200px" height="auto" style="border-radius:1%;">
+					      </td>
+					    </tr>
+					  {% endfor %}
+
+				  </tbody>
+				</table>
+			</div>
 		</div>
-	</div>
+	{% endif %}
 
 
 </body>

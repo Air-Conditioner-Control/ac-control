@@ -93,4 +93,21 @@ def jadikan_admin(request, slug):
 		return render(request, 'users/this_page_not_for_you.html')
 
 
+@login_required
+def delet_teknisi(request, slug):
+	'''Teknisi slug'''
+	if request.user.profile.user_type == 'ADMIN':
+		teknisi_i = get_object_or_404(DataTeknisi, slug=slug)
+		profile = teknisi_i.user.profile
+		teknisi_i.delete()
+		profile.user_type = 'UMUM'
+		profile.save()
+		
+
+		return redirect('daftar_teknisi')
+	else:
+		return render(request, 'users/this_page_not_for_you.html')
+
+
+
 
