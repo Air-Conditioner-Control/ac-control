@@ -74,3 +74,23 @@ def daftar_teknisi(request):
 		return render(request, 'teknisi/daftar_teknisi.html', context)
 	else:
 		return render(request, 'users/this_page_not_for_you.html')
+
+
+@login_required
+def jadikan_admin(request, slug):
+	'''Teknisi slug'''
+	if request.user.profile.user_type == 'ADMIN':
+		teknisi_i = get_object_or_404(DataTeknisi, slug=slug)
+		profile_teknisi = teknisi_i.user.profile
+		if profile_teknisi.user_type == 'ADMIN':
+			profile_teknisi.user_type = 'TEKNISI'
+		else:
+			profile_teknisi.user_type = 'ADMIN'
+		profile_teknisi.save()
+		
+		return redirect('daftar_teknisi')
+	else:
+		return render(request, 'users/this_page_not_for_you.html')
+
+
+

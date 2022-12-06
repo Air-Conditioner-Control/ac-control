@@ -153,6 +153,7 @@
 			      <th>Password</th>
 			      <th>Date Created</th>
 			      <th>Email</th>
+			      <th>Role</th>
 
 			    </tr>
 			  </thead>
@@ -165,6 +166,7 @@
 				      <td>{{tek.password}}</td>
 				      <td>{{tek.date_created|date:"d M Y"}}</td>
 				      <td>{{tek.user.email}}</td>
+				      <td><a href="{% url 'jadikan_admin' tek.slug %}">{{tek.user.profile.user_type}}</a></td>
 				    </tr>
 				  {% endfor %}
 
