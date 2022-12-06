@@ -212,6 +212,7 @@
 				    <tr>
 				      <th>No</th>
 				      <th>Tanggal</th>
+				      <th>AC</th>
 				      <th>Deskripsi</th>
 				      <th>Trouble Shooting</th>
 				      <th>Solusi</th>
@@ -225,6 +226,10 @@
 					    <tr>
 					      <th scope="row">{{ forloop.counter }}</th>
 					      <td>{{pen.date_created|date:"d M Y"}}</td>
+					      <td>
+					      	<div style='width: 100px; white-space: pre-wrap;'><a href="{% url 'detail_ac' pen.ac.slug %}">{{pen.ac}}</a>
+					      	</div>
+					      </td>
 					      <td>
 					      	<div style='width: 230px; white-space: pre-wrap;'>{{pen.description}}</div>
 					      </td>
