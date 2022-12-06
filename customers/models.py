@@ -14,7 +14,9 @@ class DataCustomers(models.Model):
 	date_created = models.DateTimeField(default=timezone.now)
 	
 	nama_lengkap = models.CharField(max_length=50)
-	alamat = models.CharField(max_length=200)
+	# alamat = models.CharField(max_length=200)
+	alamat = models.TextField(blank=True, null=True)
+
 	wa_number = models.CharField(max_length=12)
 	image = models.ImageField(default='customer/default.jpg', upload_to='customer')
 	status_choices = (

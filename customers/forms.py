@@ -20,7 +20,7 @@ class DataCustomersForm(forms.ModelForm):
 			'placeholder': 'Nama Lengkap'
 			})
 		self.fields['alamat'].widget.attrs.update({
-			'class': 'input_form_style',
+			'class': 'input_form_style_text',
 			'placeholder': 'Alamat'
 			})
 		self.fields['wa_number'].widget.attrs.update({
