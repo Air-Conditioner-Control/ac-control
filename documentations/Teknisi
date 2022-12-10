@@ -1,0 +1,53 @@
+Teknisi
+
+
+Customer
+- Nama
+- Alamat
+- No. WA
+
+
+AC
+- ID
+- Merek
+- Tipe
+- Model indoor
+- Model outdoor
+- Tanggal pemasangan
+- Kontraktor
+- Informasi servies
+
+
+Riwayat penanganan
+- Tanggal (string)
+- Deskripsi
+- Tipe pekerjaan
+- Tekanan low press
+- Tekanan high press
+- Arus listrik
+- Noise/suara
+- Voltase
+- Keterangan
+
+
+
+Trouble shooting
+- Tanggal (string)
+- Deskripsi
+- Analisa awal
+- Solusi
+- Hasil perbaikan
+- Kategori kerusakan
+
+
+
+Belanja (Masuk ke detail AC)
+- Nama barang
+- Unit
+- Harga Total
+- Foto kuitansi
+
+xxxx
+Note:
+- Bisa print
+

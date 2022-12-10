@@ -57,8 +57,16 @@ class DataAC(models.Model):
 	
 	ac_id = models.CharField(max_length=8)
 	merk = models.CharField(max_length=100)
-	kapasitas = models.CharField(max_length=100)
-	ruangan = models.CharField(max_length=100)
+
+	tipe = models.CharField(max_length=100, blank=True, null=True)
+	model_indoor = models.CharField(max_length=200, blank=True, null=True)
+	model_outdoor = models.CharField(max_length=200, blank=True, null=True)
+	tanggal_pemasangan = models.CharField(max_length=100, blank=True, null=True)
+	kontraktor = models.TextField(blank=True, null=True)
+	informasi_servis = models.TextField(blank=True, null=True)
+
+	kapasitas = models.CharField(max_length=100, blank=True, null=True)
+	ruangan = models.CharField(max_length=100, blank=True, null=True)
 
 	image = models.ImageField(default='ac/default.png', upload_to='ac')
 	
@@ -95,11 +103,17 @@ class RiwayatPenanganan(models.Model):
 	ac = models.ForeignKey(DataAC, on_delete=models.CASCADE)
 	date_created = models.DateTimeField(default=timezone.now)
 	
-	teknisi = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True, default=None)
-	
+	tanggal = models.CharField(max_length=100, blank=True, null=True)
 	description = models.TextField(blank=True, null=True)
-	trouble_shooting = models.TextField(blank=True, null=True)
-	solusi = models.TextField(blank=True, null=True)
+	tipe_pekerjaan = models.TextField(blank=True, null=True)
+	tekanan_low_press = models.TextField(blank=True, null=True)
+	tekanan_high_press = models.TextField(blank=True, null=True)
+	arus_listrik = models.CharField(max_length=100, blank=True, null=True)
+	noise = models.TextField(blank=True, null=True)
+	volatase = models.CharField(max_length=100, blank=True, null=True)
+	keterangan = models.TextField(blank=True, null=True)
+	
+	teknisi = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True, default=None)
 
 	image = models.ImageField(default='riwayat_penanganan/default.png', upload_to='riwayat_penanganan')
 	
@@ -126,6 +140,87 @@ class RiwayatPenanganan(models.Model):
 		from django.urls import reverse
 		return reverse('riwayat_penanganan', kwargs = {'slug': self.slug})
 
+
+class TroubleShooting(models.Model):
+	"""List username dan password teknisi"""
+	uid = models.UUIDField(default=uuid.uuid4, editable=False)
+	slug = models.SlugField(unique=True, null=False, max_length = 255)
+	ac = models.ForeignKey(DataAC, on_delete=models.CASCADE)
+	date_created = models.DateTimeField(default=timezone.now)
+	
+	tanggal = models.CharField(max_length=100, blank=True, null=True)
+	description = models.TextField(blank=True, null=True)
+	analisa_awal = models.TextField(blank=True, null=True)
+	solusi = models.TextField(blank=True, null=True)
+	hasil_perbaikan = models.TextField(blank=True, null=True)
+	kategori_kerusakan = models.TextField(blank=True, null=True)
+	
+	teknisi = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True, default=None)
+
+	image = models.ImageField(default='trouble_shooting/default.png', upload_to='riwayat_penanganan')
+	
+	def __str__(self):
+		return f'{self.ac}{self.description}'[:20]
+		
+	def save(self):
+		# Slug stuff
+		slug_ = slugify(self.ac) + '-' + str(self.uid)
+		self.slug = slug_[:254]
+		super().save()
+
+		img = Image.open(self.image.path)
+
+		if img.height > 300 or img.width > 300:
+			output_size = (300, 300)
+			img.thumbnail(output_size)
+			img.save(self.image.path)
+
+
+	def get_absolute_url(self):
+		'''
+		Slug stuff'''
+		from django.urls import reverse
+		return reverse('trouble_shooting', kwargs = {'slug': self.slug})
+
+
+class DataBelanja(models.Model):
+	"""List username dan password teknisi"""
+	uid = models.UUIDField(default=uuid.uuid4, editable=False)
+	slug = models.SlugField(unique=True, null=False, max_length = 255)
+	riwayat_penanganan = models.ForeignKey(RiwayatPenanganan, on_delete=models.CASCADE)
+	date_created = models.DateTimeField(default=timezone.now)
+	
+	tanggal = models.CharField(max_length=100, blank=True, null=True)
+	nama_barang = models.CharField(max_length=200, blank=True, null=True)
+	unit = models.IntegerField(blank=True, null=True)
+	harga_total = models.FloatField(blank=True, null=True)
+	
+	teknisi = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True, default=None)
+
+	foto_kuitansi = models.ImageField(default='trouble_shooting/default.png', upload_to='riwayat_penanganan')
+	
+	def __str__(self):
+		return f'{self.ac}{self.nama_barang}'[:20]
+		
+	def save(self):
+		# Slug stuff
+		slug_ = slugify(self.ac) + '-' + str(self.uid)
+		self.slug = slug_[:254]
+		super().save()
+
+		img = Image.open(self.kuitansi.path)
+
+		if img.height > 300 or img.width > 300:
+			output_size = (300, 300)
+			img.thumbnail(output_size)
+			img.save(self.kuitansi.path)
+
+
+	def get_absolute_url(self):
+		'''
+		Slug stuff'''
+		from django.urls import reverse
+		return reverse('data_belanja', kwargs = {'slug': self.slug})
 
 
 

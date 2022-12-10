@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import DataCustomers, DataAC, RiwayatPenanganan
+from .models import *
 
 
 
@@ -36,7 +36,11 @@ class DataACForm(forms.ModelForm):
 
 	class Meta:
 		model = DataAC
-		fields = ['merk', 'kapasitas', 'ruangan', 'image']
+		fields = ['merk', 'tipe', 
+		'model_indoor', 'model_outdoor',
+		'tanggal_pemasangan', 'kontraktor',
+		'informasi_servis',
+		'kapasitas', 'ruangan', 'image']
 
 	def __init__(self, *args, **kwargs):
 		super(DataACForm, self).__init__(*args, **kwargs)
@@ -63,25 +67,130 @@ class RiwayatPenangananForm(forms.ModelForm):
 
 	class Meta:
 		model = RiwayatPenanganan
-		fields = ['description', 'trouble_shooting', 'solusi', 'image']
+		fields = ['tanggal', 'description',
+		'tipe_pekerjaan', 'tekanan_low_press',
+		'tekanan_high_press', 'arus_listrik',
+		'noise', 'volatase', 'keterangan',
+		'image']
 
 	def __init__(self, *args, **kwargs):
 		super(RiwayatPenangananForm, self).__init__(*args, **kwargs)
 
 
+		self.fields['tanggal'].widget.attrs.update({
+			'class': 'input_form_style',
+			'placeholder': 'Tanggal'
+			})
 		self.fields['description'].widget.attrs.update({
 			'class': 'input_form_style',
-			'placeholder': 'Deskripsi penanganan'
+			'placeholder': 'Deskripsi Penanganan'
 			})
-		self.fields['trouble_shooting'].widget.attrs.update({
+		self.fields['tipe_pekerjaan'].widget.attrs.update({
 			'class': 'input_form_style',
-			'placeholder': 'Trouble shooting'
+			'placeholder': 'Tipe Pekerjaan'
+			})
+
+		self.fields['tekanan_low_press'].widget.attrs.update({
+			'class': 'input_form_style',
+			'placeholder': 'Tekanan Low Press'
+			})
+		self.fields['tekanan_high_press'].widget.attrs.update({
+			'class': 'input_form_style',
+			'placeholder': 'Tekanan High Press'
+			})
+		self.fields['arus_listrik'].widget.attrs.update({
+			'class': 'input_form_style',
+			'placeholder': 'Arus Listrik'
+			})
+		self.fields['noise'].widget.attrs.update({
+			'class': 'input_form_style',
+			'placeholder': 'Nois/Suara'
+			})
+		self.fields['volatase'].widget.attrs.update({
+			'class': 'input_form_style',
+			'placeholder': 'Voltase'
+			})
+		self.fields['keterangan'].widget.attrs.update({
+			'class': 'input_form_style',
+			'placeholder': 'Keterangan'
+			})
+		self.fields['image'].widget.attrs.update({
+			'placeholder': 'Foto'
+			})
+
+
+class TroubleShootingForm(forms.ModelForm):
+
+	class Meta:
+		model = TroubleShooting
+		fields = ['tanggal', 'description',
+		'analisa_awal', 'solusi', 
+		'hasil_perbaikan', 'kategori_kerusakan',
+		'image']
+
+	def __init__(self, *args, **kwargs):
+		super(TroubleShootingForm, self).__init__(*args, **kwargs)
+
+
+		self.fields['tanggal'].widget.attrs.update({
+			'class': 'input_form_style',
+			'placeholder': 'Tanggal'
+			})
+		self.fields['description'].widget.attrs.update({
+			'class': 'input_form_style',
+			'placeholder': 'Deskripsi Trouble Shooting'
+			})
+
+		self.fields['analisa_awal'].widget.attrs.update({
+			'class': 'input_form_style',
+			'placeholder': 'Analisa Awal'
 			})
 		self.fields['solusi'].widget.attrs.update({
 			'class': 'input_form_style',
 			'placeholder': 'Solusi'
 			})
+		self.fields['hasil_perbaikan'].widget.attrs.update({
+			'class': 'input_form_style',
+			'placeholder': 'Hasil Perbaikan'
+			})
+		self.fields['kategori_kerusakan'].widget.attrs.update({
+			'class': 'input_form_style',
+			'placeholder': 'Kategori Kerusakan'
+			})
 		self.fields['image'].widget.attrs.update({
 			'placeholder': 'Foto'
+			})
+
+
+class DataBelanjaForm(forms.ModelForm):
+
+	class Meta:
+		model = DataBelanja
+		fields = ['tanggal', 'nama_barang',
+		'unit', 'harga_total',
+		'foto_kuitansi']
+
+	def __init__(self, *args, **kwargs):
+		super(DataBelanjaForm, self).__init__(*args, **kwargs)
+
+
+		self.fields['tanggal'].widget.attrs.update({
+			'class': 'input_form_style',
+			'placeholder': 'Tanggal'
+			})
+		self.fields['nama_barang'].widget.attrs.update({
+			'class': 'input_form_style',
+			'placeholder': 'Nama Barang'
+			})
+		self.fields['unit'].widget.attrs.update({
+			'class': 'input_form_style',
+			'placeholder': 'Unit'
+			})
+		self.fields['harga_total'].widget.attrs.update({
+			'class': 'input_form_style',
+			'placeholder': 'Harga Total'
+			})
+		self.fields['foto_kuitansi'].widget.attrs.update({
+			'placeholder': 'Foto Kuitansi'
 			})
 

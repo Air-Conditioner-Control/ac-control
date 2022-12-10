@@ -24,6 +24,8 @@ media/customer/*
 !media/customer/default.png
 media/riwayat_penanganan/*
 !media/riwayat_penanganan/default.png
+media/trouble_shooting/*
+!media/trouble_shooting/default.png
 
 
 
