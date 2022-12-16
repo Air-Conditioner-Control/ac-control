@@ -168,6 +168,16 @@
 						      <th>No</th>
 						      <th>ID</th>
 						      <th>Merk</th>
+
+						      <th>Tipe</th>
+						      <th>Model Indoor</th>
+						      <th>Model Outdoor</th>
+						      <th>Tanggal Pemasangan</th>
+						      <th>Kontraktor</th>
+						      <th>Informasi Servis</th>
+
+
+
 						      <th>Kapasitas</th>
 						      <th>Ruangan</th>
 						      <th>Customer</th>
@@ -180,8 +190,22 @@
 						  	{% for ac in all_ac %}
 							    <tr>
 							      <th scope="row">{{ forloop.counter }}</th>
+							      
 							      <td><a href="{% url 'detail_ac' ac.slug %}">{{ac.ac_id}}</a></td>
 							      <td><div style='width: 100px; white-space: pre-wrap;'>{{ac.merk}}</div></td>
+
+
+
+							      <td><div style='width: 100px; white-space: pre-wrap;'>{{ac.tipe}}</div></td>
+							      <td><div style='width: 100px; white-space: pre-wrap;'>{{ac.model_indoor}}</div></td>
+							      <td><div style='width: 100px; white-space: pre-wrap;'>{{ac.model_outdoor}}</div></td>
+							      <td><div style='width: 100px; white-space: pre-wrap;'>{{ac.tanggal_pemasangan}}</div></td>
+							      <td><div style='width: 100px; white-space: pre-wrap;'>{{ac.kontraktor}}</div></td>
+							      
+							      <td><div style='width: 100px; white-space: pre-wrap;'>{{ac.informasi_servis}}</div></td>
+
+
+
 							      <td>{{ac.kapasitas}}</td>
 							      <td>{{ac.ruangan}}</td>
 							      <td>{{ac.customer}}</td>

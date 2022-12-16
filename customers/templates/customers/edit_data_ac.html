@@ -115,6 +115,15 @@
 		color: #BBBBBB; 
 		padding-left: 16px;
 	}
+	.input_form_style_text {
+		width: 100%; 
+		background-color: white; 
+		height: 80px; 
+		border-radius:7px; 
+		border: solid 1px #FFEE66; 
+		color: #BBBBBB; 
+		padding-left: 16px;
+	}
 	.label_form_style {
 		margin-bottom: 5px;
 		color: red;
@@ -156,6 +165,16 @@
 					<form method="POST" enctype="multipart/form-data">
 						{% csrf_token %}
 					   	<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 20px;">
+								<div style="margin-bottom: 5px;">LABEL PERUSAHAAN</div>
+								{{form.label}}
+								{% for error in form.label.errors %}
+			            <div class="alert alert-danger">
+			              <strong>{{ error|escape }}</strong>
+			            </div>
+			          {% endfor %}
+							</div>
+
+							<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 20px;">
 								<div style="margin-bottom: 5px;">MERK AC</div>
 								{{form.merk}}
 								{% for error in form.merk.errors %}
@@ -164,6 +183,77 @@
 			            </div>
 			          {% endfor %}
 							</div>
+
+							<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 20px;">
+								<div style="margin-bottom: 5px;">TIPE</div>
+								{{form.tipe}}
+								{% for error in form.tipe.errors %}
+			            <div class="alert alert-danger">
+			              <strong>{{ error|escape }}</strong>
+			            </div>
+			          {% endfor %}
+							</div>
+
+							<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 20px;">
+								<div style="margin-bottom: 5px;">MODEL INDOOR</div>
+								{{form.model_indoor}}
+								{% for error in form.model_indoor.errors %}
+			            <div class="alert alert-danger">
+			              <strong>{{ error|escape }}</strong>
+			            </div>
+			          {% endfor %}
+							</div>
+
+							<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 20px;">
+								<div style="margin-bottom: 5px;">MODEL OUTDOOR</div>
+								{{form.model_outdoor}}
+								{% for error in form.model_outdoor.errors %}
+			            <div class="alert alert-danger">
+			              <strong>{{ error|escape }}</strong>
+			            </div>
+			          {% endfor %}
+							</div>
+
+							<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 20px;">
+								<div style="margin-bottom: 5px;">TANGGAL PEMASANGAN</div>
+								{{form.tanggal_pemasangan}}
+								{% for error in form.tanggal_pemasangan.errors %}
+			            <div class="alert alert-danger">
+			              <strong>{{ error|escape }}</strong>
+			            </div>
+			          {% endfor %}
+							</div>
+
+							<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 20px;">
+								<div style="margin-bottom: 5px;">KONTRAKTOR</div>
+								{{form.kontraktor}}
+								{% for error in form.kontraktor.errors %}
+			            <div class="alert alert-danger">
+			              <strong>{{ error|escape }}</strong>
+			            </div>
+			          {% endfor %}
+							</div>
+
+							<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 20px;">
+								<div style="margin-bottom: 5px;">INFORMASI SERVIS</div>
+								{{form.informasi_servis}}
+								{% for error in form.informasi_servis.errors %}
+			            <div class="alert alert-danger">
+			              <strong>{{ error|escape }}</strong>
+			            </div>
+			          {% endfor %}
+							</div>
+
+							<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 20px;">
+								<div style="margin-bottom: 5px;">PERIODE SERVIS (DALAM BULAN)</div>
+								{{form.periode_servis}}
+								{% for error in form.periode_servis.errors %}
+			            <div class="alert alert-danger">
+			              <strong>{{ error|escape }}</strong>
+			            </div>
+			          {% endfor %}
+							</div>
+
 
 							
 

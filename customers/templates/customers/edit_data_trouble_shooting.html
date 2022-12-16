@@ -138,13 +138,13 @@
 		<div style="text-align: center; margin: 0 auto; max-width: 600px;">
 			<div style="width: 100%; background-color: transparent; float: left !important; color: #555555; font-weight: bold; margin-top: 13px; margin-bottom: 8px; font-size: 13px; left: 0px;">
 				<div style="width:100%">
-					<a href="{% url 'detail_ac' ac.slug %}">
+					<a href="{% url 'data_trouble_shooting' penanganan.slug %}">
 						<div style="width:7%; float: left; text-align: left; padding-left:3px; color:#777777;">
 							<i class="fa fa-arrow-left" aria-hidden="true"></i>
 						</div>
 					</a>
 					<div style="width: 93%; float: left; color:#777777; display: flex;">
-						<div style="text-align: left;">Tambah Riwayat Penanganan</div>
+						<div style="text-align: left;">Edit Data Trouble Shooting</div>
 					</div>
 				</div>
 			</div>
@@ -160,7 +160,6 @@
 		<div style="left: 0; width: 100%; list-style-type: none; margin: 0; padding: 0; background: white; z-index: 10; padding-left: 11px; padding-right: 11px; margin-top:50px;">
 			<div style="text-align: center; margin: 0 auto; max-width: 400px;">
 				<div style="width: 100%; background-color: white; float: left; font-size: 12px; margin-top: 16px; justify-content: space-between; color: #777777;">
-
 
 					<!-- Form -->
 					<form method="POST" enctype="multipart/form-data">
@@ -184,68 +183,42 @@
 			          {% endfor %}
 							</div>
 							<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 20px;">
-								<div style="margin-bottom: 5px;">TIPE PEKERJAAN</div>
-								{{form.tipe_pekerjaan}}
-								{% for error in form.tipe_pekerjaan.errors %}
+								<div style="margin-bottom: 5px;">ANALISA AWAL</div>
+								{{form.analisa_awal}}
+								{% for error in form.analisa_awal.errors %}
 			            <div class="alert alert-danger">
 			              <strong>{{ error|escape }}</strong>
 			            </div>
 			          {% endfor %}
 							</div>
 							<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 20px;">
-								<div style="margin-bottom: 5px;">TEKANAN LOW PRESSURE</div>
-								{{form.tekanan_low_press}}
-								{% for error in form.tekanan_low_press.errors %}
+								<div style="margin-bottom: 5px;">SOLUSI</div>
+								{{form.solusi}}
+								{% for error in form.solusi.errors %}
 			            <div class="alert alert-danger">
 			              <strong>{{ error|escape }}</strong>
 			            </div>
 			          {% endfor %}
 							</div>
 							<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 20px;">
-								<div style="margin-bottom: 5px;">TEKANAN HIGH PRESSURE</div>
-								{{form.tekanan_high_press}}
-								{% for error in form.tekanan_high_press.errors %}
+								<div style="margin-bottom: 5px;">HASIL PERBAIKAN</div>
+								{{form.hasil_perbaikan}}
+								{% for error in form.hasil_perbaikan.errors %}
 			            <div class="alert alert-danger">
 			              <strong>{{ error|escape }}</strong>
 			            </div>
 			          {% endfor %}
 							</div>
 							<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 20px;">
-								<div style="margin-bottom: 5px;">ARUS LISTRIK</div>
-								{{form.arus_listrik}}
-								{% for error in form.arus_listrik.errors %}
+								<div style="margin-bottom: 5px;">KATEGORI KERUSAKAN</div>
+								{{form.kategori_kerusakan}}
+								{% for error in form.kategori_kerusakan.errors %}
 			            <div class="alert alert-danger">
 			              <strong>{{ error|escape }}</strong>
 			            </div>
 			          {% endfor %}
 							</div>
-							<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 20px;">
-								<div style="margin-bottom: 5px;">NOISE/SUARA</div>
-								{{form.noise}}
-								{% for error in form.noise.errors %}
-			            <div class="alert alert-danger">
-			              <strong>{{ error|escape }}</strong>
-			            </div>
-			          {% endfor %}
-							</div>
-							<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 20px;">
-								<div style="margin-bottom: 5px;">VOLTASE</div>
-								{{form.volatase}}
-								{% for error in form.volatase.errors %}
-			            <div class="alert alert-danger">
-			              <strong>{{ error|escape }}</strong>
-			            </div>
-			          {% endfor %}
-							</div>
-							<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 20px;">
-								<div style="margin-bottom: 5px;">KETERANGAN TAMBAHAN</div>
-								{{form.keterangan}}
-								{% for error in form.keterangan.errors %}
-			            <div class="alert alert-danger">
-			              <strong>{{ error|escape }}</strong>
-			            </div>
-			          {% endfor %}
-							</div>
+							
 
 
 							<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 20px;">

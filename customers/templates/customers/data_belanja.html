@@ -106,6 +106,25 @@
   -o-animation: rotating 2s linear infinite;
   animation: rotating 2s linear infinite;
 }
+
+/**/
+.wordwrap { 
+   white-space: pre-wrap;      /* CSS3 */   
+   white-space: -moz-pre-wrap; /* Firefox */    
+   white-space: -pre-wrap;     /* Opera <7 */   
+   white-space: -o-pre-wrap;   /* Opera 7 */    
+   word-wrap: break-word;      /* IE */
+}
+
+.input_form_style {
+		width: 100%; 
+		background-color: transparent; 
+		height: 40px; 
+		border-radius:7px; 
+		border: solid 1px #DDDDDD; 
+		color: black; 
+		padding-left: 16px;
+	}
 </style>
 
 </head>
@@ -116,13 +135,13 @@
 		<div style="text-align: center; margin: 0 auto; max-width: 600px;">
 			<div style="width: 100%; background-color: transparent; float: left !important; color: #555555; font-weight: bold; margin-top: 13px; margin-bottom: 8px; font-size: 13px; left: 0px;">
 				<div style="width:100%">
-					<a href="{% url 'daftar_customer' %}">
+					<a href="{% url 'detail_ac' penanganan.ac.slug %}">
 						<div style="width:7%; float: left; text-align: left; padding-left:3px; color:#777777;">
 							<i class="fa fa-arrow-left" aria-hidden="true"></i>
 						</div>
 					</a>
 					<div style="width: 93%; float: left; color:#777777;">
-						<div style="text-align: left;">Detail Kustomer</div>
+						<div style="text-align: left;">Data Belanja</div>
 					</div>
 				</div>
 			</div>
@@ -132,86 +151,100 @@
 	
 
 
-	<!-- Biodata -->
+	
 	<div style="max-width: 600px; justify-content: center; margin: auto; padding-left: 11px; padding-right: 11px;">
-
 		<div style="left: 0; width: 100%; list-style-type: none; margin: 0; padding: 0; background: white; z-index: 10; padding-left: 11px; padding-right: 11px; margin-top:50px; font-size: 12px;">
-					
-			<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 20px;">
+
+			
+			<div style="width:100%; overflow:scroll; white-space:nowrap; display:inline-block;">
+				<!--  -->
+				<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 20px;">
 				<div style="margin-bottom: 5px; font-size: 16px; width: 100%;">
+					<a href="{% url 'detail_customer' penanganan.ac.customer.slug %}">
 					<div style="float: left;">
-						<img src="{{ customer.image.url }}" width="30px" height="30px" style="border-radius:50%;">
+						<img src="{{ penanganan.ac.customer.image.url }}" width="30px" height="30px" style="border-radius:50%;">
 					</div>
 					<div style="float: left;">
-						&nbsp;&nbsp;{{ customer.nama_lengkap }}
+						&nbsp;&nbsp;{{ penanganan.ac.customer.nama_lengkap }}
 					</div>
+					</a>
 				</div>
-				
+			</div>
+			<br><br>
+
+			<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 0px; display: inline-block;">
+				<div style="margin-bottom: 0px;">{{ penanganan.ac.customer.alamat }}</div>
+			</div>
+
+
+			<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 0px;">
+				<div style="margin-bottom: 0px;">{{ penanganan.ac.customer.wa_number }}</div>
+			</div>
+			<br>
+
+			<div style="width:100%; display: inline-block;">
+				<div style="width:100%; float: left; padding:0px;">
+					{{penanganan.ac.ac_id}} | {{penanganan.ac.merk}} | {{penanganan.ac.tipe}}
+				</div>
 			</div>
 			<br><br><br>
-
-			<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 0px; display: block;">
-				<div style="margin-bottom: 0px;">{{ customer.alamat }}</div>
-			</div>
-
-
-			<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 0px;">
-				<div style="margin-bottom: 0px;">{{ customer.wa_number }}</div>
-			</div>
-			<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 0px;">
-				<div style="margin-bottom: 0px;">{{ customer.status }}</div>
-			</div>
-			{% if user.profile.user_type == 'ADMIN' %}
-				<div style="width: 100%; height: 50px; text-align: left; font-size:12px;">
-					<a href="{% url 'edit_data_customer' customer.slug %}" style="width:50%;">
-						<i class="fa fa-edit"></i>&nbsp;&nbsp;Edit Data Kustomer
-					</a>
-				</div>
-			{% endif %}
-		</div>
-		<br>
-
-		{% if user.profile.user_type != 'UMUM' %}
+			{% if user.profile.user_type != 'UMUM' %}
 				<div style="width: 100%; height: 30px; text-align: left; font-size:12px;">
-					<a href="{% url 'tambah_ac' customer.slug %}" style="width:50%;">
-						<i class="fa fa-plus"></i>&nbsp;&nbsp;Tambah AC
+					<a href="{% url 'tambah_data_belanja' penanganan.slug %}" style="width:50%;">
+						<i class="fa fa-plus"></i>&nbsp;&nbsp;Tambah Data Belanja
 					</a>
 				</div>
 			{% endif %}
-			<div style="width:100%; overflow:scroll; white-space:nowrap; display:inline-block;">
-				<table class="table table-striped w-auto" style="font-size:12px;">
-				  <thead>
-				    <tr>
-				      <th>No</th>
-				      <th>ID</th>
-				      <th>Merk</th>
-				      <!-- <th>Kapasitas</th> -->
-				      <th>Ruangan</th>
-				    </tr>
-				  </thead>
-				  
-				  <tbody>
-				  	{% for ac in data_ac %}
-					    <tr>
-					      <th scope="row">{{ forloop.counter }}</th>
-					      <td><a href="{% url 'detail_ac' ac.slug %}">{{ac.ac_id}} | {{ac.label}}</a></td>
-					      <td><div style='width: 100%; white-space: pre-wrap;'>{{ac.merk}} | {{ac.tipe}}</div></td>
-					      <!-- <td>{{ac.kapasitas}}</td> -->
-					      <td>{{ac.ruangan}}</td>
-					    </tr>
-					  {% endfor %}
 
-				  </tbody>
-				</table>
+
+				<!--  -->
+				{% for pen in data %}
+				<div style="border: 1px solid #DDDDDD; padding:7px; border-radius:7px;">
+				<div style="margin-bottom:11px;"><strong>BELANJA KE-{{ forloop.counter }}</strong></div>
+				<div style='white-space: pre-wrap; line-height: 11px;'>Tanggal belanja: 
+	      	<br><div class="input_form_style" style="padding: 11px;">{{pen.tanggal}}</div>
+	      	<br><a href="" style="color: black;">Nama barang:
+	      	<br><div class="input_form_style" style="padding: 11px;">{{pen.nama_barang}}</div></a>
+	      	<br>Unit: 
+	      	<br><div class="input_form_style" style="padding: 11px;">{{pen.unit}}</div>
+	      	<br>Harga total: 
+	      	<br><div class="input_form_style" style="padding: 11px;">{{pen.harga_total}}</div>
+	      	<br>Teknisi: 
+	      	{% if pen.teknisi %}
+	      		<a href="{% url 'profile' pen.teknisi.slug %}">
+	      		<div class="input_form_style" style="padding: 11px;">{{pen.teknisi}}</div></a>
+	      	{% else %} 
+	      		<br><div class="input_form_style" style="padding: 11px;">{{pen.teknisi}}</div>
+	      	{% endif %}
+	      	
+	      	<br>Tanggal input: 
+	      	<br><div class="input_form_style" style="padding: 11px;">{{pen.date_created|date:"d M Y"}}</div> 
+	      	
+	      </div>
+	      <div>
+	      	<img src="{{ pen.foto_kuitansi.url }}" width="100%">
+	      </div>
+	      <hr>
+	      
+	      {% if user.profile.user_type == 'ADMIN' %}
+				<div style="width: 100%; height: 30px; text-align: left; font-size:12px;">
+					<a href="{% url 'edit_data_belanja' pen.slug %}" style="width:50%;">
+						<i class="fa fa-edit"></i>&nbsp;&nbsp;Edit Data Belanja
+					</a>
+				</div>
+				{% endif %}
+				</div>
+	      <br><br><br>
+
+				{% endfor %}
+				<!--  -->
 			</div>
 
 			
 
 
-	
-
-		
-	
+			
+		</div>
 
 	</div>
 

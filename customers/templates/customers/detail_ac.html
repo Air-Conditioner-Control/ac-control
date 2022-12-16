@@ -143,19 +143,16 @@
 
 	<!-- Biodata -->
 	<div style="max-width: 600px; justify-content: center; margin: auto; padding-left: 11px; padding-right: 11px;">
-
 		<div style="left: 0; width: 100%; list-style-type: none; margin: 0; padding: 0; background: white; z-index: 10; padding-left: 11px; padding-right: 11px; margin-top:50px; font-size: 12px;">
-			<!--  -->
+			
 			<div style="width: 100%; background-color: transparent; text-align: center; margin-bottom: 0px; display: block; font-size: 20px;">
 				<div style="margin-bottom: 0px;">{{ ac.ac_id }} - {{ ac.merk }} - {{ ac.kapasitas }}</div>
 			</div>
 
 			<div style="width: 100%; background-color: transparent; text-align: center; margin-bottom: 0px;">
-				<div style="margin-bottom: 0px;  font-size: 20px;">(Ruang {{ ac.ruangan }})</div>
+				<div style="margin-bottom: 0px;  font-size: 20px;">({{ ac.ruangan }})</div>
 			</div>
-			<br>
-			<!--  -->
-			
+			<br>			
 					
 			<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 20px;">
 				<div style="margin-bottom: 0px; font-size: 16px; width: 100%;">
@@ -163,7 +160,6 @@
 				</div>
 			</div>
 
-			<!--  -->
 			<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 20px;">
 				<div style="margin-bottom: 5px; font-size: 16px; width: 100%;">
 					<a href="{% url 'detail_customer' ac.customer.slug %}">
@@ -175,11 +171,10 @@
 					</div>
 					</a>
 				</div>
-				
 			</div>
 			<br><br>
 
-			<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 0px; display: block;">
+			<div style="width: 100%; background-color: transparent; text-align: left; margin-bottom: 0px; display: inline-block;">
 				<div style="margin-bottom: 0px;">{{ ac.customer.alamat }}</div>
 			</div>
 
@@ -189,13 +184,103 @@
 			</div>
 			<br>
 
-			<!-- <div style="width: 100%; background-color: transparent; text-align: center; margin-bottom: 0px; display: block; font-size: 20px;">
-				<div style="margin-bottom: 0px;">{{ ac.ac_id }} - {{ ac.merk }} - {{ ac.kapasitas }}</div>
+			<div style="width:100%; display: inline-block;">
+				<div style="width:30%; float: left; padding:7px;">
+					AC ID
+				</div>
+				<div style="width:70%; float: left; padding:7px;">
+					{{ac.ac_id}}
+				</div>
 			</div>
-
-			<div style="width: 100%; background-color: transparent; text-align: center; margin-bottom: 0px;">
-				<div style="margin-bottom: 0px;  font-size: 20px;">(Ruang {{ ac.ruangan }})</div>
-			</div> -->
+			<div style="width:100%; display: inline-block;">
+				<div style="width:30%; float: left; padding:7px;">
+					LABEL PERUSAHAAN
+				</div>
+				<div style="width:70%; float: left; padding:7px;">
+					{{ac.label}}
+				</div>
+			</div>
+			<div style="width:100%; display: inline-block; border-top: solid 1px rgb(250, 250, 250);">
+				<div style="width:30%; float: left; padding:7px;">
+					Merk
+				</div>
+				<div style="width:70%; float: left; padding:7px;">
+					{{ac.merk}}
+				</div>
+			</div>
+			<div style="width:100%; display: inline-block; border-top: solid 1px rgb(250, 250, 250);">
+				<div style="width:30%; float: left; padding:7px;">
+					Tipe
+				</div>
+				<div style="width:70%; float: left; padding:7px;">
+					{{ac.tipe}}
+				</div>
+			</div>
+			<div style="width:100%; display: inline-block; border-top: solid 1px rgb(250, 250, 250);">
+				<div style="width:30%; float: left; padding:7px;">
+					Model Indoor
+				</div>
+				<div style="width:70%; float: left; padding:7px;">
+					{{ac.model_indoor}}
+				</div>
+			</div>
+			<div style="width:100%; display: inline-block; border-top: solid 1px rgb(250, 250, 250);">
+				<div style="width:30%; float: left; padding:7px;">
+					Model Outdoor
+				</div>
+				<div style="width:70%; float: left; padding:7px;">
+					{{ac.model_outdoor}}
+				</div>
+			</div>
+			<div style="width:100%; display: inline-block; border-top: solid 1px rgb(250, 250, 250);">
+				<div style="width:30%; float: left; padding:7px;">
+					Tanggal Pemasangan
+				</div>
+				<div style="width:70%; float: left; padding:7px;">
+					{{ac.tanggal_pemasangan}}
+				</div>
+			</div>
+			<div style="width:100%; display: inline-block; border-top: solid 1px rgb(250, 250, 250);">
+				<div style="width:30%; float: left; padding:7px;">
+					Kontraktor
+				</div>
+				<div style="width:70%; float: left; padding:7px;">
+					{{ac.kontraktor}}
+				</div>
+			</div>
+			<div style="width:100%; display: inline-block; border-top: solid 1px rgb(250, 250, 250);">
+				<div style="width:30%; float: left; padding:7px;">
+					Informasi Servis
+				</div>
+				<div style="width:70%; float: left; padding:7px;">
+					{{ac.informasi_servis}}
+				</div>
+			</div>
+			<div style="width:100%; display: inline-block; border-top: solid 1px rgb(250, 250, 250);">
+				<div style="width:30%; float: left; padding:7px;">
+					Periode Servis
+				</div>
+				<div style="width:70%; float: left; padding:7px;">
+					{{ac.periode_servis}} bulan
+				</div>
+			</div>
+			<div style="width:100%; display: inline-block; border-top: solid 1px rgb(250, 250, 250);">
+				<div style="width:30%; float: left; padding:7px;">
+					Kapasitas
+				</div>
+				<div style="width:70%; float: left; padding:7px;">
+					{{ac.kapasitas}}
+				</div>
+			</div>
+			<div style="width:100%; display: inline-block; border-top: solid 1px rgb(250, 250, 250);">
+				<div style="width:30%; float: left; padding:7px;">
+					Ruangan
+				</div>
+				<div style="width:70%; float: left; padding:7px;">
+					{{ac.ruangan}}
+				</div>
+			</div>
+			<br>
 			{% if user.profile.user_type == 'ADMIN' %}
 				<div style="width: 100%; height: 50px; text-align: left; font-size:12px;">
 					<a href="{% url 'edit_data_ac' ac.slug %}" style="width:50%;">
@@ -206,28 +291,20 @@
 		</div>
 		
 		<br>
-			{% if user.profile.user_type != 'UMUM' %}
-				<div style="width: 100%; height: 30px; text-align: left; font-size:12px;">
-					<a href="{% url 'tambah_riwayat_penanganan' ac.slug %}" style="width:50%;">
-						<i class="fa fa-plus"></i>&nbsp;&nbsp;Tambah Riwayat Penanganan
-					</a>
-				</div>
-			{% endif %}
+		{% if user.profile.user_type != 'UMUM' %}
+			<div style="width: 100%; height: 30px; text-align: left; font-size:12px;">
+				<a href="{% url 'tambah_riwayat_penanganan' ac.slug %}" style="width:50%;">
+					<i class="fa fa-plus"></i>&nbsp;&nbsp;Tambah Riwayat Penanganan
+				</a>
+			</div>
+		{% endif %}
 
-			<div style="width:100%; overflow:scroll; white-space:nowrap; display:inline-block;">
-
-
-				
+		<div style="width:100%; overflow:scroll; white-space:nowrap; display:inline-block;">
 			<table class="table table-striped w-auto" style="font-size:12px;">
 			  <thead>
 			    <tr>
 			      <th>No</th>
-			      <th>Tanggal</th>
 			      <th>Deskripsi</th>
-			      <th>Trouble Shooting</th>
-			      <th>Solusi</th>
-			      <th>Teknisi</th>
-			      <th>Foto AC</th>
 			    </tr>
 			  </thead>
 			  
@@ -235,35 +312,15 @@
 			  	{% for pen in riwayat_penanganan %}
 				    <tr>
 				      <th scope="row">{{ forloop.counter }}</th>
-				      <td>{{pen.date_created|date:"d M Y"}}</td>
-				      <td><div style='width: 230px; white-space: pre-wrap;'>{{pen.description}}</div></td>
-				      <td><div style='width: 230px; white-space: pre-wrap;'>{{pen.trouble_shooting}}</div</td>
-				      <td><div style='width: 230px; white-space: pre-wrap;'>{{pen.solusi}}</div></td>
-				      {% if pen.teknisi %}
-					      <td><a href="{% url 'profile' pen.teknisi.slug %}">{{pen.teknisi}}</a></td>
-					    {% else %}
-				      	<td>{{pen.teknisi}}</td>
-					    {% endif %}
-
-				      <td><img src="{{ pen.image.url }}" width="200px" height="auto" style="border-radius:1%;"></td>
+				      
+				      <td><div style='white-space: pre-wrap; min-width: 270px;'><a href="{% url 'detail_riwayat_penanganan' pen.slug %}" style="color: black;">{{pen.tanggal}} - {{pen.description}}</a><br>{% if pen.teknisi %}<a href="{% url 'profile' pen.teknisi.slug %}">{{pen.teknisi}}</a>{% else %} {{pen.teknisi}}{% endif %} | {{pen.date_created|date:"d M Y"}} <br><a href="{% url 'data_trouble_shooting' pen.slug %}">Trouble shooting</a> | <a href="{% url 'data_belanja' pen.slug %}">Data belanja</a>
+				      </div></td>
 				    </tr>
 				  {% endfor %}
 
 			  </tbody>
 			</table>
-
-
-
-
-			</div>
-
-			
-
-
-	
-
-		
-	
+		</div>
 
 	</div>
 

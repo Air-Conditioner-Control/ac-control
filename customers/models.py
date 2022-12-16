@@ -56,6 +56,7 @@ class DataAC(models.Model):
 	date_created = models.DateTimeField(default=timezone.now)
 	
 	ac_id = models.CharField(max_length=8)
+	label = models.CharField(max_length=200, blank=True, null=True)
 	merk = models.CharField(max_length=100)
 
 	tipe = models.CharField(max_length=100, blank=True, null=True)
@@ -64,6 +65,7 @@ class DataAC(models.Model):
 	tanggal_pemasangan = models.CharField(max_length=100, blank=True, null=True)
 	kontraktor = models.TextField(blank=True, null=True)
 	informasi_servis = models.TextField(blank=True, null=True)
+	periode_servis = models.IntegerField(blank=True, null=True)
 
 	kapasitas = models.CharField(max_length=100, blank=True, null=True)
 	ruangan = models.CharField(max_length=100, blank=True, null=True)
@@ -145,7 +147,7 @@ class TroubleShooting(models.Model):
 	"""List username dan password teknisi"""
 	uid = models.UUIDField(default=uuid.uuid4, editable=False)
 	slug = models.SlugField(unique=True, null=False, max_length = 255)
-	ac = models.ForeignKey(DataAC, on_delete=models.CASCADE)
+	riwayat_penanganan = models.ForeignKey(RiwayatPenanganan, on_delete=models.CASCADE, null=True)
 	date_created = models.DateTimeField(default=timezone.now)
 	
 	tanggal = models.CharField(max_length=100, blank=True, null=True)
@@ -160,11 +162,11 @@ class TroubleShooting(models.Model):
 	image = models.ImageField(default='trouble_shooting/default.png', upload_to='riwayat_penanganan')
 	
 	def __str__(self):
-		return f'{self.ac}{self.description}'[:20]
+		return f'{self.riwayat_penanganan.ac}{self.description}'[:20]
 		
 	def save(self):
 		# Slug stuff
-		slug_ = slugify(self.ac) + '-' + str(self.uid)
+		slug_ = slugify(self.riwayat_penanganan.ac) + '-' + str(self.uid)
 		self.slug = slug_[:254]
 		super().save()
 
@@ -200,20 +202,20 @@ class DataBelanja(models.Model):
 	foto_kuitansi = models.ImageField(default='trouble_shooting/default.png', upload_to='riwayat_penanganan')
 	
 	def __str__(self):
-		return f'{self.ac}{self.nama_barang}'[:20]
+		return f'{self.riwayat_penanganan.ac}{self.nama_barang}'[:20]
 		
 	def save(self):
 		# Slug stuff
-		slug_ = slugify(self.ac) + '-' + str(self.uid)
+		slug_ = slugify(self.nama_barang) + '-' + str(self.uid)
 		self.slug = slug_[:254]
 		super().save()
 
-		img = Image.open(self.kuitansi.path)
+		# img = Image.open(self.foto_kuitansi.path)
 
-		if img.height > 300 or img.width > 300:
-			output_size = (300, 300)
-			img.thumbnail(output_size)
-			img.save(self.kuitansi.path)
+		# if img.height > 300 or img.width > 300:
+		# 	output_size = (300, 300)
+		# 	img.thumbnail(output_size)
+		# 	img.save(self.foto_kuitansi.path)
 
 
 	def get_absolute_url(self):
