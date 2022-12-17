@@ -226,7 +226,7 @@
 	      </div>
 	      <hr>
 	      
-	      {% if user.profile.user_type == 'ADMIN' %}
+	      {% if teknisi.user_type == 'ADMIN' or teknisi.user_type == 'SUPERADMIN' %}
 				<div style="width: 100%; height: 30px; text-align: left; font-size:12px;">
 					<a href="{% url 'edit_data_trouble_shooting' pen.slug %}" style="width:50%;">
 						<i class="fa fa-edit"></i>&nbsp;&nbsp;Edit Data Trouble Shooting

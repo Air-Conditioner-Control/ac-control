@@ -16,20 +16,25 @@ import numpy as np
 from .forms import *
 from .models import *
 from django.shortcuts import get_object_or_404
-
+from perusahaan.models import Perusahaan
+from teknisi.models import DataTeknisi
 
 
 @login_required
-def daftarkan_customer(request):
+def daftarkan_customer(request, slug):
+	perusahaan = get_object_or_404(Perusahaan, slug=slug)
 	if request.method == 'POST':
 		form = DataCustomersForm(request.POST, request.FILES)
 		if form.is_valid():
-			form.save()
+			obj = form.save(commit=False)
+			obj.perusahaan = perusahaan
+			obj.save()
+
 			
 			# Flash message
 			messages.success(request, f'Anda berhasil mendaftarkan customer!')
 
-			return redirect('daftar_customer')
+			return redirect('daftar_customer', slug=perusahaan.slug)
 		else:
 			return render(request, 'customers/daftarkan_customer.html', {'form': form})		
 	else:
@@ -57,11 +62,13 @@ def edit_data_customer(request, slug):
 
 
 @login_required
-def daftar_customer(request):
+def daftar_customer(request, slug):
+	perusahaan = get_object_or_404(Perusahaan, slug=slug)
 	if request.user.profile.user_type != 'UMUM':
-		customers = reversed(DataCustomers.objects.all())
+		customers = reversed(DataCustomers.objects.filter(perusahaan=perusahaan))
 		context = {
-			"customers": customers
+			"customers": customers,
+			"perusahaan": perusahaan
 		}
 		return render(request, 'customers/daftar_customer.html', context)
 	else:
@@ -76,7 +83,8 @@ def detail_customer(request, slug):
 
 	context = {
 		'customer': customer,
-		'data_ac': data_ac
+		'data_ac': data_ac,
+		'perusahaan': customer.perusahaan
 	}
 
 	return render(request, 'customers/detail_customer.html', context)
@@ -109,11 +117,13 @@ def tambah_ac(request, slug):
 def detail_ac(request, slug):
 	ac = get_object_or_404(DataAC, slug=slug)
 	riwayat_penanganan = reversed(RiwayatPenanganan.objects.filter(ac=ac))
+	teknisi = get_object_or_404(DataTeknisi, perusahaan=ac.customer.perusahaan, user=request.user)
 
 
 	context = {
 		'ac': ac,
-		'riwayat_penanganan': riwayat_penanganan
+		'riwayat_penanganan': riwayat_penanganan,
+		'teknisi': teknisi
 	}
 
 	return render(request, 'customers/detail_ac.html', context)
@@ -252,9 +262,11 @@ def data_belanja(request, slug):
 	'''Slug riwayat'''
 	riwayat_penanganan = get_object_or_404(RiwayatPenanganan, slug=slug)
 	data = list(reversed(DataBelanja.objects.filter(riwayat_penanganan=riwayat_penanganan).order_by('date_created')))
+	teknisi = get_object_or_404(DataTeknisi, perusahaan=riwayat_penanganan.ac.customer.perusahaan, user=request.user)
 	context = {
 		'data': data,
-		'penanganan': riwayat_penanganan
+		'penanganan': riwayat_penanganan,
+		'teknisi': teknisi
 	}
 	return render(request, 'customers/data_belanja.html', context)
 
@@ -309,9 +321,11 @@ def data_trouble_shooting(request, slug):
 	'''Slug riwayat'''
 	riwayat_penanganan = get_object_or_404(RiwayatPenanganan, slug=slug)
 	data = list(reversed(TroubleShooting.objects.filter(riwayat_penanganan=riwayat_penanganan).order_by('date_created')))
+	teknisi = get_object_or_404(DataTeknisi, perusahaan=riwayat_penanganan.ac.customer.perusahaan, user=request.user)
 	context = {
 		'data': data,
-		'penanganan': riwayat_penanganan
+		'penanganan': riwayat_penanganan,
+		'teknisi': teknisi
 	}
 	return render(request, 'customers/data_trouble_shooting.html', context)
 

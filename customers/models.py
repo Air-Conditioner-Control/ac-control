@@ -4,6 +4,7 @@ import uuid
 from django.utils.text import slugify
 from django.utils import timezone
 from users.models import Profile
+from perusahaan.models import Perusahaan
 
 
 
@@ -23,6 +24,7 @@ class DataCustomers(models.Model):
 		('TIDAK AKTIF', 'TIDAK AKTIF'),
 		)
 	status = models.CharField(max_length=50, choices=status_choices, default='AKTIF')
+	perusahaan = models.ForeignKey(Perusahaan, on_delete=models.SET_NULL, null=True, default=None)
 	
 	def __str__(self):
 		return f'{self.nama_lengkap}'

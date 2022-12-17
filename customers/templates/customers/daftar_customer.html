@@ -116,7 +116,7 @@
 		<div style="text-align: center; margin: 0 auto; max-width: 600px;">
 			<div style="width: 100%; background-color: transparent; float: left !important; color: #555555; font-weight: bold; margin-top: 13px; margin-bottom: 8px; font-size: 13px; left: 0px;">
 				<div style="width:100%">
-					<a href="{% url 'home' %}">
+					<a href="{% url 'home_perusahaan' perusahaan.slug %}">
 						<div style="width:7%; float: left; text-align: left; padding-left:3px; color:#777777;">
 							<i class="fa fa-arrow-left" aria-hidden="true"></i>
 						</div>
@@ -133,7 +133,7 @@
 		<div style="width: 100%; background-color: transparent; float: left; !important; color: #555555; font-weight: bold; margin-top: 67px; margin-left: 11px; margin-right: 11px; margin-bottom: 0px; font-size: 13px; left: 0px;">
 			{% if user.profile.user_type != 'UMUM' %}
 				<div style="width: 100%; text-align: left; font-size:12px; height:24px;">
-					<a href="{% url 'daftarkan_customer' %}" style="width:50%;">
+					<a href="{% url 'daftarkan_customer' perusahaan.slug %}" style="width:50%;">
 						<i class="fa fa-plus"></i>&nbsp;&nbsp;Tambah Kustomer
 					</a>
 				</div>
