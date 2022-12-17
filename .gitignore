@@ -20,6 +20,7 @@ media/logo/*
 media/profile/*
 !media/profile/default.jpg
 media/assets/*
+!media/assets/home.jpg
 media/ac/*
 !media/ac/default.png
 media/customer/*
