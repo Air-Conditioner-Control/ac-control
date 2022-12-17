@@ -1,0 +1,499 @@
+{% load index %}
+{% load get_qureyset_obj %}
+{% load get_initial %}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="shortcut icon" href="/media/logo/logo.ico" />
+{% if title %}
+  <title>AC Control! - {{ title }}</title>
+{% else %}
+  <title>AC Control!</title>
+{% endif %}
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jura:wght@300&display=swap" rel="stylesheet">
+<!-- bootsrap -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Fa icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+
+<script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+  
+
+
+
+<style>
+	/*placeholder input*/
+	input::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #BBBBBB;
+	}
+	input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+	    color:    #BBBBBB;
+	}
+	input::-moz-placeholder { /* Mozilla Firefox 19+ */
+	    color:    #BBBBBB;
+	}
+	input:-ms-input-placeholder { /* Internet Explorer 10+ */
+	    color:    #BBBBBB;
+	}
+</style>
+
+<!-- button tantang animation -->
+<style type="text/css">
+	@keyframes flickerAnimation {
+  0%   { opacity:1; }
+  50%  { opacity:0.7; }
+  100% { opacity:1; }
+}
+@-o-keyframes flickerAnimation{
+  0%   { opacity:1; }
+  50%  { opacity:0.7; }
+  100% { opacity:1; }
+}
+@-moz-keyframes flickerAnimation{
+  0%   { opacity:1; }
+  50%  { opacity:0.7; }
+  100% { opacity:1; }
+}
+@-webkit-keyframes flickerAnimation{
+  0%   { opacity:1; }
+  50%  { opacity:0.7; }
+  100% { opacity:1; }
+}
+.animate-flicker {
+   -webkit-animation: flickerAnimation 3s infinite;
+   -moz-animation: flickerAnimation 3s infinite;
+   -o-animation: flickerAnimation 3s infinite;
+    animation: flickerAnimation 3s infinite;
+}
+/*spining*/
+@-webkit-keyframes rotating /* Safari and Chrome */ {
+  from {
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotating {
+  from {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+.rotating {
+  -webkit-animation: rotating 11s linear infinite;
+  -moz-animation: rotating 11s linear infinite;
+  -ms-animation: rotating 11s linear infinite;
+  -o-animation: rotating 11s linear infinite;
+  animation: rotating 11s linear infinite;
+}
+
+/*Whatsapp*/
+.fa-whatsapp  {
+  color:#fff;
+  background:
+   linear-gradient(#25d366,#25d366) 14% 84%/16% 16% no-repeat,
+   radial-gradient(#25d366 58%,transparent 0);
+}
+
+/*Sliders client*/
+.slick-slide {
+    margin: 0px 20px;
+}
+
+.slick-slide img {
+    width: 100%;
+}
+
+.slick-slider
+{
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+            user-select: none;
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
+    -ms-touch-action: pan-y;
+        touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.slick-list
+{
+    position: relative;
+    display: block;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+.slick-list:focus
+{
+    outline: none;
+}
+.slick-list.dragging
+{
+    cursor: pointer;
+    cursor: hand;
+}
+
+.slick-slider .slick-track,
+.slick-slider .slick-list
+{
+    -webkit-transform: translate3d(0, 0, 0);
+       -moz-transform: translate3d(0, 0, 0);
+        -ms-transform: translate3d(0, 0, 0);
+         -o-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+}
+
+.slick-track
+{
+    position: relative;
+    top: 0;
+    left: 0;
+    display: block;
+}
+.slick-track:before,
+.slick-track:after
+{
+    display: table;
+    content: '';
+}
+.slick-track:after
+{
+    clear: both;
+}
+.slick-loading .slick-track
+{
+    visibility: hidden;
+}
+
+.slick-slide
+{
+    display: none;
+    float: left;
+    height: 100%;
+    min-height: 1px;
+}
+[dir='rtl'] .slick-slide
+{
+    float: right;
+}
+.slick-slide img
+{
+    display: block;
+}
+.slick-slide.slick-loading img
+{
+    display: none;
+}
+.slick-slide.dragging img
+{
+    pointer-events: none;
+}
+.slick-initialized .slick-slide
+{
+    display: block;
+}
+.slick-loading .slick-slide
+{
+    visibility: hidden;
+}
+.slick-vertical .slick-slide
+{
+    display: block;
+    height: auto;
+    border: 1px solid transparent;
+}
+.slick-arrow.slick-hidden {
+    display: none;
+}
+
+
+/*Testimoni*/
+.card-main {
+		margin-left: 11px;
+		margin-right: 11px;
+    padding: 11px;
+    border-radius: 10px;
+    margin-top: 11px;
+    margin-bottom: 11px;
+    box-shadow: 0px 1px 2px 0px grey;
+}
+
+.card-0 {
+    color: #fff;
+    background-color: rgb(0,100,0,0.7);
+    position: relative;
+    margin-left: 71px;
+    border-radius: 10px;
+    min-height: 112px;
+}
+
+.carousel-indicators li {
+    cursor: pointer;
+    border-radius: 50% !important;
+    width: 10px;
+    height: 10px;
+}
+
+.profile {
+    color: #000;
+    background-color: #FFD54F;
+    position: absolute;
+    left: -70px;
+    top: 17%;
+    border-radius: 8px;
+    border-top-left-radius: 0px; 
+    border-bottom-right-radius: 0px; 
+}
+
+.profile-pic {
+    width: 120px;
+    height: 120px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.open-quotes {
+    margin-left: 85px;
+    margin-top: 10px;
+}
+
+.content {
+    margin-left: 25px;
+    margin-right: 8px;
+}
+
+.close-quotes {
+    margin-bottom: 10px;
+    margin-right: 6px
+}
+
+@media screen and (max-width: 600px) {
+    .card-main {
+        padding: 11px 10px;
+    }
+
+    .card-0 {
+        min-height: 232px;
+    }
+
+    .profile {
+        top: 24%;
+    }
+
+    .profile-pic {
+        width: 90px;
+        height: 90px;
+    }
+
+    .open-quotes {
+        margin-left: 30px;
+    }
+
+    .content {
+        margin-left: 55px;
+        margin-right: 5px;
+    }
+
+    .close-quotes {
+        margin-right: 5px;
+    }
+}
+
+
+</style>
+
+</head>
+<body style="font-family: 'Jura', sans-serif;">
+
+	<!-- Top Navigation -->
+	{% if not request.user.is_authenticated %}
+		<div style="position: fixed; top: 0; left: 0; width: 100%; list-style-type: none; margin: 0; padding: 0; background: rgb(255, 255, 255, 0.8); z-index: 10; padding-left: 11px; padding-right: 11px; border-bottom: 1px solid; border-color:#F7F7F7">
+			<div style="text-align: center; margin: 0 auto; max-width: 600px; background-color: transparent;">
+				<div style="width: 50%; background-color: transparent; float: left !important; color: #555555; font-weight: bold; margin-top: 13px; margin-bottom: 8px; font-size: 13px;">
+					
+					<a href="">
+						<div style="width:100%; color: #777777;">
+							<div style="width:30%; float: left;">
+								<img src="/media/logo/logo.png" width="100%" height="100%">
+							</div>
+
+							<div style="width: 70%; float: left;">
+								<div style="text-align: left; line-height:23px; font-size:18px; color: black; padding-left:11px;">AC Control</div>
+
+							</div>
+						</div>
+					</a>
+
+				</div>
+				<div style="width: 50%; background-color: transparent; float: right; font-size: 12px; margin-top: 16px; margin-bottom: 11px; color: #777777; position: relative;">
+					<div style="width: 50%; background-color: transparent; float: right;">
+						{% if user.profile.user_type != 'UMUM' %}
+							<a href="{% url 'login' %}">
+								<button style="border-radius: 4px; border-color: #FFEE66; background-color: transparent; border: solid 1px black; font-size: 12px; color: black; font-family: 'Jura', sans-serif; font-weight: bold;">
+								Admin Login
+								</button>
+							</a>
+						{% endif %}
+					</div>
+					<!-- <a href="{% url 'login' %}" style="color:#999999; font-weight: bold;">
+						<div style="width: 20%; background-color: transparent; float: right; color: black;">Login</div>
+					</a> -->
+					
+				</div>
+			</div>
+		</div>
+	{% else %}
+		<div style="position: fixed; top: 0; left: 0; width: 100%; list-style-type: none; margin: 0; padding: 0; background: rgb(255, 255, 255, 0.8); z-index: 10; padding-left: 11px; padding-right: 11px; border-bottom: 1px solid; border-color:#F7F7F7">
+			<div style="text-align: right; margin: 0 auto; max-width: 600px;">
+				<div style="width: 50%; background-color: transparent; float: left !important; color: #555555; font-weight: bold; margin-top: 13px; margin-bottom: 8px; font-size: 13px;">
+					<a href="">
+						<div style="width:100%; color: #777777;">
+							<!-- <div style="width:30%; float: left;">
+								<img src="/media/logo/logo.png" width="100%" height="100%">
+							</div> -->
+
+							<div style="width: 100%; float: left;">
+								<div style="text-align: left; line-height:23px; font-size:18px; color: black; padding-left:11px;">AC Control-SUPER ADMIN</div>
+
+							</div>
+						</div>
+					</a>
+
+				</div>
+				<div style="width: 50%; background-color: transparent; float: left; font-size: 12px; margin-top: 16px; margin-bottom: 11px; justify-content: space-between; color: #777777;">
+					<div style="width: 30%; background-color: transparent; float: right; padding-right: 10px;">
+						<div onclick="open_profile_menu()">
+							{% if request.user.profile.image != 'profile/default.png' %}
+								<img src="{{ request.user.profile.image.url }}" width="25px" height="25px" style="border-radius:50%; cursor: pointer;">
+							{% else %}
+								<div style="width:25px; height:25px; line-height:22px; text-align: center; border: 1px solid gold; border-radius:50%; float: right;">
+									{{request.user.profile.full_name|get_initial}}
+								</div>
+							{% endif %}
+						</div>
+					</div>
+					
+					<div style="width: 70%; background-color: transparent; float: right;">
+						{% if user.profile.user_type != 'UMUM' %}
+							<a href="{% url 'ac_search' 'NONE' %}" style="color: black;">
+								<button style="border-radius: 4px; border-color: #FFEE66; background-color: transparent; border: solid 1px transparent; font-size: 12px; color: black; font-family: 'Jura', sans-serif; margin: -5px; font-weight: bold; line-height: 30px;">
+									<i class="fa fa-search" aria-hidden="true"></i>&nbsp; &nbsp; &nbsp; 
+								</button>
+							</a>
+							
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endif %}
+
+	<!-- Body -->
+	<div style="max-width: 600px; justify-content: center; margin: auto; padding-left: 0px; padding-right: 0px;">
+		<div style="margin-top: 70px; padding: 11px;">
+			<div style="width:100%; float: left;">
+				<div>Hi Super!</div>
+
+
+				<div>
+					<a href="{% url 'tambah_perusahaan' %}">Create Perusahaan</a>
+				</div>
+				<div>
+					<a href="{% url 'data_perusahaan' %}">Data Perusahaan</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</body>
+
+
+
+<script type="text/javascript">
+	function close_sambutan() {
+		document.getElementById( 'sambutan' ).style.display = 'none';
+	}
+	function close_profile_menu() {
+		document.getElementById( 'profile_menu' ).style.display = 'none';
+	}
+	function open_profile_menu() {
+		document.getElementById( 'profile_menu' ).style.display = 'block';
+	}
+</script>
+<script>
+  function to_search_page() {
+      var search_daerah = document.getElementById('search_daerah').value;
+      var search_query = document.getElementById('search_query').value;
+
+      if (! search_daerah) {
+      	search_daerah = 'NASIONAL';
+      };
+      if (! search_query) {
+      	search_query = 'NONE';
+      };
+      
+      window.location.href = window.location.origin.toString() + '/sepakbola/ranking/' + search_daerah +'/' + search_query +'/';
+      
+  };
+</script>
+<script type="text/javascript">
+	$(document).ready(function(){
+  $('.customer-logos').slick({
+    slidesToShow: 6,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 1000,
+    arrows: false,
+    dots: false,
+    pauseOnHover: false,
+    responsive: [{
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 4
+      }
+    }, {
+      breakpoint: 520,
+      settings: {
+        slidesToShow: 3
+      }
+    }]
+  });
+});
+</script>
+</html>
+
+

@@ -25,12 +25,13 @@ admin.site.site_title = 'AC-Control Site Admin'        # default: "Django site a
 
 
 urlpatterns = [
-    path('', include('home.urls')),
+    path('superadmin/', include('home.urls')),
     path('admin/', admin.site.urls),
     path('user/', include('users.urls')),
     path('teknisi/', include('teknisi.urls')),
     path('customers/', include('customers.urls')),
     path('search/', include('search.urls')),
+    path('', include('perusahaan.urls')),
 ]
 
 

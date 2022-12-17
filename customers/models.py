@@ -14,7 +14,6 @@ class DataCustomers(models.Model):
 	date_created = models.DateTimeField(default=timezone.now)
 	
 	nama_lengkap = models.CharField(max_length=50)
-	# alamat = models.CharField(max_length=200)
 	alamat = models.TextField(blank=True, null=True)
 
 	wa_number = models.CharField(max_length=12)
@@ -159,7 +158,7 @@ class TroubleShooting(models.Model):
 	
 	teknisi = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True, default=None)
 
-	image = models.ImageField(default='trouble_shooting/default.png', upload_to='riwayat_penanganan')
+	image = models.ImageField(default='trouble_shooting/default.png', upload_to='trouble_shooting')
 	
 	def __str__(self):
 		return f'{self.riwayat_penanganan.ac}{self.description}'[:20]
@@ -199,7 +198,7 @@ class DataBelanja(models.Model):
 	
 	teknisi = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True, default=None)
 
-	foto_kuitansi = models.ImageField(default='trouble_shooting/default.png', upload_to='riwayat_penanganan')
+	foto_kuitansi = models.ImageField(default='kuitansi/default.png', upload_to='kuitansi')
 	
 	def __str__(self):
 		return f'{self.riwayat_penanganan.ac}{self.nama_barang}'[:20]

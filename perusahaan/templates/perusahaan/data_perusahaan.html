@@ -106,6 +106,15 @@
   -o-animation: rotating 2s linear infinite;
   animation: rotating 2s linear infinite;
 }
+
+/**/
+.wordwrap { 
+   white-space: pre-wrap;      /* CSS3 */   
+   white-space: -moz-pre-wrap; /* Firefox */    
+   white-space: -pre-wrap;     /* Opera <7 */   
+   white-space: -o-pre-wrap;   /* Opera 7 */    
+   word-wrap: break-word;      /* IE */
+}
 </style>
 
 </head>
@@ -116,70 +125,107 @@
 		<div style="text-align: center; margin: 0 auto; max-width: 600px;">
 			<div style="width: 100%; background-color: transparent; float: left !important; color: #555555; font-weight: bold; margin-top: 13px; margin-bottom: 8px; font-size: 13px; left: 0px;">
 				<div style="width:100%">
-					<a href="{% url 'home' %}">
+					<a href="{% url 'superadmin' %}">
 						<div style="width:7%; float: left; text-align: left; padding-left:3px; color:#777777;">
 							<i class="fa fa-arrow-left" aria-hidden="true"></i>
 						</div>
 					</a>
 					<div style="width: 93%; float: left; color:#777777;">
-						<div style="text-align: left;">Data Teknisi</div>
-
-						
+						<div style="text-align: left;">Data Perusahaan</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div style="text-align: left; margin: 0 auto; max-width: 600px;">
-		<div style="width: 100%; background-color: transparent; float: left; !important; color: #555555; font-weight: bold; margin-top: 73px; margin-left: 11px; margin-right: 11px; margin-bottom: 8px; font-size: 13px; left: 0px;">
+	
 
-			{% if teknisi_i.user_type == 'ADMIN' %}
-				<div style="width: 100%; text-align: left; font-size:12px; height:24px;">
-					<a href="{% url 'create_teknisi' teknisi_i.perusahaan.slug %}" style="width:50%;">
-						<i class="fa fa-plus"></i>&nbsp;&nbsp;Tambah Teknisi
-					</a>
-				</div>
-			{% endif %}
 
-			<!--Table-->
-			<table class="table table-striped w-auto">
+	<!-- Biodata -->
+	<div style="max-width: 600px; justify-content: center; margin: auto; padding-left: 11px; padding-right: 11px;">
+		<div style="left: 0; width: 100%; list-style-type: none; margin: 0; padding: 0; background: white; z-index: 10; padding-left: 11px; padding-right: 11px; margin-top:50px; font-size: 12px;">
+			
+		</div>
+		
+		<br>
+		{% if user.profile.user_type != 'UMUM' %}
+			<div style="width: 100%; height: 30px; text-align: left; font-size:12px;">
+				<a href="{% url 'tambah_perusahaan' %}" style="width:50%;">
+					<i class="fa fa-plus"></i>&nbsp;&nbsp;Tambah Perusahaan
+				</a>
+			</div>
+		{% endif %}
 
-			  <!--Table head-->
+		<div style="width:100%; overflow:scroll; white-space:nowrap; display:inline-block;">
+			<table class="table table-striped w-auto" style="font-size:12px;">
 			  <thead>
 			    <tr>
 			      <th>No</th>
-			      <th>Username</th>
-			      <th>Password</th>
-			      <th>Date Created</th>
+			      <th>Nama Perusahaan</th>
+			      <th>Whatsapp</th>
+			      <th>Whatsapp Link</th>
 			      <th>Email</th>
-			      <th>Role</th>
-			      <th>Delet</th>
-
+			      <th>Alamat</th>
+			      <th>Moto</th>
+			      <th>Logo</th>
 			    </tr>
 			  </thead>
 			  
 			  <tbody>
-			  	{% for tek in teknisi %}
+			  	{% for pen in data %}
 				    <tr>
-				      <th scope="row">{{ forloop.counter }}</th>
-				      <td><a href="{% url 'profile' tek.user.profile.slug %}">{{tek.username}}</a></td>
-				      <td>{{tek.password}}</td>
-				      <td>{{tek.date_created|date:"d M Y"}}</td>
-				      <td>{{tek.user.email}}</td>
-				      <td><a href="{% url 'jadikan_admin' tek.slug %}">{{tek.user_type}}</a></td>
-				      <td><a href="{% url 'delet_teknisi' tek.slug %}" style="color: red;">Delet</a></td>
+				      <th scope="row">
+				      	<div style='white-space: pre-wrap;'>
+				      		{{ forloop.counter }}
+
+				      	</div>
+				      </th>
+				      <td>
+				      	<div style='white-space: pre-wrap;'>
+				      		<a href="{% url 'detail_perusahaan' pen.slug %}">{{pen.name}}
+				      		</a>
+				      	</div>
+				    	</td>
+				      <td>
+				      	<div style='white-space: pre-wrap;'>
+				      		{{pen.wa_number}}
+				      	</div>
+				    	</td>
+				    	<td>
+				      	<div style='white-space: pre-wrap;'>
+				      		{{pen.wa_link}}
+				      	</div>
+				    	</td>
+				      <td>
+				      	<div style='white-space: pre-wrap;'>
+				      		{{pen.email}}
+				      	</div>
+				    	</td>
+				      <td>
+				      	<div style='white-space: pre-wrap; min-width: 270px;'>
+				      		{{pen.alamat}}
+				      	</div>
+				    	</td>
+				      <td>
+				      	<div style='white-space: pre-wrap; min-width: 270px;'>
+				      		{{pen.motto}}
+				      	</div>
+				    	</td>
+				      <td>
+				      	<div style='white-space: pre-wrap;'>
+				      		<a href="{% url 'home_perusahaan' pen.slug %}">
+				      		<img src="{{ pen.logo.url }}" width="100%" height="auto" style="border-radius:3%;">
+				      		</a>
+				      	</div>
+				    	</td>
 				    </tr>
 				  {% endfor %}
 
 			  </tbody>
 			</table>
-
-			
 		</div>
-	</div>
 
-	
+	</div>
 
 
 </body>

@@ -3,5 +3,5 @@ from . import views as home_view
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    path('', home_view.home, name='home'),
+    path('', home_view.superadmin, name='superadmin'),
 ]

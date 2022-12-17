@@ -11,6 +11,11 @@ from django.shortcuts import get_object_or_404
 import json
 
 
-def home(request):
-	return render(request, 'home/home.html', {})
+
+@login_required
+def superadmin(request):
+	if (request.user.username == 'mujirin') and (request.user.profile.user_type == 'SUPERADMIN'):
+		return render(request, 'home/superadmin.html', {})
+	else:
+		return redirect('this_page_not_for_you')
 
