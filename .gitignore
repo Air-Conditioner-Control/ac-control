@@ -28,13 +28,13 @@ media/riwayat_penanganan/*
 media/trouble_shooting/*
 !media/trouble_shooting/default.png
 media/perusahaan/*
-!media/perusahaan/default.png
+!media/perusahaan/default.jpg
 media/pelanggan_kami/*
-!media/pelanggan_kami/default.png
+!media/pelanggan_kami/default.jpg
 media/layanan_kami/*
 !media/layanan_kami/default.png
 media/testimoni/*
-!media/testimoni/default.png
+!media/testimoni/default.jpg
 
 
 

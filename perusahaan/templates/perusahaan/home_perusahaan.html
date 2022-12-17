@@ -347,12 +347,12 @@
 					
 					<a href="">
 						<div style="width:100%; color: #777777;">
-							<div style="width:30%; float: left;">
-								<img src="/media/logo/logo.png" width="100%" height="100%">
+							<div style="width:15%; float: left;">
+								<img src="{{perusahaan.logo.url}}" width="33px" height="33px" >
 							</div>
 
-							<div style="width: 70%; float: left;">
-								<div style="text-align: left; line-height:23px; font-size:18px; color: black; padding-left:11px;">AC Control</div>
+							<div style="width: 85%; float: left;">
+								<div style="text-align: left; line-height:23px; font-size:18px; color: black; padding-left:16px;">{{perusahaan.name}}</div>
 
 							</div>
 						</div>
@@ -382,12 +382,12 @@
 				<div style="width: 50%; background-color: transparent; float: left !important; color: #555555; font-weight: bold; margin-top: 13px; margin-bottom: 8px; font-size: 13px;">
 					<a href="">
 						<div style="width:100%; color: #777777;">
-							<div style="width:30%; float: left;">
-								<img src="/media/logo/logo.png" width="100%" height="100%">
+							<div style="width:15%; float: left;">
+								<img src="{{perusahaan.logo.url}}" width="33px" height="33px">
 							</div>
 
-							<div style="width: 70%; float: left;">
-								<div style="text-align: left; line-height:23px; font-size:18px; color: black; padding-left:11px;">AC Control</div>
+							<div style="width: 85%; float: left;">
+								<div style="text-align: left; line-height:23px; font-size:14px; color: black; padding-left:16px;">{{perusahaan.name}}</div>
 
 							</div>
 						</div>
@@ -433,7 +433,7 @@
 		<div style="background: url('/media/assets/home.jpg'); background-size: cover;">
 			<div style="width:100%; float: left; height: 250px; ">
 				<div style="margin-left: 11px; margin-right: 11px; background-color: rgb(0,100,0,0.5); width:50%; position: relative; top:80%;-webkit-transform: translateY(-80%); -ms-transform: translateY(-80%); transform: translateY(-80%); color: white; padding: 5px;">
-					<div>Profesional, Berpengalaman, dan Dicintai Pelanggan
+					<div>{{perusahaan.motto}}
 					</div>
 				</div>
 			</div>
@@ -441,27 +441,30 @@
 		</div>
 
 		
-
-	
 		<!-- Client list -->
-		<div class="container" style="max-width:600px; padding:0px; margin:0px; margin-bottom: 30px;">
-			<div style="color: #555555; margin-top: 30px; margin-bottom: 10px; text-align: center;">
-				<div>PELANGGAN KAMI</div>
+		{% if customers %}
+			<div class="container" style="max-width:600px; padding:0px; margin:0px; margin-bottom: 30px;">
+				<div style="color: #555555; margin-top: 30px; margin-bottom: 10px; text-align: center;">
+					<div>PELANGGAN KAMI</div>
+				</div>
+			  <section class="customer-logos slider">
+			  	{% for cust in customers %}
+			  		{% if cust.image.url != '/media/customer/default.jpg'%}
+					    <div class="slide">
+					    	<img src="{{cust.image.url}}">
+					    </div>
+					{% else %}
+						<div class="slide" style="padding-top: 30px; min-height:60px;">
+					    	{{cust.nama_lengkap}}
+					    </div>
+					{% endif %}
+
+				{% endfor %}
+			  </section>
 			</div>
-		  <section class="customer-logos slider">
-		    <div class="slide"><img src="/media/assets/c1.png"></div>
-		    <div class="slide"><img src="/media/assets/c2.png"></div>
-		    <div class="slide"><img src="/media/assets/c3.png"></div>
-		    <div class="slide"><img src="/media/assets/c4.png"></div>
-		    <div class="slide"><img src="/media/assets/c5.png"></div>
-		    <!-- <div class="slide"><img src="/media/assets/c6.png"></div> -->
-		    <div class="slide"><img src="/media/assets/c7.png"></div>
-		    <div class="slide"><img src="/media/assets/c8.png"></div>
-		    <div class="slide"><img src="/media/assets/c9.png"></div>
-		    <div class="slide"><img src="/media/assets/c10.png"></div>
-		    <!-- <div class="slide"><img src="/media/logo/logo.png"></div> -->
-		  </section>
-		</div>
+		{% endif %}
+
+
 
 		<!-- Our services -->
 
@@ -469,22 +472,23 @@
 			<div>LAYANAN KAMI</div>
 		</div>
 
-
-		<div style="width: 100%; padding:11px; margin: 0px; background-color: transparent; height: 250px;margin-top: 7px; border-radius:1px; -moz-box-shadow: 0 0 3px #ccc; -webkit-box-shadow: 0 0 3px #ccc; box-shadow: 0 0 3px #ccc;">
-			<div style="color: white;">
-				<div style="width:80%; height: 210px; float: left;">
-					<img src="/media/assets/ac1.jpg" width="100%" height="100%" style="border-radius: 5px; -moz-box-shadow: 0 0 3px #ccc; -webkit-box-shadow: 0 0 3px #ccc; box-shadow: 0 0 3px #ccc;">
-				</div>
-				<div style="width:40%; height: 100%; float: left; padding: 0px 11px 0px 11px; color: black; margin-left: -20%; background-color: rgb(255, 255, 255, 0.9); margin-top:40px; border-radius:7px; border: solid 1px black;">
-					<div style="font-size: 18px; font-weight: bold;">GANTI SPAREPART
+		{% for lay in layanan %}
+			<div style="width: 100%; padding:11px; margin: 0px; background-color: transparent; height: 250px;margin-top: 7px; border-radius:1px; -moz-box-shadow: 0 0 3px #ccc; -webkit-box-shadow: 0 0 3px #ccc; box-shadow: 0 0 3px #ccc;">
+				<div style="color: white;">
+					<div style="width:80%; height: 210px; float: left;">
+						<img src="{{lay.image.url}}" width="100%" height="100%" style="border-radius: 5px; -moz-box-shadow: 0 0 3px #ccc; -webkit-box-shadow: 0 0 3px #ccc; box-shadow: 0 0 3px #ccc;">
 					</div>
-					<div style="font-size: 12px; font-weight: bold;">Kami pakar servis semua jenis AC mulai dari Panasonic, LG, Sanyo, dan lainnya.
+					<div style="width:40%; height: 100%; float: left; padding: 0px 11px 0px 11px; color: black; margin-left: -20%; background-color: rgb(255, 255, 255, 0.9); margin-top:40px; border-radius:7px; border: solid 1px black;">
+						<div style="font-size: 18px; font-weight: bold;">{{lay.name}}
+						</div>
+						<div style="font-size: 12px; font-weight: bold;">{{lay.description}}
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		{% endfor %}
 
-		<div style="width: 100%; padding:11px; margin: 0px; background-color: transparent; height: 250px;margin-top: 7px; border-radius:1px; -moz-box-shadow: 0 0 3px #ccc; -webkit-box-shadow: 0 0 3px #ccc; box-shadow: 0 0 3px #ccc;">
+		<!-- <div style="width: 100%; padding:11px; margin: 0px; background-color: transparent; height: 250px;margin-top: 7px; border-radius:1px; -moz-box-shadow: 0 0 3px #ccc; -webkit-box-shadow: 0 0 3px #ccc; box-shadow: 0 0 3px #ccc;">
 			<div style="color: white;">
 				<div style="width:80%; height: 210px; float: left;">
 					<img src="/media/assets/ac2.jpg" width="100%" height="100%" style="border-radius: 5px; -moz-box-shadow: 0 0 3px #ccc; -webkit-box-shadow: 0 0 3px #ccc; box-shadow: 0 0 3px #ccc;">
@@ -511,7 +515,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 
 
 		
@@ -532,26 +536,70 @@
             <div class="card card-main border-0 text-center">
               <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
-                    <li data-target="#carouselExampleIndicators" data-slide-to="0"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="1" class="active"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                	{% for tes in testimoni %}
+                		{% if forloop.counter == 2 %}
+                    		<li data-target="#carouselExampleIndicators" data-slide-to="{{ forloop.counter }}" class="active"></li>
+                		{% else %}
+                			<li data-target="#carouselExampleIndicators" data-slide-to="{{ forloop.counter }}"></li>
+                		{% endif %}
+                    {% endfor %}
+                    <!-- <li data-target="#carouselExampleIndicators" data-slide-to="1" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li> -->
+
                 </ol>
+
+
                 <div class="carousel-inner">
-                <div class="carousel-item">
+                {% for tes in testimoni %}
+                	{% if forloop.counter == 2 %}
+	                	<div class="carousel-item active">
+		                  <div class="card border-0 card-0">
+		                    <div class="card profile py-3 px-4">
+		                      <div class="text-center">
+		                        <img src="{{tes.image.url}}" class="img-fluid profile-pic">
+		                      </div>
+		                      <h6 class="mb-0 mt-2">{{tes.name}}</h6>
+		                      <small style="width: 80px;">{{tes.jabatan}}</small>
+		                    </div>
+		                    <img class="img-fluid open-quotes" src="https://i.imgur.com/Hp91vdT.png" width="20" height="20">
+		                    <p class="content mb-0" style="padding-left: 70px; min-height: 200px;">{{tes.testimoni}}</p>
+		                    <img class="img-fluid close-quotes ml-auto" src="https://i.imgur.com/iPcHyJK.png" width="20" height="20">
+		                  </div>
+		                </div>
+                	{% else %}
+		                <div class="carousel-item">
+		                  <div class="card border-0 card-0">
+		                    <div class="card profile py-3 px-4">
+		                      <div class="text-center">
+		                        <img src="{{tes.image.url}}" class="img-fluid profile-pic">
+		                      </div>
+		                      <h6 class="mb-0 mt-2" style="font-weight: bold;">{{tes.name}}</h6>
+		                      <small style="width: 80px; text-align: center;">{{tes.jabatan}}</small>
+		                    </div>
+		                    <img class="img-fluid open-quotes" src="https://i.imgur.com/Hp91vdT.png" width="20" height="20">
+		                    <p class="content mb-0" style="padding-left: 70px; min-height: 200px;">{{tes.testimoni}}</p>
+		                    <img class="img-fluid close-quotes ml-auto" src="https://i.imgur.com/iPcHyJK.png" width="20" height="20">
+		                  </div>
+		                </div>
+		            {% endif %}
+                {% endfor %}
+
+                <!-- <div class="carousel-item active">
                   <div class="card border-0 card-0">
                     <div class="card profile py-3 px-4">
                       <div class="text-center">
-                        <img src="https://i.imgur.com/gazoShk.jpg" class="img-fluid profile-pic">
+                        <img src="https://i.imgur.com/oW8Wpwi.jpg" class="img-fluid profile-pic">
                       </div>
-                      <h6 class="mb-0 mt-2" style="font-weight: bold;">Hanung Manggara</h6>
-                      <small style="width: 80px; text-align: center;">Manager Operasional Gajdah Maju</small>
+                      <h6 class="mb-0 mt-2">{{tes.name}}</h6>
+                      <small style="width: 80px;">{{tes.jabatan}}</small>
                     </div>
                     <img class="img-fluid open-quotes" src="https://i.imgur.com/Hp91vdT.png" width="20" height="20">
-                    <p class="content mb-0" style="padding-left: 70px; min-height: 200px;">Servisnya bagus, harga transparan, respon cepat, pengerjaan juga cepat, profesional pokoknya.</p>
+                    <p class="content mb-0" style="padding-left: 70px; min-height: 200px;">{{tes.testimoni}}</p>
                     <img class="img-fluid close-quotes ml-auto" src="https://i.imgur.com/iPcHyJK.png" width="20" height="20">
                   </div>
-                </div>
-                <div class="carousel-item active">
+                </div> -->
+
+                <!-- <div class="carousel-item active">
                   <div class="card border-0 card-0">
                     <div class="card profile py-3 px-4">
                       <div class="text-center">
@@ -564,8 +612,8 @@
                     <p class="content mb-0" style="padding-left: 70px; min-height: 200px;">Servisnya bagus, harga transparan, respon cepat, pengerjaan juga cepat, profesional pokoknya.</p>
                     <img class="img-fluid close-quotes ml-auto" src="https://i.imgur.com/iPcHyJK.png" width="20" height="20">
                   </div>
-                </div>
-                <div class="carousel-item">
+                </div> -->
+                <!-- <div class="carousel-item">
                   <div class="card border-0 card-0">
                     <div class="card profile py-3 px-4">
                       <div class="text-center">
@@ -578,7 +626,7 @@
                     <p class="content mb-0" style="padding-left: 70px; min-height: 200px;">Servisnya bagus, harga transparan, respon cepat, pengerjaan juga cepat, profesional pokoknya.</p>
                     <img class="img-fluid close-quotes ml-auto" src="https://i.imgur.com/iPcHyJK.png" width="20" height="20">
                   </div>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
@@ -601,6 +649,9 @@
 				<div style="width: 80%; background-color: black; margin: 0px 11px 11px 11px; padding: 17px 17px 17px 17px; border-radius:0px; line-height:1.2em; float: left;">
 					<a href="{% url 'profile' user.profile.slug %}">
 						<button style="width:100%; height:33px; border-radius:1px; font-size:16px; color: white; background-color: transparent; border: 1px solid transparent; margin-bottom: 3px; text-align: left; padding-right:11px;">PROFILE</button>
+					</a>
+					<a href="{% url 'detail_perusahaan' teknisi.perusahaan.slug %}">
+					<button style="width:100%; height:33px; border-radius:1px; font-size:16px; color: white; background-color: transparent; border: 1px solid transparent; margin-bottom: 3px; text-align: left;padding-right:11px;">{{teknisi.perusahaan|upper}}</button>
 					</a>
 					{% if teknisi.user_type == 'ADMIN' or teknisi.user_type == 'SUPERADMIN' %}
 						<hr>
@@ -628,10 +679,6 @@
 
 					{% endif %}
 					{% if teknisi.user_type == 'SUPERADMIN' %}
-						<a href="{% url 'detail_perusahaan' teknisi.perusahaan.slug %}">
-						<hr>
-						<button style="width:100%; height:33px; border-radius:1px; font-size:16px; color: white; background-color: transparent; border: 1px solid transparent; margin-bottom: 3px; text-align: left;padding-right:11px;">{{teknisi.perusahaan}}</button>
-						</a>
 						<a href="{% url 'tambah_perusahaan' %}">
 						<button style="width:100%; height:33px; border-radius:1px; font-size:16px; color: white; background-color: transparent; border: 1px solid transparent; margin-bottom: 3px; text-align: left;padding-right:11px;">TAMBAH PERUSAHAAN</button>
 						</a>
@@ -651,11 +698,10 @@
 	{% endif %}
 
 
-
 	<!-- Message Navigation -->
 	<div style="position: fixed; bottom: 0; right: 11px; width: 100%; list-style-type: none; margin: 0; padding: 0; background: transparent; z-index: 10; padding-left: 11px; padding-right: 11px; border-bottom: 1px solid; border-color:#F7F7F7">
 		<div style="text-align: right; margin: 0 auto; max-width: 600px;">
-			<a href="https://wa.me/6285602186771">
+			<a href="{{perusahaan.wa_link}}">
 				<div style="margin-bottom:30px; color: lightgreen; font-weight: bold;">
 					<div style="font-size:18px;"><span style="text-shadow: 1px 1px 1px #000000;">Customer Service</span>
 						<i class="fab fa-whatsapp" style="font-size:33px"></i></div>
@@ -676,13 +722,13 @@
 				<h5 class="headin5_amrc col_white_amrc pt2" style="font-weight: bold;">KONTAK KAMI
 				</h5>
 				<hr>
-				<p class="mb10">Jl. Pramuka Raya, No. 43B, Kap. 123A, Jakarta Selatan, Indonesia</p>
+				<p class="mb10">{{perusahaan.alamat}}</p>
 				<p>
-					<i class="fa fa-phone"></i>&nbsp;&nbsp;+6285602186771
+					<i class="fa fa-phone"></i>&nbsp;&nbsp;{{perusahaan.wa_number}}
 				</p>
 				<p>
 					<i class="fa fa fa-envelope">
-					</i>&nbsp;&nbsp;thomasmujirin@gmail.com
+					</i>&nbsp;&nbsp;{{perusahaan.email}}
 				</p>
 			</div>
 		</div>

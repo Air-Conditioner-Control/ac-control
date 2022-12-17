@@ -99,7 +99,7 @@ class Perusahaan(models.Model):
 
 
 class PelangganKami(models.Model):
-	"""Untuk admin dan teknisi"""
+	"""[not used]Untuk admin dan teknisi"""
 	uid = models.UUIDField(default=uuid.uuid4, editable=False)
 	slug = models.SlugField(unique=True, null=False, max_length = 255)
 	date_created = models.DateTimeField(default=timezone.now)
@@ -146,7 +146,7 @@ class LayananKami(models.Model):
 	date_created = models.DateTimeField(default=timezone.now)
 	
 	perusahaan = models.ForeignKey(Perusahaan, on_delete=models.CASCADE)
-	image = models.ImageField(default='layanan_kami/default.jpg', upload_to='layanan_kami')
+	image = models.ImageField(default='layanan_kami/default.png', upload_to='layanan_kami')
 	name = models.CharField(max_length=200)
 	description = models.TextField(blank=True, null=True)
 	

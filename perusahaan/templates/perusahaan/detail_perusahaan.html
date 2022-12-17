@@ -150,7 +150,9 @@
 				<div style="margin-bottom: 5px; font-size: 16px; width: 100%;">
 					
 					<div style="float: left;">
+						<a href="{% url 'home_perusahaan' perusahaan.slug %}">
 						<img src="{{ perusahaan.logo.url }}" width="30px" height="30px" style="border-radius:50%;">
+						</a>
 					</div>
 					<div style="float: left;">
 						&nbsp;&nbsp;{{ perusahaan.name }}
@@ -214,7 +216,7 @@
 			</div>
 			
 			<br>
-			{% if user.profile.user_type == 'SUPERADMIN' %}
+			{% if teknisi_i.user_type == 'ADMIN' or teknisi_i.user_type == 'SUPERADMIN'  %}
 				<div style="width: 100%; height: 50px; text-align: left; font-size:12px;">
 					<a href="{% url 'edit_perusahaan' perusahaan.slug %}" style="width:50%;">
 						<i class="fa fa-edit"></i>&nbsp;&nbsp;Edit Data Perusahaan
@@ -228,7 +230,7 @@
 	<div style="text-align: left; margin: 0 auto; max-width: 600px;">
 		<div style="width: 100%; background-color: transparent; float: left; !important; color: #555555; font-weight: bold; margin-top: 7px; margin-left: 11px; margin-right: 11px; margin-bottom: 8px; font-size: 13px; left: 0px;">
 
-			{% if user.profile.user_type == 'SUPERADMIN' %}
+			{% if teknisi_i.user_type == 'ADMIN' or teknisi_i.user_type == 'SUPERADMIN'  %}
 				<div style="width: 100%; text-align: left; font-size:12px; height:24px;">
 					<a href="{% url 'create_teknisi' perusahaan.slug %}" style="width:50%;">
 						<i class="fa fa-plus"></i>&nbsp;&nbsp;Tambah Teknisi
@@ -270,6 +272,135 @@
 			
 		</div>
 	</div>
+
+
+	<!-- Layanan -->
+	<div style="text-align: left; margin: 0 auto; max-width: 600px;">
+		<div style="width: 100%; background-color: transparent; float: left; !important; color: #555555; font-weight: bold; margin-top: 7px; margin-left: 11px; margin-right: 11px; margin-bottom: 8px; font-size: 13px; left: 0px;">
+
+			{% if teknisi_i.user_type == 'ADMIN' or teknisi_i.user_type == 'SUPERADMIN'  %}
+				<div style="width: 100%; text-align: left; font-size:12px; height:24px;">
+					<a href="{% url 'tambah_layanan' perusahaan.slug %}" style="width:50%;">
+						<i class="fa fa-plus"></i>&nbsp;&nbsp;Tambah Layanan
+					</a>
+				</div>
+			{% endif %}
+
+			<!--Table-->
+			<table class="table table-striped w-auto">
+			  <thead>
+			    <tr>
+			      <th>No</th>
+			      <th>Name</th>
+			      <th>Deskripsi</th>
+			      <th>Foto</th>
+			      <th>Edit</th>
+			      <th>Delet</th>
+
+			    </tr>
+			  </thead>
+			  
+			  <tbody>
+			  	{% for tek in layanan %}
+				    <tr>
+				      <th scope="row">{{ forloop.counter }}
+				      </th>
+				      <td>
+				      	<a href="">{{tek.name}}
+				      	</a></td>
+				      <td>
+				      	{{tek.description}}
+				      </td>
+				      <td>
+				      	<img src="{{ tek.image.url }}" width="70px" height="70px">
+				    	</td>
+				      <td>
+				      	{% if teknisi_i.user_type == 'ADMIN' or teknisi_i.user_type == 'SUPERADMIN'  %}
+					      	<a href="{% url 'edit_layanan' tek.slug %}">Edit
+				      		</a>
+				      	{% endif %}
+				      </td>
+				      <td>
+				      	{% if teknisi_i.user_type == 'ADMIN' or teknisi_i.user_type == 'SUPERADMIN'  %}
+					      	<a href="{% url 'delet_layanan' tek.slug %}" style="color: red;">	Delet
+					      	</a>
+					      {% endif %}
+				      </td>
+				    </tr>
+				  {% endfor %}
+
+			  </tbody>
+			</table>
+
+			
+		</div>
+	</div>
+
+
+	<!-- Testimoni -->
+	<div style="text-align: left; margin: 0 auto; max-width: 600px;">
+		<div style="width: 100%; background-color: transparent; float: left; !important; color: #555555; font-weight: bold; margin-top: 7px; margin-left: 11px; margin-right: 11px; margin-bottom: 8px; font-size: 13px; left: 0px;">
+
+			{% if teknisi_i.user_type == 'ADMIN' or teknisi_i.user_type == 'SUPERADMIN'  %}
+				<div style="width: 100%; text-align: left; font-size:12px; height:24px;">
+					<a href="{% url 'tambah_testimoni' perusahaan.slug %}" style="width:50%;">
+						<i class="fa fa-plus"></i>&nbsp;&nbsp;Tambah Testimoni
+					</a>
+				</div>
+			{% endif %}
+
+			<!--Table-->
+			<table class="table table-striped w-auto">
+			  <thead>
+			    <tr>
+			      <th>No</th>
+			      <th>Name</th>
+			      <th>Jabatan</th>
+			      <th>Testimoni</th>
+			      <th>Foto</th>
+			      <th>Edit</th>
+			      <th>Delet</th>
+
+			    </tr>
+			  </thead>
+			  
+			  <tbody>
+			  	{% for tek in testimoni %}
+				    <tr>
+				      <th scope="row">{{ forloop.counter }}
+				      </th>
+				      <td>
+				      	<a href="">{{tek.name}}
+				      	</a></td>
+				      <td>
+				      	{{tek.jabatan}}
+				      </td>
+				      <td>
+				      	{{tek.testimoni}}
+				      </td>
+				      <td>
+				      	<img src="{{ tek.image.url }}" width="70px" height="70px">
+				    	</td>
+				      <td>
+				      	{% if teknisi_i.user_type == 'ADMIN' or teknisi_i.user_type == 'SUPERADMIN'  %}
+					      	<a href="{% url 'edit_testimoni' tek.slug %}">Edit
+					      	</a>
+					      {% endif %}
+				      </td>
+				      <td>
+				      	{% if teknisi_i.user_type == 'ADMIN' or teknisi_i.user_type == 'SUPERADMIN'  %}
+					      	<a href="{% url 'delet_testimoni' tek.slug %}" style="color: red;">	Delet
+					      	</a>
+					      {% endif %}
+				      </td>
+				    </tr>
+				  {% endfor %}
+
+			  </tbody>
+			</table>
+		</div>
+	</div>
+
 
 </body>
 

@@ -17,6 +17,8 @@ from .forms import *
 from .models import *
 from teknisi.models import DataTeknisi
 from django.shortcuts import get_object_or_404
+from django.db.models import Q
+from customers.models import DataCustomers
 
 
 def home(request):
@@ -39,9 +41,17 @@ def home(request):
 def home_perusahaan(request, slug):
 	perusahaan = get_object_or_404(Perusahaan, slug=slug)
 	teknisi = get_object_or_404(DataTeknisi, user=request.user, perusahaan=perusahaan)
+	customers = DataCustomers.objects.filter(perusahaan=perusahaan)
+	
+	layanan = LayananKami.objects.filter(perusahaan=perusahaan)
+	testimoni = Testimoni.objects.filter(perusahaan=perusahaan)
+
 	context = {
 		'perusahaan': perusahaan,
-		'teknisi': teknisi
+		'teknisi': teknisi,
+		'customers': customers,
+		'layanan': layanan,
+		'testimoni': testimoni
 	}
 	return render(request, 'perusahaan/home_perusahaan.html', context)
 
@@ -101,13 +111,123 @@ def data_perusahaan(request):
 @login_required
 def detail_perusahaan(request, slug):
 	perusahaan = get_object_or_404(Perusahaan, slug=slug)
-	teknisi = reversed(DataTeknisi.objects.filter(perusahaan=perusahaan))
-	
-	context = {
-		'perusahaan': perusahaan,
-		'teknisi': teknisi
-	}
-	return render(request, 'perusahaan/detail_perusahaan.html', context)
+	teknisi_i = get_object_or_404(DataTeknisi, perusahaan=perusahaan, user=request.user)
 
+	if teknisi_i.user_type in ['SUPERADMIN', 'ADMIN']:
+
+		layanan = LayananKami.objects.filter(perusahaan=perusahaan)
+		testimoni = Testimoni.objects.filter(perusahaan=perusahaan)
+
+		if teknisi_i.user_type != 'SUPERADMIN':
+			teknisi = reversed(DataTeknisi.objects.filter(~Q(user_type='SUPERADMIN'), perusahaan=perusahaan))
+		else:
+			teknisi = reversed(DataTeknisi.objects.filter(perusahaan=perusahaan))
+
+		context = {
+			'perusahaan': perusahaan,
+			'teknisi': teknisi,
+			'teknisi_i': teknisi_i,
+			'layanan': layanan,
+			'testimoni': testimoni
+		}
+		return render(request, 'perusahaan/detail_perusahaan.html', context)
+	else:
+		return redirect('this_page_not_for_you')
+
+# XXXXXXXXXXXXXXX
+@login_required
+def tambah_layanan(request, slug):
+	perusahaan = get_object_or_404(Perusahaan, slug=slug)
+
+	if request.method == 'POST':
+		form = LayananKamiForm(request.POST, request.FILES)
+		if form.is_valid():
+			obj = form.save(commit=False)
+			obj.perusahaan = perusahaan
+			obj.save()
+
+			return redirect('detail_perusahaan', slug=perusahaan.slug)
+		else:
+			return render(request, 'perusahaan/tambah_layanan.html', {'form': form, 'perusahaan': obj})		
+	else:
+		form = LayananKamiForm()
+	return render(request, 'perusahaan/tambah_layanan.html', {'form': form})
+
+
+@login_required
+def edit_layanan(request, slug):
+	instance = get_object_or_404(LayananKami, slug=slug)
+	if request.method == 'POST':
+		form = LayananKamiForm(request.POST, request.FILES, instance=instance)
+		if form.is_valid():
+			form.save()
+			
+			return redirect('detail_perusahaan', slug=instance.perusahaan.slug)
+		else:
+			return render(request, 'perusahaan/edit_layanan.html', {'form': form, 'perusahaan': instance})		
+	else:
+		form = LayananKamiForm(instance=instance)
+	return render(request, 'perusahaan/edit_layanan.html', {'form': form, 'perusahaan': instance})
+
+
+@login_required
+def delet_layanan(request, slug):
+	layanan = get_object_or_404(LayananKami, slug=slug)
+	perusahaan = layanan.perusahaan
+	teknisi_i = get_object_or_404(DataTeknisi, perusahaan=perusahaan, user=request.user)
+
+	if teknisi_i.user_type in ['ADMIN', 'SUPERADMIN']:
+		layanan.delete()
+		return redirect('detail_perusahaan', slug=perusahaan.slug)
+	else:
+		return redirect('this_page_not_for_you')
+
+
+@login_required
+def tambah_testimoni(request,slug):
+	perusahaan = get_object_or_404(Perusahaan, slug=slug)
+
+	if request.method == 'POST':
+		form = TestimoniForm(request.POST, request.FILES)
+		if form.is_valid():
+			obj = form.save(commit=False)
+			obj.perusahaan = perusahaan
+			obj.save()
+
+			return redirect('detail_perusahaan', slug=perusahaan.slug)
+		else:
+			return render(request, 'perusahaan/tambah_testimoni.html', {'form': form, 'perusahaan': obj})		
+	else:
+		form = TestimoniForm()
+	return render(request, 'perusahaan/tambah_testimoni.html', {'form': form})
+
+
+@login_required
+def edit_testimoni(request, slug):
+	instance = get_object_or_404(Testimoni, slug=slug)
+	if request.method == 'POST':
+		form = TestimoniForm(request.POST, request.FILES, instance=instance)
+		if form.is_valid():
+			form.save()
+			
+			return redirect('detail_perusahaan', slug=instance.perusahaan.slug)
+		else:
+			return render(request, 'perusahaan/edit_testimoni.html', {'form': form, 'perusahaan': instance})		
+	else:
+		form = TestimoniForm(instance=instance)
+	return render(request, 'perusahaan/edit_testimoni.html', {'form': form, 'perusahaan': instance})
+
+
+@login_required
+def delet_testimoni(request, slug):
+	testimoni = get_object_or_404(Testimoni, slug=slug)
+	perusahaan = testimoni.perusahaan
+	teknisi_i = get_object_or_404(DataTeknisi, perusahaan=perusahaan, user=request.user)
+
+	if teknisi_i.user_type in ['ADMIN', 'SUPERADMIN']:
+		testimoni.delete()
+		return redirect('detail_perusahaan', slug=perusahaan.slug)
+	else:
+		return redirect('this_page_not_for_you')
 
 
