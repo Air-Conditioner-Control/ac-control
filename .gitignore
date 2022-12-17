@@ -3,6 +3,7 @@
 setingan_rahasia2.py
 setingan_rahasia.py
 ac_control/settings.py
+ac_control/settings_prod.py
 config_dev.json
 documentations/deployment_corymes.md
 
@@ -17,7 +18,7 @@ media/logo/*
 !/media/logo/logo.ico
 
 media/profile/*
-!media/profile/default.png
+!media/profile/default.jpg
 media/assets/*
 media/ac/*
 !media/ac/default.png
@@ -35,6 +36,7 @@ media/layanan_kami/*
 !media/layanan_kami/default.png
 media/testimoni/*
 !media/testimoni/default.jpg
+media/kuitansi/*
 
 
 
