@@ -172,9 +172,12 @@ def tambah_riwayat_penanganan(request, slug):
 
 
 
-def data_ac(request):
+def data_ac(request, slug):
+	perusahaan = get_object_or_404(Perusahaan, slug=slug)
+	customer = DataCustomers.objects.filter(perusahaan=perusahaan)
 	
-	all_ac = list(reversed(DataAC.objects.all().order_by('date_created')))
+	all_ac = list(reversed(DataAC.objects.filter(customer__in=customer).order_by('date_created')))
+	# all_ac = list(reversed(DataAC.objects.all().order_by('date_created')))
 	context = {
 		'all_ac': all_ac,
 		'query': 'NONE'

@@ -181,6 +181,7 @@
 				    <tr>
 				      <th>No</th>
 				      <th>ID</th>
+				      <th>Label Perusahaan</th>
 				      <th>Merk</th>
 				      <!-- <th>Kapasitas</th> -->
 				      <th>Ruangan</th>
@@ -191,7 +192,8 @@
 				  	{% for ac in data_ac %}
 					    <tr>
 					      <th scope="row">{{ forloop.counter }}</th>
-					      <td><a href="{% url 'detail_ac' ac.slug %}">{{ac.ac_id}} | {{ac.label}}</a></td>
+					      <td><a href="{% url 'detail_ac' ac.slug %}">{{ac.ac_id}}</a></td>
+					      <td><a href="{% url 'detail_ac' ac.slug %}">{{ac.label}}</a></td>
 					      <td><div style='width: 100%; white-space: pre-wrap;'>{{ac.merk}} | {{ac.tipe}}</div></td>
 					      <!-- <td>{{ac.kapasitas}}</td> -->
 					      <td>{{ac.ruangan}}</td>

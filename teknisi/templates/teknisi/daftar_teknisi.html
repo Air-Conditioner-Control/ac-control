@@ -135,7 +135,7 @@
 	<div style="text-align: left; margin: 0 auto; max-width: 600px;">
 		<div style="width: 100%; background-color: transparent; float: left; !important; color: #555555; font-weight: bold; margin-top: 73px; margin-left: 11px; margin-right: 11px; margin-bottom: 8px; font-size: 13px; left: 0px;">
 
-			{% if teknisi_i.user_type == 'ADMIN' %}
+			{% if teknisi_i.user_type == 'ADMIN' or teknisi_i.user_type == 'SUPERADMIN' %}
 				<div style="width: 100%; text-align: left; font-size:12px; height:24px;">
 					<a href="{% url 'create_teknisi' teknisi_i.perusahaan.slug %}" style="width:50%;">
 						<i class="fa fa-plus"></i>&nbsp;&nbsp;Tambah Teknisi
