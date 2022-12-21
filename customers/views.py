@@ -274,6 +274,23 @@ def data_belanja(request, slug):
 	return render(request, 'customers/data_belanja.html', context)
 
 
+@login_required
+def all_data_belanja(request, slug):
+	perusahaan = get_object_or_404(Perusahaan, slug=slug)
+	customers = DataCustomers.objects.filter(perusahaan=perusahaan)
+	all_ac = DataAC.objects.filter(customer__in=customers)
+
+	riwayat_penanganan = RiwayatPenanganan.objects.filter(ac__in=all_ac)
+	data = list(reversed(DataBelanja.objects.filter(riwayat_penanganan__in=riwayat_penanganan).order_by('date_created')))
+	teknisi = get_object_or_404(DataTeknisi, perusahaan=perusahaan, user=request.user)
+	context = {
+		'data': data,
+		'penanganan': riwayat_penanganan,
+		'teknisi': teknisi,
+		'perusahaan': perusahaan
+	}
+	return render(request, 'customers/all_data_belanja.html', context)
+	
 
 
 

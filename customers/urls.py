@@ -18,6 +18,7 @@ urlpatterns = [
     path('tambah_data_belanja/<slug:slug>/', customer_view.tambah_data_belanja, name='tambah_data_belanja'),
     path('edit_data_belanja/<slug:slug>/', customer_view.edit_data_belanja, name='edit_data_belanja'),
     path('data_belanja/<slug:slug>/', customer_view.data_belanja, name='data_belanja'),
+    path('all_data_belanja/<slug:slug>/', customer_view.all_data_belanja, name='all_data_belanja'),
     path('tambah_data_trouble_shooting/<slug:slug>/', customer_view.tambah_data_trouble_shooting, name='tambah_data_trouble_shooting'),
     path('edit_data_trouble_shooting/<slug:slug>/', customer_view.edit_data_trouble_shooting, name='edit_data_trouble_shooting'),
     path('data_trouble_shooting/<slug:slug>/', customer_view.data_trouble_shooting, name='data_trouble_shooting'),
