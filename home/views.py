@@ -15,7 +15,10 @@ import json
 @login_required
 def superadmin(request):
 	if (request.user.username == 'mujirin') and (request.user.profile.user_type == 'SUPERADMIN'):
-		return render(request, 'home/superadmin.html', {})
+		context = {
+
+		}
+		return render(request, 'home/superadmin.html', context)
 	else:
 		return redirect('this_page_not_for_you')
 

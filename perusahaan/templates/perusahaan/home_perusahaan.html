@@ -412,7 +412,7 @@
 					
 					<div style="width: 70%; background-color: transparent; float: right;">
 						{% if teknisi.user_type != 'UMUM' %}
-							<a href="{% url 'ac_search' 'NONE' %}" style="color: black;">
+							<a href="{% url 'ac_search' 'NONE' perusahaan.slug %}" style="color: black;">
 								<button style="border-radius: 4px; border-color: #FFEE66; background-color: transparent; border: solid 1px transparent; font-size: 12px; color: black; font-family: 'Jura', sans-serif; margin: -5px; font-weight: bold; line-height: 30px;">
 									<i class="fa fa-search" aria-hidden="true"></i>&nbsp; &nbsp; &nbsp; 
 								</button>

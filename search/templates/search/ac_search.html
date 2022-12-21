@@ -209,7 +209,7 @@
   function to_search_page() {
       var search_query = document.getElementById('search_query').value;
       
-      window.location.href = window.location.origin.toString() + '/search/ac_search/' +  search_query +'/';
+      window.location.href = window.location.origin.toString() + '/search/ac_search/' +  search_query +'/' + '{{perusahaan.slug}}' + '/';
       
   };
 </script>

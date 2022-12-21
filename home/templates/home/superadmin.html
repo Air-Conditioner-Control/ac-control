@@ -343,7 +343,7 @@
 			<div style="text-align: center; margin: 0 auto; max-width: 600px; background-color: transparent;">
 				<div style="width: 50%; background-color: transparent; float: left !important; color: #555555; font-weight: bold; margin-top: 13px; margin-bottom: 8px; font-size: 13px;">
 					
-					<a href="">
+					<a href="{% url 'data_perusahaan' %}">
 						<div style="width:100%; color: #777777;">
 							<div style="width:30%; float: left;">
 								<img src="/media/logo/logo.png" width="100%" height="100%">
@@ -406,14 +406,14 @@
 					</div>
 					
 					<div style="width: 70%; background-color: transparent; float: right;">
-						{% if user.profile.user_type != 'UMUM' %}
-							<a href="{% url 'ac_search' 'NONE' %}" style="color: black;">
+						<!-- {% if user.profile.user_type != 'UMUM' %}
+							<a href="" style="color: black;">
 								<button style="border-radius: 4px; border-color: #FFEE66; background-color: transparent; border: solid 1px transparent; font-size: 12px; color: black; font-family: 'Jura', sans-serif; margin: -5px; font-weight: bold; line-height: 30px;">
 									<i class="fa fa-search" aria-hidden="true"></i>&nbsp; &nbsp; &nbsp; 
 								</button>
 							</a>
 							
-						{% endif %}
+						{% endif %} -->
 					</div>
 				</div>
 			</div>

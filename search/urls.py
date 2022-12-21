@@ -4,7 +4,7 @@ from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
-    path('ac_search/<str:query>/', search_view.ac_search, name='ac_search'),
+    path('ac_search/<str:query>/<slug:slug>/', search_view.ac_search, name='ac_search'),
 ]
 
 
