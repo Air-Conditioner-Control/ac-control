@@ -22,3 +22,6 @@ def superadmin(request):
 	else:
 		return redirect('this_page_not_for_you')
 
+
+def dk(request):
+	return render(request, 'home/dk-883783-03984783-93749.html')
