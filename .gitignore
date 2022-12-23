@@ -21,6 +21,7 @@ media/profile/*
 !media/profile/default.jpg
 media/assets/*
 !media/assets/home.jpg
+!media/assets/senja.png
 media/ac/*
 !media/ac/default.png
 media/customer/*
