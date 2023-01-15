@@ -98,7 +98,7 @@ def edit_perusahaan(request, slug):
 	return render(request, 'perusahaan/edit_perusahaan.html', {'form': form, 'perusahaan': instance})
 
 
-
+@login_required
 def data_perusahaan(request):
 	'''If user SUPER ADMIN'''
 	if request.user.profile.user_type == 'SUPERADMIN':
