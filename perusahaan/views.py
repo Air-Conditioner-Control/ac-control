@@ -101,12 +101,14 @@ def edit_perusahaan(request, slug):
 
 def data_perusahaan(request):
 	'''If user SUPER ADMIN'''
-	data = list(reversed(Perusahaan.objects.all().order_by('date_created')))
-	context = {
-		'data': data,
-	}
-	return render(request, 'perusahaan/data_perusahaan.html', context)
-
+	if request.user.profile.user_type == 'SUPERADMIN':
+		data = list(reversed(Perusahaan.objects.all().order_by('date_created')))
+		context = {
+			'data': data,
+		}
+		return render(request, 'perusahaan/data_perusahaan.html', context)
+	else:
+		return redirect('this_page_not_for_you')
 
 @login_required
 def detail_perusahaan(request, slug):
