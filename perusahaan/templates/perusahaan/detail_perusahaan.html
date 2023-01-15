@@ -126,7 +126,11 @@
 		<div style="text-align: center; margin: 0 auto; max-width: 600px;">
 			<div style="width: 100%; background-color: transparent; float: left !important; color: #555555; font-weight: bold; margin-top: 13px; margin-bottom: 8px; font-size: 13px; left: 0px;">
 				<div style="width:100%">
-					<a href="{% url 'data_perusahaan' %}">
+					{% if user.profile.user_type == 'SUPERADMIN' %}
+						<a href="{% url 'data_perusahaan' %}">
+					{% else %}
+						<a href="{% url 'home' %}">
+					{% endif %}
 						<div style="width:7%; float: left; text-align: left; padding-left:3px; color:#777777;">
 							<i class="fa fa-arrow-left" aria-hidden="true"></i>
 						</div>
